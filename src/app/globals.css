@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-1sm: 991px;
+  --breakpoint-2sm: 767px;
+  --breakpoint-3sm: 479px;
+
+  --color-primary: #002147;
+  --color-brand: #C98838;
+  --color-secondary: #D7DCE2;
+  --color-tertiary: #fffc;
+  --color-primary-100: #ABB6C3;
+  --color-other: #333;
+  --color-glow: #3D9DFF;
+}
+
+@layer utilities {
+  .rotate-3d {
+    transform: rotateX(-18deg) rotateY(-22deg) rotate(-28deg);
+  }
+}
+
+
+body{
+  font-family: var(--font-inter), sans-serif;
+  width: 100%;
+  min-width: fit-content;
+  height: fit-content;
+  overflow-x: hidden;
+  overflow-wrap: break-word;
+}
