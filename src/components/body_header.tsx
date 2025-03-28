@@ -40,7 +40,7 @@ const BodyHeader: React.FC = () => {
         <motion.div
           className="flex flex-col 1sm:max-w-[29.625rem] gap-[1.25rem] w-full 1sm:px-0 px-[1rem]"
           key={pathname}
-          initial={{ x: "10%", opacity: 0 }}
+          initial={{ x: 100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{
             duration: 1,
@@ -48,14 +48,15 @@ const BodyHeader: React.FC = () => {
             opacity: { duration: 0.5, delay: 0.5 },
           }}
           viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
+          style={{ willChange: "transform, opacity" }}
         >
           <div className="w-full flex flex-col gap-[1.25rem] text-left items-start">
             <h1 className="text-brand uppercase text-[1rem]/[1.25rem] font-medium tracking-[2px]">
               {content.title}
             </h1>
-            <h3 className="text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold text-white tracking-[-1px]">
+            <h2 className="text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold text-white tracking-[-1px]">
               {content.subTitle}
-            </h3>
+            </h2>
             <p className="text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal opacity-[.8]">
               {content.description}
             </p>
@@ -75,7 +76,7 @@ const BodyHeader: React.FC = () => {
           width={content.width}
           height={content.height}
           className="object-cover 1sm:max-h-[22.23rem] max-h-[33.92rem] w-full"
-          initial={{ x: "-10%", opacity: 0 }}
+          initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{
             duration: 1,

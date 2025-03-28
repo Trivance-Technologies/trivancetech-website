@@ -77,13 +77,14 @@ const Contact = () => {
             <div className='w-full px-[1rem] 1sm:px-[1.5rem]'>
                 <div className='w-full max-w-[67.25rem] mx-auto'>
                     <motion.div className='flex flex-col 2sm:flex-row gap-0 2sm:gap-[1.5rem] w-full justify-between h-fit'
-                        initial={{ y: '10%', opacity: 0 }}
+                        initial={{ y: 100, opacity: 0 }}
                         whileInView={{ y: 0, opacity: 1 }}
                         transition={{
                             duration: 1,
                             ease: "easeInOut",
                         }}
                         viewport={{ once: true }}  
+                        style={{ willChange: "transform, opacity" }}
                     >
                         <div className='w-full'>
                             <Image width={1279} height={853} src='/images/image3.webp' alt='someone calling' className='object-cover h-full'/>

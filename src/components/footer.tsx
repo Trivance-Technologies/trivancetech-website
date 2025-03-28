@@ -1,5 +1,4 @@
 'use client'
-import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
@@ -15,17 +14,9 @@ const Footer = () => {
     const basePath = getBasePath(pathname);
     
     return (
-        <footer className='w-full pt-[3.25rem] pb-[1.25rem] flex flex-col bg-primary items-center'>
+        <footer className='w-full pt-[3.25rem] pb-[1.25rem] flex flex-col bg-primary items-center overflow-hidden'>
             <section className='px-[1rem] 1sm:px-[1.5rem] w-full flex justify-center items-center'>
-                <motion.div className='flex 2sm:flex-row flex-col mx-auto w-full max-w-[67.25rem] 2sm:gap-[3rem] gap-[48px]'
-                    initial={{ y: '10%', opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    transition={{
-                        duration: 1,
-                        ease: "easeInOut",
-                    }}
-                    viewport={{ once: true }}  
-                >
+                <div className='flex 2sm:flex-row flex-col mx-auto w-full max-w-[67.25rem] 2sm:gap-[3rem] gap-[48px]'>
                     <section className='flex flex-col 2sm:max-w-[18.1rem] 2sm:gap-[36px] gap-[20px] w-full'>
                         <Link aria-label="Trivance Tech homepage" href="/" className='w-full max-w-[14.3125rem] h-[3.5rem] flex items-center justify-center'>
                             <div
@@ -110,21 +101,13 @@ const Footer = () => {
                             </div>
                         </div>
                     </section>
-                </motion.div>
+                </div>
             </section>
             <div className='w-full h-[1px] my-[1.25rem] bg-white opacity-[.1]'></div>
             <section className='px-[1rem] 1sm:px-[1.5rem] w-full flex'>
-                <motion.div className='mx-auto w-full max-w-[67.25rem]'
-                    initial={{ y: '10%', opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
-                    transition={{
-                        duration: 1,
-                        ease: "easeInOut",
-                    }}
-                    viewport={{ once: true }}  
-                >
+                <div className='mx-auto w-full max-w-[67.25rem]'>
                     <p className='w-full text-white font-normal text-[1rem]/[1.25rem] opacity-[.5] '>{`Copyright © 2025 Trivance Technologies Ltd. All rights reserved.`}</p>
-                </motion.div>
+                </div>
             </section>
         </footer>
     )

@@ -12,7 +12,7 @@ interface IdealsCardPropTypes {
 const IdealsCard : React.FC<IdealsCardPropTypes> = ({ iconUrl, title, description, index }) => {
   return (
     <motion.div className='w-full gap-[1.25rem] flex flex-col items-center'
-      initial={{ x: '20%', opacity: 0 }}
+      initial={{ x: 200, opacity: 0 }}
       whileInView={{ x: 0, opacity: 1 }}
       transition={{
           duration: .8,
@@ -20,6 +20,7 @@ const IdealsCard : React.FC<IdealsCardPropTypes> = ({ iconUrl, title, descriptio
           delay: .3 * index
       }}
       viewport={{ once: true }}
+      style={{ willChange: "transform, opacity" }}
     >
         <span
           className='w-[60px] h-[60px] bg-primary'

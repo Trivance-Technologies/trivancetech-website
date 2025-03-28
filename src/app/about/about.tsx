@@ -29,13 +29,14 @@ const About = () => {
         <div className='px-[1rem] 1sm:px-[1.5rem] w-full'>
             <div className='w-full max-w-[67.25rem] mx-auto flex flex-col items-center text-center'>
                 <motion.div className='flex flex-col gap-[1.25rem] mb-[3.75rem]'                 
-                    initial={{ y: '10%', opacity: 0 }}
+                    initial={{ y: 100, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{
                         duration: 1,
                         ease: "easeInOut",
                     }}
                     viewport={{ once: true }}  
+                    style={{ willChange: "transform, opacity" }}
                 >
                     <h2 className='tracking-[2px] uppercase font-medium text-[1rem]/[1.25rem] opacity-[.6] text-primary'>Consulting</h2>
                     <h3 className='tracking-[-1px] text-[2.5rem]/[3rem] font-semibold text-primary'>Empowering your business to expand and thrive</h3>

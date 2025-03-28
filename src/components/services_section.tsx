@@ -22,13 +22,14 @@ const ServicesSection : React.FC<servicesPropTypes> = ({ title, subtitle, descri
         <section className={`w-full ${isProducts ? 'bg-white' : 'bg-secondary'} py-[6rem] 1sm:py-[7.5rem] px-[1rem] 1sm:px-[1.5rem]`}>
             <div className="w-full flex flex-col mx-auto max-w-[67.25rem] gap-[2.5rem]">
                 <motion.div className="w-full flex flex-col gap-[1.25rem] text-left"
-                    initial={{ y: '10%', opacity: 0 }}
+                    initial={{ y: 100, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{
                         duration: 1,
                         ease: "easeInOut",
                     }}
                     viewport={{ once: true }}  
+                    style={{ willChange: "transform, opacity" }}
                 >
                     <h2 className="uppercase tracking-[2px] font-medium text-[1rem]/[1.25rem] opacity-[.6] text-primary">{title}</h2>
                     <div className="flex flex-col 1sm:flex-row justify-between w-full gap-[1rem] 1sm:gap-[6.25rem]">
@@ -45,14 +46,15 @@ const ServicesSection : React.FC<servicesPropTypes> = ({ title, subtitle, descri
                     </div>
                 </motion.div>
                 <motion.div className="grid 1sm:gap-[2.5rem] gap-[1.25rem] grid-cols-1 2sm:grid-cols-3"
-                    initial={{ y: '10%', opacity: 0 }}
-                    whileInView={{ y: 0, opacity: 1 }}
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
                     transition={{
                         duration: 1,
                         ease: "easeInOut",
                         delay: .5,
                     }}
                     viewport={{ once: true }}  
+                    style={{ willChange: "opacity" }}
                 >
                     {
                         (showAllServices) ? ( data.slice(0, 3).map((data, index) => (

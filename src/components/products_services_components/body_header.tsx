@@ -36,7 +36,7 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
                 <div className='mx-auto w-full max-w-[67.25rem]'>
                     <div className='flex flex-col-reverse 1sm:flex-row gap-[1rem] 3sm:gap-[2rem] 1sm:gap-[3.75rem] items-center w-full'>
                         <motion.div className='flex flex-col 1sm:max-w-[29.625rem] gap-[1.25rem] w-full px-[1rem] 1sm-px-0'
-                            initial={{ x: "10%", opacity: 0 }}
+                            initial={{ x: 100, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
                             transition={{
                             duration: 1,
@@ -44,6 +44,7 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
                             opacity: { duration: 0.5, delay: 0.5 },
                             }}
                             viewport={{ once: true }}
+                            style={{ willChange: "transform, opacity" }}
                         >
                             <div className='w-full flex flex-col gap-[1.25rem] text-left items-start'>
                                 <div className='breadcrumbs flex flex-row w-full items-center'>
@@ -65,7 +66,7 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
                             height={imageHeight}
                             width={imageWidth}
                             className="object-cover w-full max-h-[33.92rem] 1sm:max-h-[22.23rem]"
-                            initial={{ x: "-10%", opacity: 0 }}
+                            initial={{ x: -100, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
                             transition={{
                               duration: 1,

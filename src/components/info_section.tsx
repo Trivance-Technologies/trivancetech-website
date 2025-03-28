@@ -14,13 +14,14 @@ const InfoSection : React.FC<InfoSectionDetails> = ({ swapRow, showButton }) => 
     <section className={`w-full py-[6rem] 1sm:py-[7.5rem] ${(swapRow) ? 'bg-secondary' : 'bg-primary'} relative overflow-hidden`}>
         <div className="w-full px-[1rem] 1sm:px-[1.5rem]">
             <motion.div  className="w-full max-w-[67.25rem] mx-auto relative"
-                initial={{ y: '10%', opacity: 0 }}
+                initial={{ y: 100, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{
                     duration: 1,
                     ease: "easeInOut",
                 }}
                 viewport={{ once: true }}  
+                style={{ willChange: "transform, opacity" }}
             >
                 <div className='absolute bg-glow opacity-[.3] rounded-[50%] w-[11.6875rem] 2sm:w-[15.6875rem] h-[34.0625rem] 2sm:h-[45.6875rem] z-0 rotate-3d blur-[180px] 2sm:blur-[140px] top-[50%] left-auto right-[90px] 2sm:top-0 2sm:left-0 2sm:right-0'></div>
                 <div className={`flex ${(swapRow) ? 'flex-col 2sm:flex-row-reverse' : 'flex-col-reverse 2sm:flex-row'} gap-[1.25rem] 3sm:gap-[3rem] 2sm:gap-[2.5rem] 1sm:gap-[4rem] items-start 2sm:items-center justify-between`}>
