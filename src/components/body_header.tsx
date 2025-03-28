@@ -50,9 +50,9 @@ const BodyHeader: React.FC = () => {
           viewport={{ once: true, margin: "-100px 0px -100px 0px" }}
         >
           <div className="w-full flex flex-col gap-[1.25rem] text-left items-start">
-            <h2 className="text-brand uppercase text-[1rem]/[1.25rem] font-medium tracking-[2px]">
+            <h1 className="text-brand uppercase text-[1rem]/[1.25rem] font-medium tracking-[2px]">
               {content.title}
-            </h2>
+            </h1>
             <h3 className="text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold text-white tracking-[-1px]">
               {content.subTitle}
             </h3>

@@ -10,7 +10,7 @@ interface WhyItMattersTypes {
 
 const WhyItMatters: React.FC<WhyItMattersTypes> = ({ title, description }) => {
     return (
-        <section className='w-full py-[3rem] 3rem:py-[4rem] 2rem:py-[6rem] 1sm:py-[7.5rem] bg-secondary'>
+        <section className='w-full py-[3rem] 3rem:py-[4rem] 2rem:py-[6rem] 1sm:py-[7.5rem] bg-secondary overflow-hidden'>
             <div className='px-[1rem] 3sm:px-[1.25rem] 2sm:px-[1rem] 1sm:px-[1.25rem] w-full flex items-center justify-center'>
                 <div className='flex flex-col-reverse 3sm:flex-row gap-[2rem] 2sm:gap-[3rem] 1sm:gap-[8.75rem] max-w-[62.75rem] w-full items-center'>
                     <motion.div className='w-full flex flex-col max-w-[32.88rem] text-left 3sm:text-right items-start 3sm:items-end'

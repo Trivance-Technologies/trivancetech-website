@@ -21,6 +21,7 @@ const Header: React.FC = () => {
   const { is404 } = useNotFoundPageContext();
 
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
@@ -29,21 +30,29 @@ const Header: React.FC = () => {
     setScrollProgress(progress);
   };
 
+  const handleResize = () => setIsSmallScreen(window.innerWidth < 991);
+
+
   useEffect(() => {
+    handleResize();
     handleScroll();
 
+    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
     return () => {
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
     <header
-      className="fixed top-0 z-[9999] w-full 1sm:px-[1.5rem] pl-[1.5rem] transition-[background-color] duration-[300ms]"
+      className="fixed top-0 z-[9999] w-full 1sm:px-[1rem] px-[1.5rem] transition-[background-color] duration-[300ms]"
       style={{
-        backgroundColor: (is404) ? `rgba(0, 33, 71, 1)` : `rgba(0, 33, 71, ${scrollProgress})`,
+        backgroundColor: isSmallScreen
+        ? `rgba(0, 33, 71, 1)`
+        : (is404 ? `rgba(0, 33, 71, 1)` : `rgba(0, 33, 71, ${scrollProgress})`),
       }}
     >
       <nav
@@ -51,74 +60,73 @@ const Header: React.FC = () => {
         className="w-full flex flex-row mx-auto max-w-[67.25rem] gap-[16px] py-[20px] justify-between"
       >
         <Link
+          aria-label="Trivance Tech homepage"
           href="/"
           className="w-[14.3125rem] h-[3.5rem] flex items-center"
         >
-          <Image
-            width={4678}
-            height={1136}
-            src={"/logos/trivance.svg"}
-            alt={"logo of trivance tech"}
-            className="object-cover"
-            priority
+          <div
+            style={{
+              maskImage: "url('/logos/trivance.svg')",
+              WebkitMaskImage: "url('/logos/trivance.svg')",
+              maskSize: "contain",
+              maskRepeat: "no-repeat",
+              maskPosition: "center",
+              width: "100%",
+              height: "100%"
+            }}
+            className="bg-brand"
+            aria-label="logo of trivance tech"
           />
         </Link>
 
         <div className="1sm:flex hidden flex-row text-[1rem]/[1.5rem] text-tertiary my-auto">
-          <Link href="/">
-            <span
-              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] ${
-                basePath === "/" ? "border-brand" : "border-transparent"
-              } hover:text-brand px-[1rem] py-[.5rem]`}
-            >
+          <Link 
+              href="/" 
+              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] 
+              ${basePath === "/" ? "border-brand" : "border-transparent"} 
+              hover:text-brand px-[1rem] py-[.5rem]`}
+          >
               Home
-            </span>
           </Link>
-          <Link href="/about">
-            <span
-              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] ${
-                basePath === "/about" ? "border-brand" : "border-transparent"
-              } hover:text-brand px-[1rem] py-[.5rem]`}
-            >
+          <Link 
+              href="/about" 
+              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] 
+              ${basePath === "/about" ? "border-brand" : "border-transparent"} 
+              hover:text-brand px-[1rem] py-[.5rem]`}
+          >
               About
-            </span>
           </Link>
-          <Link href="/services">
-            <span
-              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] ${
-                basePath === "/services" ? "border-brand" : "border-transparent"
-              } hover:text-brand px-[1rem] py-[.5rem]`}
-            >
+          <Link 
+              href="/services" 
+              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] 
+              ${basePath === "/services" ? "border-brand" : "border-transparent"} 
+              hover:text-brand px-[1rem] py-[.5rem]`}
+          >
               Services
-            </span>
           </Link>
-          <Link href="/products">
-            <span
-              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] ${
-                basePath === "/products" ? "border-brand" : "border-transparent"
-              } hover:text-brand px-[1rem] py-[.5rem]`}
-            >
+          <Link 
+              href="/products" 
+              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] 
+              ${basePath === "/products" ? "border-brand" : "border-transparent"} 
+              hover:text-brand px-[1rem] py-[.5rem]`}
+          >
               Products
-            </span>
           </Link>
-          <Link href="/contact">
-            <span
-              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] ${
-                basePath === "/contact" ? "border-brand" : "border-transparent"
-              } hover:text-brand px-[1rem] py-[.5rem]`}
-            >
+          <Link 
+              href="/contact" 
+              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] 
+              ${basePath === "/contact" ? "border-brand" : "border-transparent"} 
+              hover:text-brand px-[1rem] py-[.5rem]`}
+          >
               Contact
-            </span>
           </Link>
         </div>
-
         <Link
           href="/contact"
           className="1sm:flex hidden transition-[background-color,color,border-color] duration-[400ms] border-[2px] bg-transparent py-[.75rem] px-[1.5rem] text-[1rem]/[1.25rem] my-auto text-white border-white hover:text-black hover:bg-brand hover:border-brand font-semibold"
         >
           Get in Touch
         </Link>
-
         <button
           className="w-[5rem] 1sm:hidden flex items-center justify-center"
           onClick={toggleNavigation}

@@ -27,8 +27,20 @@ const Footer = () => {
                     viewport={{ once: true }}  
                 >
                     <section className='flex flex-col 2sm:max-w-[18.1rem] 2sm:gap-[36px] gap-[20px] w-full'>
-                        <Link href="/" className='w-full max-w-[14.3125rem] h-[3.5rem] flex items-center justify-center'>
-                            <Image width={4678} height={1136} src={'/logos/trivance.svg'} alt={'logo of trivance tech'} className='object-cover'/>
+                        <Link aria-label="Trivance Tech homepage" href="/" className='w-full max-w-[14.3125rem] h-[3.5rem] flex items-center justify-center'>
+                            <div
+                                    style={{
+                                    maskImage: "url('/logos/trivance.svg')",
+                                    WebkitMaskImage: "url('/logos/trivance.svg')",
+                                    maskSize: "contain",
+                                    maskRepeat: "no-repeat",
+                                    maskPosition: "center",
+                                    width: "100%",
+                                    height: "100%"
+                                    }}
+                                    className="bg-brand"
+                                    aria-label="logo of trivance tech"
+                                />                      
                         </Link>
                         <p className='text-left text-[1rem]/[1.25] font-normal w-full text-white'>Expert guidance tailored to your business needs, driving growth and innovation.</p>
                         <div className='flex flex-row justify-start w-full gap-[.75rem]'>
@@ -42,21 +54,37 @@ const Footer = () => {
                             Useful Links
                         </h2>
                         <div className="w-[100px] flex flex-col justify-start items-start gap-[1.25rem] 2ms:gap-[1.5rem] text-left">
-                            <Link href="/">
-                                <span className={`transition-all duration-[400ms] ${(basePath === '/') ? 'text-brand' : 'text-secondary'} hover:text-brand`}>Home</span>
+                            <Link 
+                                href="/" 
+                                className={`transition-all duration-[400ms] ${(basePath === '/') ? 'text-brand' : 'text-secondary'} hover:text-brand`}
+                            >
+                                Home
                             </Link>
-                            <Link href="/about">
-                                <span className={`transition-all duration-[400ms] ${(basePath === '/about') ? 'text-brand' : 'text-secondary'} hover:text-brand`}>About</span>
+                            <Link 
+                                href="/about" 
+                                className={`transition-all duration-[400ms] ${(basePath === '/about') ? 'text-brand' : 'text-secondary'} hover:text-brand`}
+                            >
+                                About
                             </Link>
-                            <Link href="/services">
-                                <span className={`transition-all duration-[400ms] ${(basePath === '/services') ? 'text-brand' : 'text-secondary'} hover:text-brand`}>Services</span>
+                            <Link 
+                                href="/services" 
+                                className={`transition-all duration-[400ms] ${(basePath === '/services') ? 'text-brand' : 'text-secondary'} hover:text-brand`}
+                            >
+                                Services
                             </Link>
-                            <Link href="/products">
-                                <span className={`transition-all duration-[400ms] ${(basePath === '/products') ? 'text-brand' : 'text-secondary'} hover:text-brand`}>Products</span>
+                            <Link 
+                                href="/products" 
+                                className={`transition-all duration-[400ms] ${(basePath === '/products') ? 'text-brand' : 'text-secondary'} hover:text-brand`}
+                            >
+                                Products
                             </Link>
-                            <Link href="/contact">
-                                <span className={`transition-all duration-[400ms] ${(basePath === '/contact') ? 'text-brand' : 'text-secondary'} hover:text-brand`}>Contact</span>
+                            <Link 
+                                href="/contact" 
+                                className={`transition-all duration-[400ms] ${(basePath === '/contact') ? 'text-brand' : 'text-secondary'} hover:text-brand`}
+                            >
+                                Contact
                             </Link>
+
                         </div>
                     </section>
                     <section className='w-full 2sm:max-w-[24.625rem] flex flex-col full text-left 2ms:mt-[1.25rem] mt-0'>

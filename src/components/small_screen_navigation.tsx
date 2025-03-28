@@ -17,7 +17,7 @@ const SmallScreenNavigation : React.FC = () => {
     const { isNavVisible } = useNavigation();
     
   return (
-    <section className={`absolute w-full h-full bg-primary z-100 top-0 ${isNavVisible ? 'block 1sm:hidden' : 'hidden'} overflow-hidden`}>
+    <section className={`fixed w-full h-screen bg-primary z-100 top-0 ${isNavVisible ? 'block 1sm:hidden' : 'hidden'} overflow-hidden`}>
         <nav role="navigation" className="w-full">
             <div className="pt-[109.2px] pb-[163.8px] flex flex-col items-center">
                 <div className="w-full mx-auto flex flex-col gap-[10px] max-w-[60%] items-center justify-center pb-[16px] text-[1.125rem]/[1.5rem]">

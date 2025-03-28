@@ -14,7 +14,9 @@ interface ServicesCardData {
 
 const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description, isProducts, isHomePage, typesOfService }) => {
   return (
-    <Link href={
+    <Link    
+    aria-label={`Link to ${isProducts ? "product" : "service"}: ${title}`}
+    href={
         isHomePage && !isProducts 
             ? "/services"
             : `/${isProducts ? "products" : "services"}/${title.toLowerCase().replace(/\s+/g, "-")}`
@@ -52,7 +54,7 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
             </ul>
             ) : (
             <p className='text-[1rem]/[1.25rem] text-primary opacity-[.6] group-hover:text-white group-hover:opacity-[.8] transition-[color,opacity] duration-[300ms]'>{description}</p>)}
-            <button className='w-fit text-center text-primary font-semibold text-[1.125rem]/[1.375rem] mt-[1.875rem] bg-transparent group-hover:bg-brand border-[2px] flex flex-row gap-[.375rem] items-center justify-start px-[1.25rem] py-[.875rem] border-[rgba(23,29,47,0.2)] group-hover:border-brand transition-[background-color,border] duration-[300ms]'>
+            <div className='w-fit text-center text-primary font-semibold text-[1.125rem]/[1.375rem] mt-[1.875rem] bg-transparent group-hover:bg-brand border-[2px] flex flex-row gap-[.375rem] items-center justify-start px-[1.25rem] py-[.875rem] border-[rgba(23,29,47,0.2)] group-hover:border-brand transition-[background-color,border] duration-[300ms]'>
                 <p>Details</p>
                 <Image
                     src="/right_arrow.svg"
@@ -60,7 +62,7 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
                     width={20}
                     height={21}
                 />
-            </button>
+            </div>
         </div>
     </Link>
   )

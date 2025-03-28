@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const PartnersLogosDisplay = () => {
   return (
-    <section className="w-full py-[3.75rem]">
+    <section className="w-full py-[3.75rem] overflow-hidden">
         <div className="w-full px-[1rem] 1sm:px-[1.5rem] flex justify-center">
           <div className='flex flex-col w-full max-w-[67.25rem] items-center gap-[3rem]'>
             <motion.h2 className='opacity-[.6] uppercase text-primary text-[1rem]/[1.25rem] tracking-[2px]'

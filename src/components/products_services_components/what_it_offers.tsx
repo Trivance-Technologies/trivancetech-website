@@ -14,7 +14,7 @@ interface WhatItOffersTypes {
 
 const WhatItOffers: React.FC<WhatItOffersTypes> = ({ title, content, isProduct }) => {
     return (
-        <section className='w-full py-[3.75rem]'>
+        <section className='w-full py-[3.75rem] overflow-hidden'>
             <div className='w-full px-[1rem] 3sm:px-[1.25rem] 2sm:px-[1rem] 1sm:px-[1.25rem]'>
                 <div className='w-full max-w-[67.25rem] mx-auto flex flex-col 3sm:flex-row gap-[2rem] 3sm:gap-[3rem] 1sm:gap-[8.75rem]'>
                     <motion.div className='w-full relative'

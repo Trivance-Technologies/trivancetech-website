@@ -47,12 +47,15 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
                         >
                             <div className='w-full flex flex-col gap-[1.25rem] text-left items-start'>
                                 <div className='breadcrumbs flex flex-row w-full items-center'>
-                                    <Link href="/services">
-                                        <span className="uppercase text-white text-[1rem]/[1.25rem] font-medium tracking-[2px]">{title} &gt;</span>
+                                    <Link 
+                                        href="/services" 
+                                        className="uppercase text-white text-[1rem]/[1.25rem] font-medium tracking-[2px]"
+                                    >
+                                        {title} &gt;
                                     </Link>
                                     <span className='text-brand text-[1rem]/[1.25rem] trackin-[2px] uppercase font-medium ml-[4px]'>{subtitle}</span>
                                 </div>
-                                <h2 className='text-[2rem]/[2.625rem] 2sm:text-[3rem]/[3.75rem] font-semibold text-white tracking-[-1px] capitalize'>{subtitle}</h2>
+                                <h1 className='text-[2rem]/[2.625rem] 2sm:text-[3rem]/[3.75rem] font-semibold text-white tracking-[-1px] capitalize'>{subtitle}</h1>
                                 <p className='text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal opacity-[.6]'>{description}</p>
                             </div>
                         </motion.div>

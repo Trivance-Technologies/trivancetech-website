@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ClientsLogoDisplay = () => {
   return (
-    <section className="w-full py-[6rem] 1sm:py-[7.5rem] bg-secondary">
+    <section className="w-full py-[6rem] 1sm:py-[7.5rem] bg-secondary overflow-hidden">
       <div className="w-full px-[1rem] 1sm:px-[1.5rem] flex justify-center">
         <div className='flex flex-col 2sm:flex-row w-full max-w-[67.25rem] items-start 2sm:items-center gap-[3rem] 1sm:gap-[4.75rem]'>
           <motion.div className="flex flex-col gap-[1.5rem] 2sm:max-w-[27rem] w-full"

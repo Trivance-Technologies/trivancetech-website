@@ -30,13 +30,16 @@ const ServicesSection : React.FC<servicesPropTypes> = ({ title, subtitle, descri
                     }}
                     viewport={{ once: true }}  
                 >
-                    <h2 className="uppercase tracking-[2px] font-medium text-[1rem]/[1.25rem] opacity-[.6] text-brand">{title}</h2>
+                    <h2 className="uppercase tracking-[2px] font-medium text-[1rem]/[1.25rem] opacity-[.6] text-primary">{title}</h2>
                     <div className="flex flex-col 1sm:flex-row justify-between w-full gap-[1rem] 1sm:gap-[6.25rem]">
                         <h3 className="text-[2.5rem]/[3rem] font-semibold trackin-[-1px] text-primary">{subtitle}</h3>
                         <div className="flex flex-col max-w-[28rem] gap-[1rem]">
                             <p className='opacity-[.6] text-primary text-[1rem]/[1.25rem]'>{description}</p>
-                            <Link href={`${isProducts ? '/products' : '/services'}`}>
-                                <span className={`${(showAllServices && isProducts) ? 'block' : 'hidden'} underline text-[1rem]/[1.25rem] font-semibold text-primary hover:text-brand transition-colors duration-[300ms]`}>All products</span>
+                            <Link 
+                                href="/products" 
+                                className={`${(showAllServices && isProducts) ? "block" : "hidden"} underline text-[1rem]/[1.25rem] font-semibold text-primary hover:text-brand transition-colors duration-[300ms]`}
+                            >
+                                All products
                             </Link>
                         </div>
                     </div>
