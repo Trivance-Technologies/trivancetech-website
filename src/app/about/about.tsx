@@ -25,7 +25,7 @@ const idealsDetails = [
 const About = () => {
   return (
     <>
-      <section className='w-full py-[3.75rem]'>
+      <section className='w-full py-[3.75rem] overflow-hidden'>
         <div className='px-[1rem] 1sm:px-[1.5rem] w-full'>
             <div className='w-full max-w-[67.25rem] mx-auto flex flex-col items-center text-center'>
                 <motion.div className='flex flex-col gap-[1.25rem] mb-[3.75rem]'                 

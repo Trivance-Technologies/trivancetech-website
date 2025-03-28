@@ -48,7 +48,7 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className="fixed top-0 z-[9999] w-full 1sm:px-[1rem] px-[1.5rem] transition-[background-color] duration-[300ms]"
+      className="fixed top-0 z-[9999] w-full 1sm:pl-[1rem] pl-[1.5rem] 1sm:pr-[1rem] pr-0 transition-[background-color] duration-[300ms]"
       style={{
         backgroundColor: isSmallScreen
         ? `rgba(0, 33, 71, 1)`

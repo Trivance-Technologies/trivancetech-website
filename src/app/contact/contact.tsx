@@ -58,7 +58,7 @@ const Contact = () => {
 
     return (
         <>
-        <section className='w-full py-[3.75rem]'>
+        <section className='w-full py-[3.75rem] overflow-hidden'>
             <div className='px-[1rem] 1sm:px-[1.5rem] w-full'>
                 <div className='w-full grid grid-cols-1 3sm:grid-cols-2 1sm:grid-cols-4 1sm:max-w-[67.25rem] mx-auto gap-[3rem] 1sm:gap-0'>
                     {contactDetails.map((detail, index) => (
@@ -73,7 +73,7 @@ const Contact = () => {
                 </div>
             </div>
         </section>
-        <section className='w-full py-[3.75rem] bg-secondary'>
+        <section className='w-full py-[3.75rem] bg-secondary overflow-hidden'>
             <div className='w-full px-[1rem] 1sm:px-[1.5rem]'>
                 <div className='w-full max-w-[67.25rem] mx-auto'>
                     <motion.div className='flex flex-col 2sm:flex-row gap-0 2sm:gap-[1.5rem] w-full justify-between h-fit'
