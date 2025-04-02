@@ -1,5 +1,4 @@
 'use client'
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from "next/navigation";
 
@@ -8,6 +7,8 @@ const getBasePath = (pathname: string) => {
     const segments = pathname.split("/").filter(Boolean);
     return `/${segments[0]}`;
 };
+
+const currentYear = new Date().getFullYear();
 
 const Footer = () => {
     const pathname = usePathname();
@@ -21,23 +22,44 @@ const Footer = () => {
                         <Link aria-label="Trivance Tech homepage" href="/" className='w-full max-w-[14.3125rem] h-[3.5rem] flex items-center justify-center'>
                             <div
                                     style={{
-                                    maskImage: "url('/logos/trivance.svg')",
-                                    WebkitMaskImage: "url('/logos/trivance.svg')",
-                                    maskSize: "contain",
-                                    maskRepeat: "no-repeat",
-                                    maskPosition: "center",
-                                    width: "100%",
-                                    height: "100%"
+                                        maskImage: "url('/logos/trivance.svg')",
+                                        WebkitMaskImage: "url('/logos/trivance.svg')",
+                                        maskSize: "contain",
+                                        maskRepeat: "no-repeat",
+                                        maskPosition: "center",
+                                        width: "100%",
+                                        height: "100%"
                                     }}
                                     className="bg-brand"
                                     aria-label="logo of trivance tech"
                                 />                      
                         </Link>
-                        <p className='text-left text-[1rem]/[1.25] font-normal w-full text-white'>Expert guidance tailored to your business needs, driving growth and innovation.</p>
+                        <p className='text-left text-[1rem]/[1.25] font-normal w-full text-white'>Innovation and progress, powered by tailored expertise designed for you.</p>
                         <div className='flex flex-row justify-start w-full gap-[.75rem]'>
-                        <a href="https://ng.linkedin.com/company/trivance-technologies-limited" target="_blank" className='transition-all duration-[400ms] rounded-full w-[2rem] h-[2rem] flex justify-center items-center bg-secondary hover:bg-brand'>
-                            <Image src={'/logos/linkedin.svg'} alt={'Linkedin logo'} width={15} height={15}/>
-                        </a>
+                            <Link aria-label="Trivance Tech's LinkedIn Page" href="https://ng.linkedin.com/company/trivance-technologies-limited" target="_blank" className='transition-all duration-[400ms] rounded-full w-[2rem] h-[2rem] flex justify-center items-center bg-secondary hover:bg-brand'>
+                                <div style={{
+                                        maskImage: "url('/logos/linkedin.svg')",
+                                        WebkitMaskImage: "url('/logos/linkedin.svg')",
+                                        maskSize: "contain",
+                                        maskRepeat: "no-repeat",
+                                        maskPosition: "center",
+                                        width: "15px",
+                                        height: "15px"
+                                    }} className='bg-primary'>
+                                </div>
+                            </Link>
+                            <Link aria-label="Trivance Tech's Facebook Page" href="https://www.facebook.com/trivancetech" target="_blank" className='transition-all duration-[400ms] rounded-full w-[2rem] h-[2rem] flex justify-center items-center bg-secondary hover:bg-brand'>
+                                <div style={{
+                                        maskImage: "url('/logos/facebook.svg')",
+                                        WebkitMaskImage: "url('/logos/facebook.svg')",
+                                        maskSize: "contain",
+                                        maskRepeat: "no-repeat",
+                                        maskPosition: "center",
+                                        width: "14px",
+                                        height: "14px"
+                                    }} className='bg-primary'>
+                                </div>
+                            </Link>
                         </div>
                     </section>
                     <section className="w-full 2sm:max-w-[20rem] flex flex-col text-left 2sm:items-center items-start">
@@ -87,7 +109,7 @@ const Footer = () => {
                         <div className='flex flex-col 2sm:flex-row gap-[1rem] 2sm:gap-[1.5rem]'>
                             <div className='flex flex-col gap-[8px]'>
                                 <h3 className='text-white text-[1rem]/[1.25rem]'>Address</h3>
-                                <p className='opacity-[.6] text-white text-[1rem]/[1.25rem] font-normal'>25, Olusoji Idowu St., Ilupeju, Lagos</p>
+                                <p className='opacity-[.6] text-white text-[1rem]/[1.25rem] font-normal'>25, Olusoji Idowu St., Ilupeju, Lagos.</p>
                             </div>
                             <div className='flex flex-col 3ms:flex-row 2ms:flex-col gap-[1rem]'>
                                 <div className='flex flex-col gap-[8px]'>
@@ -106,7 +128,7 @@ const Footer = () => {
             <div className='w-full h-[1px] my-[1.25rem] bg-white opacity-[.1]'></div>
             <section className='px-[1rem] 1sm:px-[1.5rem] w-full flex'>
                 <div className='mx-auto w-full max-w-[67.25rem]'>
-                    <p className='w-full text-white font-normal text-[1rem]/[1.25rem] opacity-[.5] '>{`Copyright © 2025 Trivance Technologies Ltd. All rights reserved.`}</p>
+                    <p className='w-full text-white font-normal text-[1rem]/[1.25rem] opacity-[.5] '>{`Copyright © ${currentYear} Trivance Technologies Ltd. All rights reserved.`}</p>
                 </div>
             </section>
         </footer>

@@ -11,8 +11,8 @@ export default function Home() {
       <ServicesSection
       isHomePage={true}
       title = "our services"
-      subtitle = "What services do we offer for your business"
-      description = "See how our tailored services can boost your business. From planning to support, we provide the expertise to drive your success."
+      subtitle = "Our Services Deliver, Our Solutions Work"
+      description = "Let's boost your business. Our tailored services provide expert support—from planning to growth and beyond."
       showAllServices={true}
       isProducts={false}
        />
@@ -23,8 +23,8 @@ export default function Home() {
       <ServicesSection
       isHomePage={true}
       title = "our products"
-      subtitle="Explore our range of innovative products"
-      description="Find reliable and effective products designed to improve your business operations. From essential tools to advanced systems, we've got you covered."
+      subtitle="Explore the innovation in our products"
+      description="We're locked in with you. From reliable, effective and tailored products to improve your operations to essential tools and advanced systems — we support your goals."
       showAllServices={true}
       isProducts={true}
       />

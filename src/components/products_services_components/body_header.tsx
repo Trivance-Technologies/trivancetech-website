@@ -65,6 +65,7 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
                             alt = {imageAlt}
                             height={imageHeight}
                             width={imageWidth}
+                            priority
                             className="object-cover w-full max-h-[33.92rem] 1sm:max-h-[22.23rem]"
                             initial={{ x: -100, opacity: 0 }}
                             whileInView={{ x: 0, opacity: 1 }}
