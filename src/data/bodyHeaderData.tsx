@@ -20,8 +20,8 @@ export const bodyHeaderDataMap: Record<string, {
     },
     "/about": {
         title: "About",
-        subTitle: "We assist our clients in maintaining a clear vision.",
-        description: "Our services provide a strategic overview, keeping clients focused on long-term goals",
+        subTitle: "We help our clients stay laser-focused on their vision.",
+        description: "Our services sharpen strategic focus and keep clients aligned with their long-term goals.",
         link: "/contact",
         imageLink: "/images/bodyheader/image2.webp",
         imageAlt: "image of a group of people seating around a meeting table.",

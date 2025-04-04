@@ -8,17 +8,17 @@ const idealsDetails = [
     {
         "iconUrl": "/magnifying-glass.svg",
         "title": "Who We Are",
-        "description": "Trivance Technologies is a leading provider of industry specific solutions to organizations to help them maximize their potential, meet their regulatory requirements and organizational goals. Trivance is also an Odoo Partner and Huawei Partner."
+        "description": "Trivance Technologies was founded on the belief that every organization carries a unique potential worth honoring. We craft industry-specific solutions that not only meet regulatory demands but elevate purpose-driven goals. As an Odoo and Huawei partner, we are built for complexity and engineered for your growth."
     },
     {
         "iconUrl": "/bag.svg",
         "title": "Our Expertise",
-        "description": "Our team possesses appreciable experience in documenting, designing, developing and implementing solutions across various industries. We have proven capabilities in ERP implementations and a diverse range of IT solutions development from design and development through to strategic advice and professional services."
+        "description": "Our team excels in delivering end to end solutions, from documentation and design to development and implementation, across diverse industries. We have established expertise in ERP systems and a comprehensive suite of IT solutions. We champion customer focus, agile project management, and Time Management."
     },
     {
         "iconUrl": "/handshake.svg",
         "title": "Why Choose Us",
-        "description": "With extensive experience, superior products, and unwavering professionalism, Trivance Technologies is committed to delivering exceptional solutions backed by reliable support."
+        "description": "Choosing Trivance Technologies means choosing a partner who truly understands your needs. With years of experience, top-tier products, and unwavering support, we’re here to make your vision a reality. Can you afford to trust anyone else?"
     },
 ];
 
