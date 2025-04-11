@@ -8,13 +8,13 @@ const Services = () => {
     <>
       <ServicesSection
       title = "our services"
-      subtitle = "Explore the services we offer to support your business"
-      description = "See how our tailored services can boost your business. From planning to support, we provide the expertise to drive your success."
+      subtitle = "Explore our services built for your growth"
+      description = "We build around you—because your business deserves more than a template."
       showAllServices={false}
       isProducts={false}
       isHomePage={false}
        />
-      <KnowMoreCard text={'Want to know more? Contact with our consultant'} />
+      <KnowMoreCard text={'Curious to know more? Contact our consultant'} />
       <InfoSection 
       swapRow={true}
       showButton={true}

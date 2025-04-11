@@ -20,7 +20,7 @@ export const bodyHeaderDataMap: Record<string, {
     },
     "/about": {
         title: "About",
-        subTitle: "We help our clients stay laser-focused on their vision.",
+        subTitle: "We help our clients stay laser-focused on their vision",
         description: "Our services sharpen strategic focus and keep clients aligned with their long-term goals.",
         link: "/contact",
         imageLink: "/images/bodyheader/image2.webp",
@@ -30,8 +30,8 @@ export const bodyHeaderDataMap: Record<string, {
     },
     "/services": {
         title: "Services",
-        subTitle: "Find out how our services can elevate your business potential",
-        description: "Unlock new opportunities and achieve greater success with our expert services.",
+        subTitle: "Let us help you rise—where our services can elevate your business potential",
+        description: "Gain access to future-ready opportunities through high-impact solutions.",
         imageAlt: "image of a group of people pointing out things on a large table with lots of papers.",
         link: "/about",
         imageLink: "/images/bodyheader/image3.webp",
@@ -50,8 +50,8 @@ export const bodyHeaderDataMap: Record<string, {
     },
     "/contact": {
         title: "Contact",
-        subTitle: "Always searching for improved solutions.",
-        description: "Reach out for inquiries, support, or to schedule a consultation. We're here to assist you.",
+        subTitle: "Our search for smarter never stops",
+        description: "Reach out for inquiries, support, or to schedule a consultation. We're one message away.",
         link: "/about",
         imageLink: "/images/bodyheader/image4.webp",
         imageAlt: "image of a young lady talking into her headphones.",

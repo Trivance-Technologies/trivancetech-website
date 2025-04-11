@@ -30,7 +30,7 @@ const InfoSection : React.FC<InfoSectionDetails> = ({ swapRow, showButton }) => 
                             <h2 className={`${(swapRow) ? 'text-brand' : 'text-brand'} ${(swapRow) ? 'opacity-[.6]' : 'opacity-[1]'} tracking-[2px] font-medium text-[1rem]/[1.25rem] uppercase`}>CONSULTANCY</h2>
                             <h3 className={`${(swapRow) ? 'text-primary' : 'text-white'} trackin-[-1px] text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold`}>Software Development, Implementation & Support</h3>
                         </div>
-                        <p className={`${(swapRow) ? 'text-primary' : 'text-white'} opacity-[.6] text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal`}>You dream it, we will actualize it with our advanced technology tools.</p>
+                        <p className={`${(swapRow) ? 'text-primary' : 'text-white'} opacity-[.6] text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal`}>Dream in detail, we will actualize it with our advanced technologies.</p>
                         <Link href='/contact' className={`${(showButton) ? 'block' : 'hidden'} transition-[background-color,color] duration-[400ms] border-[2px] hover:bg-transparent py-[.625rem] 2sm:py-[.875rem] px-[1.25rem] 2sm:px-[1.875rem] text-[1.125rem]/[1.375rem] my-auto text-black hover:text-brand bg-brand border-brand font-semibold w-fit`}>
                             Get In Touch
                         </Link>
