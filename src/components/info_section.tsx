@@ -35,7 +35,7 @@ const InfoSection : React.FC<InfoSectionDetails> = ({ swapRow, showButton }) => 
                             Get In Touch
                         </Link>
                     </div>
-                    <Image src='/images/image2.webp' width={1280} height={850} alt="image of lines of code on a laptop screen." className="object-cover max-h-[26rem] 2sm:max-w-[26rem]"/>
+                    <Image src='/images/image2.webp' width={1800} height={1200} alt="image of lines of code on a laptop screen." className="object-cover max-h-[26rem] 2sm:max-w-[26rem]"/>
                 </div>
             </motion.div >
         </div>

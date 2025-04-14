@@ -14,9 +14,9 @@ export const bodyHeaderDataMap: Record<string, {
         description: "Unlock your organization's potential with expert consulting, tailored solutions, and efficient documentation. Our services drive performance, optimize processes, and ensure long-term success.",
         link: "/about",
         imageLink: "/images/bodyheader/image1.webp",
-        imageAlt: "image of a man and woman sitting in front of a monitor.",
-        width: 1920,
-        height: 1280
+        imageAlt: "image of a woman fingers interlocked and sitting in front of a laptop and some papers.",
+        width: 1800,
+        height: 1200
     },
     "/about": {
         title: "About",
@@ -32,11 +32,11 @@ export const bodyHeaderDataMap: Record<string, {
         title: "Services",
         subTitle: "Let us help you rise—where our services can elevate your business potential",
         description: "Gain access to future-ready opportunities through high-impact solutions.",
-        imageAlt: "image of a group of people pointing out things on a large table with lots of papers.",
+        imageAlt: "image of a woman explaining a project on her laptop and phone.",
         link: "/about",
         imageLink: "/images/bodyheader/image3.webp",
-        width: 1280,
-        height: 960
+        width: 1800,
+        height: 1350
     },
     "/products": {
         title: "Products",
