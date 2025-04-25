@@ -45,10 +45,22 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
         </div>  
         <div className='flex flex-col h-full justify-between'>
             {(isHomePage && !isProducts) ? (
-            <ul style={{ listStyleType: "disc", paddingLeft: "20px" }}>
+            <ul className='gap-[.5rem] flex flex-col'>
                 {
                     typesOfService?.map((data, index) => (
-                        <li className='text-[1rem]/[1.25rem] text-primary opacity-[.6] group-hover:text-white group-hover:opacity-[.8] transition-[color,opacity] duration-[300ms]' key={index}>{data.name}</li>
+                        <li className='flex flex-row gap-2 items-center'>
+                            <span
+                            className="w-[16px] h-[16px] opacity-[.6] bg-primary group-hover:bg-white transition-[background-color] duration-[300ms]"
+                            style={{
+                                maskImage: "url('/check.svg')",
+                                WebkitMaskImage: "url('/check.svg')",
+                                maskSize: "contain",
+                                maskRepeat: "no-repeat",
+                                maskPosition: "center",
+                            }}
+                            ></span>
+                            <p className='text-[1rem]/[1.25rem] text-primary opacity-[.6] group-hover:text-white group-hover:opacity-[.8] transition-[color,opacity] duration-[300ms]' key={index}>{data.name}</p>
+                        </li>
                     ))
                 }
             </ul>
@@ -58,7 +70,7 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
                 <p>Details</p>
                 <Image
                     src="/right_arrow.svg"
-                    alt="right aarrow icon"
+                    alt="right arrow icon"
                     width={20}
                     height={21}
                 />

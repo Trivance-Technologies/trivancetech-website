@@ -23,7 +23,7 @@ const ClientsLogoDisplay = () => {
             </div>
             <p className={`text-primary opacity-[.6] text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal`}>We&rsquo;ve had the privilege of partnering with industry leaders and innovative organizations, delivering tailored solutions that drive growth, efficiency, and success. Our commitment to excellence ensures every client achieves their goals with confidence.</p>
           </motion.div>
-          <motion.div className="w-full grid grid-cols-1 2sm:grid-cols-3 items-center gap-[4rem]"
+          <motion.div className="grid grid-cols-1 2sm:grid-cols-2 0sm:grid-cols-3 items-center gap-[4rem] w-fit"
             initial={{ x: -100, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{
@@ -36,6 +36,7 @@ const ClientsLogoDisplay = () => {
           >
             <Image src='/logos/leadway_pensure.png' width={225} height={225} alt="logo of leadway pensure company" className="object-cover max-w-[130px] 1sm:max-w-[154px]"/>
             <Image src='/logos/neulogic.png' width={365} height={138} alt="logo of neulogic company" className="object-cover max-w-[130px] 1sm:max-w-[154px]"/>
+            <Image src='/logos/arami.webp' width={1419} height={1123} alt="logo of neulogic company" className="object-cover max-w-[130px] 1sm:max-w-[154px]"/>
           </motion.div>
         </div>
       </div>
