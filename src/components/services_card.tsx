@@ -48,7 +48,7 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
             <ul className='gap-[.5rem] flex flex-col'>
                 {
                     typesOfService?.map((data, index) => (
-                        <li className='flex flex-row gap-2 items-center'>
+                        <li key={index} className='flex flex-row gap-2 items-center'>
                             <span
                             className="w-[16px] h-[16px] opacity-[.6] bg-primary group-hover:bg-white transition-[background-color] duration-[300ms]"
                             style={{
