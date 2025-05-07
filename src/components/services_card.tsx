@@ -41,7 +41,7 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
                     duration-[300ms]'
                 >
             </span>
-            <h4 className='text-[1.5rem]/[1.875rem] text-primary group-hover:text-white transition-[color] duration-[300ms] font-semibold tracking-[-1px]'>{title}</h4>
+            <h4 className='text-[1.25rem]/[1.625rem] 2sm:text-[1.5rem]/[1.875rem] text-primary group-hover:text-white transition-[color] duration-[300ms] font-semibold tracking-[-1px]'>{title}</h4>
         </div>  
         <div className='flex flex-col h-full justify-between'>
             {(isHomePage && !isProducts) ? (
@@ -66,7 +66,7 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
             </ul>
             ) : (
             <p className='text-[1rem]/[1.25rem] text-primary opacity-[.6] group-hover:text-white group-hover:opacity-[.8] transition-[color,opacity] duration-[300ms]'>{description}</p>)}
-            <div className='w-fit text-center text-primary font-semibold text-[1.125rem]/[1.375rem] mt-[1.875rem] bg-transparent group-hover:bg-brand border-[2px] flex flex-row gap-[.375rem] items-center justify-start px-[1.25rem] py-[.875rem] border-[rgba(23,29,47,0.2)] group-hover:border-brand transition-[background-color,border] duration-[300ms]'>
+            <div className='w-fit text-center text-primary font-semibold text-[.875rem]/[1.25rem] 3sm:text-[1.125rem]/[1.375rem] mt-[1.875rem] bg-transparent group-hover:bg-brand border-[2px] flex flex-row gap-[.375rem] items-center justify-start px-[1.25rem] py-[.875rem] border-[rgba(23,29,47,0.2)] group-hover:border-brand transition-[background-color,border] duration-[300ms]'>
                 <p>Details</p>
                 <Image
                     src="/right_arrow.svg"

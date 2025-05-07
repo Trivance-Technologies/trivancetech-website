@@ -39,7 +39,7 @@ const WhyItMatters: React.FC<WhyItMattersTypes> = ({ title, description }) => {
                         viewport={{ once: true }}
                         style={{ willChange: "transform, opacity" }}
                     >
-                        <Image src='/images/image5.webp' height={1280} width={853} alt='image of a black guy explaining something to an elderly woman.' className='object-cover'/>
+                        <Image src='/images/image5.webp' height={1800} width={1012} alt='image of a black guy holding a newspaper.' className='object-cover'/>
                     </motion.div>
                 </div>
             </div>

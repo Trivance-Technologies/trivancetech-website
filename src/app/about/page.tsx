@@ -3,7 +3,7 @@ import About from "./about";
 
 export const metadata: Metadata = {
     title: 'About Us - Trivance Technologies',
-    description: "Trivance Technologies is an Odoo Partner and a Huawei Partner, providing industry-specific solutions to organizations.",
+    description: "Trivance Technologies is an Odoo Partner, providing industry-specific solutions to organizations.",
 };
 
 export default function Page() {

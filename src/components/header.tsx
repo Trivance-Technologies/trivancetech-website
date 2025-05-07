@@ -62,7 +62,7 @@ const Header: React.FC = () => {
         <Link
           aria-label="Trivance Tech homepage"
           href="/"
-          className="w-[14.3125rem] h-[3.5rem] flex items-center"
+          className="w-[8.5875rem] h-[2.1rem] 2sm:w-[14.3125rem] 2sm:h-[3.5rem] flex items-center"
         >
           <div
             style={{

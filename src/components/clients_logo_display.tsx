@@ -18,7 +18,7 @@ const ClientsLogoDisplay = () => {
             style={{ willChange: "transform, opacity" }}
           >
             <div className="flex flex-col gap-[1.25rem]">
-                <h2 className={`text-brand tracking-[2px] font-medium text-[1rem]/[1.25rem] uppercase`}>Our Awesome Clients</h2>
+                <h2 className={`text-primary tracking-[2px] font-medium text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] uppercase`}>Our Awesome Clients</h2>
                 <h3 className={`text-primary trackin-[-1px] text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold`}>Trusted By and Delivering Excellence to Top Brands</h3>
             </div>
             <p className={`text-primary opacity-[.6] text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal`}>We&rsquo;ve had the privilege of partnering with industry leaders and innovative organizations, delivering tailored solutions that drive growth, efficiency, and success. Our commitment to excellence ensures every client achieves their goals with confidence.</p>

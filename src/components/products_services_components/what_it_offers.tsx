@@ -27,7 +27,7 @@ const WhatItOffers: React.FC<WhatItOffersTypes> = ({ title, content, isProduct }
                         viewport={{ once: true }}
                         style={{ willChange: "transform, opacity" }}
                     >
-                        <Image width={1280} height={853} src='/images/image4.webp' alt='image of three black people sitting in a straight line, holding hands and talking to another black woman.' className='object-cover'/>
+                        <Image width={1800} height={1508} src='/images/image4.webp' alt='image of a man tapping on a hologram' className='object-cover'/>
                     </motion.div>
                     <div className="flex flex-col w-full text-left">
                         <motion.h2

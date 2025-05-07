@@ -15,8 +15,8 @@ export const bodyHeaderDataMap: Record<string, {
         link: "/about",
         imageLink: "/images/bodyheader/image1.webp",
         imageAlt: "image of a woman fingers interlocked and sitting in front of a laptop and some papers.",
-        width: 1800,
-        height: 1200
+        width: 1125,
+        height: 1125
     },
     "/about": {
         title: "About",
@@ -30,13 +30,13 @@ export const bodyHeaderDataMap: Record<string, {
     },
     "/services": {
         title: "Services",
-        subTitle: "Let us help you rise—where our services can elevate your business potential",
+        subTitle: "Let us help you rise — where our services can elevate your business potential.",
         description: "Gain access to future-ready opportunities through high-impact solutions.",
         imageAlt: "image of a woman explaining a project on her laptop and phone.",
         link: "/about",
         imageLink: "/images/bodyheader/image3.webp",
         width: 1800,
-        height: 1350
+        height: 1200
     },
     "/products": {
         title: "Products",

@@ -9,42 +9,37 @@ export const servicesData: {
     {
         iconUrl: "/book.svg",
         title: "User Documentation",
-        description: "Enhance user onboarding and reduce support tickets with clear training manuals, release notes, user guides, and FAQs."
+        description: "Empower users. Minimize support. Simplify adoption."
     },
     {
         iconUrl: "/gear.svg",
         title: "Technical Manual",
-        description: "Guide tech users with a detailed manual covering system logic, functionality, and troubleshooting."
+        description: "For tech teams. By specialists. Built for clarity."
     },
     {
         iconUrl: "/checklist.svg",
         title: "Process Documentation",
-        description: "Improve clarity and optimize operations with clear and effective process documentation."
+        description: "Document smarter. Operate better."
     },
     {
         iconUrl: "/network.svg",
         title: "Knowledge Base Platform",
-        description: "Centralize your organization's knowledge with an AI-powered platform for secure access and collaboration."
+        description: "Centralized organization's knowledge. Smarter access. Secure collaboration. Powered by AI."
     },
     {
         iconUrl: "/code.svg",
-        title: "Software Development",
-        description: "Empowering your business with tailored software solutions designed to enhance performance, scalability, and user experience."
-    },
-    {
-        iconUrl: "/build.svg",
-        title: "Implementation Services",
-        description: "We guide you through the entire implementation process, from data migration to final deployment."
+        title: "Software Development and Implementation",
+        description: "Code that scales. Design that connects. Results that last. From data to deployment, we've got you."
     },
     {
         iconUrl: "/lightbulb.svg",
         title: "Advisory Services",
-        description: "Get expert guidance on optimizing your technology stack to achieve better performance and efficiency."
+        description: "Strategic guidance. Operational brilliance."
     },
     {
         iconUrl: "/support.svg",
         title: "Support Services",
-        description: "Our support is fully local, ensuring fast response times and personalized assistance."
+        description: "Your team. Our experts. Always within reach.."
     }
 ];
 
@@ -79,10 +74,7 @@ export const mainServicesData: {
         description: "Guide tech users with a detailed manual covering system logic, functionality, and troubleshooting.",
         typesOfService: [
             {
-                name: "Software Development"
-            },
-            {
-                name: "Implementation Services"
+                name: "Software Development and Implementation"
             },
             {
                 name: "Advisory Services"
@@ -107,182 +99,160 @@ export const serviceData: Record<string, {
     }[];
 }> = {
     "user-documentation": {
-        description: "Enhance user onboarding and reduce support tickets with clear training manuals, release notes, user guides, and FAQs.",
-        fullDescription: "An effective user manual is very vital in a solution adoption. This not only reduces your support tickets but also enhances user onboarding on the system. Our Training manuals, Release Notes, User guide and FAQs give a yearning to come back experience of the solution, provide clear information and how to surmount challenges on the solution.",
+        description: "Empower users. Minimize support. Simplify adoption.",
+        fullDescription: "Great documentation is more than support — it's your product's voice. With structured accessible guides, you reduce ticket volume, elevate user confidence, and foster long-term adoption.",
         imageUrl: "/images/services/image1.webp",
-        imageAlt: "image of a woman writing on her notebook whilst looking at her tablet.",
-        width: 1280,
-        height: 1920,
+        imageAlt: "image of a woman writing on her notebook whilst pointing at her tablet.",
+        width: 1800,
+        height: 1350,
         whatWeOffer: [
             {
-                title: "Comprehensive Training Manuals",
-                details: "Detailed guides that simplify system adoption, helping users understand features and navigate challenges effortlessly."
+                title: "Intuitive Training Manuals",
+                details: "Clear, visual-first documentation that eases users into your system and drives confident usage from day one."
             },
             {
-                title: "Clear Release Notes",
-                details: "Summarized updates that inform users about new features, enhancements, and bug fixes to improve understanding and engagement."
+                title: "Digestible Release Notes",
+                details: "Concise, well-organized updates that keep users engaged and informed without being overwhelmed."
             },
             {
-                title: "User-Friendly Guides",
-                details: "Step-by-step instructions that provide clarity on product usage, ensuring a seamless onboarding experience."
+                title: "Interactive User Guides & FAQs",
+                details: "Step-by-step pathways that anticipate user questions and guide actions effortlessly."
             },
         ]
     },
     "technical-manual": {
-        description: "Guide tech users with a detailed manual covering system logic, functionality, and troubleshooting.",
-        fullDescription: "Reach out to us to build a comprehensive Technical manual that would detail your solution or system inner workings, logic and functionality and guide the Techies and Users through the management, configuration, and testing of the solution. It serves as an essential resource during product development, maintenance and troubleshooting.",
+        description: "For tech teams. By specialists. Built for clarity.",
+        fullDescription: "From deployment to debugging, our technical manuals give your developers a living blueprint. It's clarity, continuity, and control—all in one place.",
         imageUrl: "/images/services/image2.webp",
-        imageAlt: "image of a page of a book on a Quick Tour section on using the PageMaker app.",
-        width: 1920,
-        height: 1440,
+        imageAlt: "image of a laptop open with a code editor running.",
+        width: 1800,
+        height: 1198,
         whatWeOffer: [
             {
-                title: "System Logic Explanation",
-                details: "Outlines the system’s architecture, logic, and functionality."
+                title: "Detailed System Architecture",
+                details: "Comprehensive walkthroughs of backend logic, system design, and operational flow."
             },
             {
-                title: "Management Guide",
-                details: "Provides guidance on system configuration, management, and testing."
+                title: "Config & Management Toolkit",
+                details: "Practical guidance for setup, maintenance, and feature management."
             },
             {
-                title: "Troubleshooting Support",
-                details: "Acts as a vital reference for resolving technical issues and maintenance."
+                title: "Troubleshooting Frameworks",
+                details: "Robust, scenario-based solutions to empower your tech team when it matters most."
             }
         ]
     },
     "process-documentation": {
-        description: "Improve clarity and optimize operations with clear and effective process documentation.",
-        fullDescription: "Proper Process documentation is very crucial in achieving success in various departments of an organization. Our process documentation service will help bring more clarity to procedures and general operations' effectiveness and optimization.",
+        description: "Document smarter. Operate better.",
+        fullDescription: "Process documentation isn't just paperwork — it's how organizations grow with precision. Our service transforms everyday operations into repeatable excellence.",
         imageUrl: "/images/services/image3.webp",
-        imageAlt: "image of a woman writing on a notebook with her other hand on her laptop whilst looking at the notebook.",
-        width: 1280,
-        height: 855,
+        imageAlt: "image of a man typing on his laptop.",
+        width: 1800,
+        height: 1200,
         whatWeOffer: [
             {
-                title: "Improved Clarity",
-                details: "Helps teams understand operational processes."
+                title: "Operational Clarity",
+                details: "Map out workflows with intuitive logic and structured visual representation."
             },
             {
-                title: "Boosted Efficiency",
-                details: "Ensures streamlined procedures for improved productivity."
+                title: "Increased Productivity",
+                details: "Standardize key processes to minimize errors and improve delivery speed."
             },
             {
-                title: "Enhanced Optimization",
-                details: "Identifies opportunities to refine and improve processes."
+                title: "Process Optimization",
+                details: "Uncover bottlenecks and create space for strategic improvements."
             }
         ]
     },
     "knowledge-base-platform": {
-        description: "Centralize your organization's knowledge with an AI-powered platform for secure access and collaboration.",
-        fullDescription: "Do you have all your documents in place already? We can transform them into a centralized AI-Powered knowledge platform accessible to your team and other relevant users from anywhere or device based on required access. It provides security for your organization's knowledge asset and fosters team collaboration. Our documentation services are also delivered on this All-in-one knowledge base platform.",
+        description: "Centralized organization's knowledge. Smarter access. Secure collaboration. Powered by AI.",
+        fullDescription: "Transform scattered knowledge into a powerful ecosystem. Our AI-driven knowledge base fuels productivity, consistency, and informed decision-making.",
         imageUrl: "/images/services/image4.webp",
-        imageAlt: "image of books on a bookshelf.",
-        width: 1280,
-        height: 855,
+        imageAlt: "image of a woman sitting with a fingers interlocked, with her laptop.",
+        width: 1800,
+        height: 1200,
         whatWeOffer: [
             {
-                title: "Centralized Access",
-                details: "Teams can securely retrieve information from anywhere."
+                title: "Centralized Search",
+                details: "Instant access to indexed documentation, organized by roles and relevance."
             },
             {
-                title: "Enhanced Security",
-                details: "Protects your organization's knowledge assets."
+                title: "Enterprise-Grade Security",
+                details: "Confidently control who sees what — safeguard your IP without sacrificing access.."
             },
             {
-                title: "Promotes Collaboration",
-                details: "Encourages teamwork by sharing knowledge in a unified platform."
+                title: "Collaborative Environment",
+                details: "Create, edit, and share knowledge effortlessly across teams."
             },
             {
-                title: "All-in-One Solution",
-                details: "Documentation services are integrated seamlessly within the platform."
+                title: "Integrated Documentation Delivery",
+                details: "We build and host your documentation right inside the platform."
             }
         ]
     },
-    "software-development": {
-        description: "Empowering your business with tailored software solutions designed to enhance performance, scalability, and user experience.",
-        fullDescription: "We specialize in creating custom software solutions tailored to your business needs. From concept to deployment, our expert developers work with you to build scalable, secure, and high-performance applications that drive results.",
+    "software-development-and-implementation": {
+        description: "Code that scales. Design that connects. Results that last. From data to deployment, we've got you.",
+        fullDescription: "We don't just build software — we build your competitive edge. From concept to deployment, our solutions are born from collaboration and built for impact.",
         imageUrl: "/images/services/image5.webp",
-        imageAlt: "image showing only a man's hand coding on his laptop.",
-        width: 1280,
-        height: 848,
+        imageAlt: "image of a laptop open with a code editor running.",
+        width: 1800,
+        height: 1200,
         whatWeOffer: [
             {
-                title: "Custom Solutions",
-                details: "We design and develop software that aligns perfectly with your unique business requirements."
+                title: "Tailored Software Solutions",
+                details: "Solution-built apps that match your unique needs and goals."
             },
             {
-                title: "Scalable Architecture",
-                details: "Our solutions are built to grow with your business, ensuring long-term efficiency and performance."
+                title: "Scalable, Future-Ready Architecture",
+                details: "Performance today. Expansion tomorrow."
             },
             {
-                title: "Agile Development",
-                details: "We follow agile methodologies to deliver iterative improvements, ensuring your software evolves with changing needs."
-            }
-        ]
-    },
-    "implementation-services": {
-        description: "We guide you through the entire implementation process, from data migration to final deployment.",
-        fullDescription: "We work with you to manage the implementation process, from data migration through to final deployment.",
-        imageUrl: "/images/services/image6.webp",
-        imageAlt: "image of a woman writing on some sticky notes placed on a transparent board.",
-        width: 1280,
-        height: 853,
-        whatWeOffer: [
-            {
-                title: "Seamless Data Migration",
-                details: "Ensures your data is transferred securely and accurately with minimal downtime."
-            },
-            {
-                title: "Deployment Assistance",
-                details: "Provides expert support to ensure a smooth and successful deployment process."
-            },
-            {
-                title: "Post-Launch Guidance",
-                details: "Offers continued support to help your team adapt and maximize the new system's potential."
+                title: "Agile Delivery Model",
+                details: "Iterative improvements that adapt with your business — not against it."
             }
         ]
     },
     "advisory-services": {
-        description: "Get expert guidance on optimizing your technology stack to achieve better performance and efficiency.",
-        fullDescription: "Do you need advice on any aspect of your technology stack? We've got you covered.",
+        description: "Strategic guidance. Operational brilliance.",
+        fullDescription: "Whether you're scaling up or pivoting fast, expert insight turns vision into strategy. We help you build smarter from the inside out.",
         imageUrl: "/images/services/image7.webp",
-        imageAlt: "image of a woman in an office listening to another woman talk.",
-        width: 1280,
-        height: 1920,
+        imageAlt: "closeup image of a woman placing a document on a table.",
+        width: 1800,
+        height: 1201,
         whatWeOffer: [
             {
-                title: "Technology Strategy",
-                details: "Align your IT strategy with your business goals for sustainable growth."
+                title: "Tech-Stack Alignment",
+                details: "Architect solutions that move in step with your business goals."
             },
             {
-                title: "Architecture Review",
-                details: "Ensure your system architecture is scalable, secure, and efficient."
+                title: "Performance-Driven Reviews",
+                details: "Identify inefficiencies and architect high-performing systems."
             },
             {
-                title: "Best Practices Guidance",
-                details: "Implement industry best practices to enhance development and deployment processes."
+                title: "Best Practice Integration",
+                details: "Industry benchmarks infused into every decision you make."
             }
         ]
     },
     "support-services": {
-        description: "Local support you can rely on, ensuring quick responses to critical updates and changes.",
-        fullDescription: "Our support is 100% local. Turnaround time for important statutory changes is kept to a minimum.",
+        description: "Your team. Our experts. Always within reach.",
+        fullDescription: "When issues arise, proximity matters. Our local-first support model ensures that help isn't just fast—it's relevant, contextual, and human.",
         imageUrl: "/images/services/image8.webp",
-        imageAlt: "image of a black man and woman with headphones in an office, with the girl noting on her notebook whilst looking at her monitor.",
-        width: 1280,
-        height: 853,
+        imageAlt: "image of a man and a woman shaking hands in presence of another person.",
+        width: 1800,
+        height: 1508,
         whatWeOffer: [
             {
-                title: "Local Support",
-                details: "Our support is fully local, ensuring fast response times and personalized assistance."
+                title: "Hyper-Responsive Local Support",
+                details: "Quick resolutions from experts who understand your environment."
             },
             {
-                title: "Rapid Response",
-                details: "We prioritize urgent statutory changes to minimize delays and disruptions."
+                title: "Change Management Confidence",
+                details: "Handle updates and statutory requirements without delays."
             },
             {
-                title: "Expert Guidance",
-                details: "Our local specialists provide in-depth knowledge and tailored solutions."
+                title: "Specialist Care",
+                details: "From minor fixes to critical escalations, you're in skilled hands."
             }
         ]
     },

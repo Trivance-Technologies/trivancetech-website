@@ -38,9 +38,9 @@ const IdealsCard : React.FC<IdealsCardPropTypes> = ({ iconUrl, title, descriptio
         }}
       ></span>
 
-      <h3 className="text-[1.25rem]/[1.5rem] font-semibold text-primary text-center">{title}</h3>
+      <h3 className="text-[1.125rem]/[1.5rem] 2sm:text-[1.25rem]/[1.5rem] font-semibold text-primary text-center">{title}</h3>
 
-      <p className="opacity-[.6] text-primary text-[1rem]/[1.25rem]">
+      <p className="opacity-[.6] text-primary text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem]">
         {expanded ? description : `${description.slice(0, 120)}... `}
         <button
           className="text-blue-500 font-medium hover:underline" style={{paddingLeft: (expanded) ? '5px' : '0px'}}

@@ -40,6 +40,12 @@ const SmallScreenNavigation : React.FC = () => {
                     Services
                 </Link>
                 <Link 
+                    href="/products" 
+                    className={`w-full text-center transition-[border] duration-[400ms] hover:border-brand border-b-[2px] ${(basePath === '/products') ? 'border-brand text-tertiary' : 'border-transparent text-white'} hover:text-brand px-[1rem] py-[.5rem] mb-[.5rem]`}
+                >
+                    Products
+                </Link>
+                <Link 
                     href="/contact" 
                     className={`w-full text-center transition-[border] duration-[400ms] hover:border-brand border-b-[2px] ${(basePath === '/contact') ? 'border-brand text-tertiary' : 'border-transparent text-white'} hover:text-brand px-[1rem] py-[.5rem] mb-[.5rem]`}
                 >

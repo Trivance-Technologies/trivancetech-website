@@ -63,7 +63,7 @@ const BodyHeader: React.FC = () => {
           </div>
           <Link
             href={content.link}
-            className="transition-[background-color,color] duration-[400ms] border-[2px] hover:bg-transparent py-[.625rem] 2sm:py-[.875rem] px-[1.25rem] 2sm:px-[1.875rem] text-[1.125rem]/[1.375rem] text-black hover:text-brand bg-brand border-brand font-semibold w-fit"
+            className="transition-[background-color,color] duration-[400ms] border-[2px] hover:bg-transparent py-[.625rem] 2sm:py-[.875rem] px-[1.25rem] 2sm:px-[1.875rem] text-[.875rem]/[1.25rem] 3sm:text-[1.125rem]/[1.375rem] text-black hover:text-brand bg-brand border-brand font-semibold w-fit"
           >
            {`${(content.link === '/contact' ? 'Get in Touch' : 'Know More')}`}
           </Link>

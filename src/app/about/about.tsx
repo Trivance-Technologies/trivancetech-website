@@ -8,7 +8,7 @@ const idealsDetails = [
     {
         "iconUrl": "/magnifying-glass.svg",
         "title": "Who We Are",
-        "description": "Trivance Technologies was founded on the belief that every organization carries a unique potential worth honoring. We craft industry-specific solutions that not only meet regulatory demands but elevate purpose-driven goals. As an Odoo and Huawei partner, we are built for complexity and engineered for your growth."
+        "description": "Trivance Technologies was founded on the belief that every organization carries a unique potential worth honoring. We craft industry-specific solutions that not only meet regulatory demands but elevate purpose-driven goals. As an Odoo partner, we are built for complexity and engineered for your growth."
     },
     {
         "iconUrl": "/bag.svg",
@@ -38,8 +38,8 @@ const About = () => {
                     viewport={{ once: true }}  
                     style={{ willChange: "transform, opacity" }}
                 >
-                    <h2 className='tracking-[2px] uppercase font-medium text-[1rem]/[1.25rem] opacity-[.6] text-primary'>Consulting</h2>
-                    <h3 className='tracking-[-1px] text-[2.5rem]/[3rem] font-semibold text-primary'>Empowering your business to expand and thrive</h3>
+                    <h2 className='tracking-[2px] uppercase font-medium text-[.875rem]/[1.25rem] 3sm:text-[1rem]/[1.25rem] opacity-[.6] text-primary'>Consulting</h2>
+                    <h3 className='tracking-[-1px] text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold text-primary'>Empowering your business to expand and thrive</h3>
                 </motion.div>
                 <div className='flex gap-[1.25rem] 2sm:gap-[2rem] 1sm:gap-[3.75rem] 2sm:flex-row flex-col'>
                     {
