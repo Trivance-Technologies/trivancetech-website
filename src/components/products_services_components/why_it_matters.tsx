@@ -26,7 +26,7 @@ const WhyItMatters: React.FC<WhyItMattersTypes> = ({ title, description }) => {
                     >
                         <h2 className='tracking-[2px] text-primary opacity-[.6] uppercase font-medium text-[.875rem]/[1.25rem] 3sm:text-[1rem]/[1.25rem]'>{title}</h2>
                         <h3 className='mt-[0.75rem] 2sm:mt-[1.25rem] mb-[1.25rem] 2sm:mb-[2.5rem] text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold text-primary'>Why It Matters</h3>
-                        <p className='text-primary text-[1rem]/[1.25rem] opacity-[.6]'>{description}</p>
+                        <p className='text-primary text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] opacity-[.6]'>{description}</p>
                     </motion.div>
                     <motion.div className='w-full'
                         initial={{ x: -100, opacity: 0 }}

@@ -19,7 +19,7 @@ const Footer = () => {
             <section className='px-[1rem] 1sm:px-[1.5rem] w-full flex justify-center items-center'>
                 <div className='flex 2sm:flex-row flex-col mx-auto w-full max-w-[67.25rem] 2sm:gap-[3rem] gap-[48px]'>
                     <section className='flex flex-col 2sm:max-w-[18.1rem] 2sm:gap-[36px] gap-[20px] w-full'>
-                        <Link aria-label="Trivance Tech homepage" href="/" className='w-full 2sm:max-w-[14.3125rem] 2sm:h-[3.5rem] max-w-[8.5875rem] h-[2.1rem] flex items-center justify-center'>
+                        <Link aria-label="Trivance Tech homepage" href="/" className='w-full 3sm:max-w-[14.3125rem] 3sm:h-[3.5rem] max-w-[8.5875rem] h-[2.1rem] flex items-center justify-center'>
                             <div
                                     style={{
                                         maskImage: "url('/logos/trivance.svg')",

@@ -76,7 +76,7 @@ const WhatItOffers: React.FC<WhatItOffersTypes> = ({ title, content, isProduct }
                                     <h4 className="text-[1.125rem]/[1.5rem] 2sm:text-[1.25rem]/[1.5rem] font-semibold text-primary">
                                         {`${data.title}:`}
                                     </h4>
-                                    <p className="opacity-[.6] text-[1rem]/[1.25rem] text-primary">
+                                    <p className="opacity-[.6] text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] text-primary">
                                         {`${data.details}`}
                                     </p>
                                 </motion.div>

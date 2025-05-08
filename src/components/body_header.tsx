@@ -26,7 +26,7 @@ const BodyHeader: React.FC = () => {
   if (!content) return null;
 
   return (
-<section className="relative w-full bg-primary pt-[6rem] 1sm:pt-[11.25rem] 1sm:pb-[3.75rem] pb-[2rem] overflow-hidden">
+<section className="relative w-full bg-primary pt-[4.599375rem] 3sm:pt-[6rem] 1sm:pt-[11.25rem] 1sm:pb-[3.75rem] pb-[2rem] overflow-hidden">
   {/* Blue Blur - Top Left */}
   <div className="absolute top-[-15%] left-[-10%] w-[min(40vw,400px)] h-[min(100vh,1000px)] bg-glow opacity-30 rounded-full blur-[150px] rotate-[-27.4933deg]" />
   {/* Blue Blur - Bottom Right */}

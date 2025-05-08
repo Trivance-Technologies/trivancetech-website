@@ -24,7 +24,7 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
     }, [toggleIs404]);
 
     return (
-        <section className='relative bg-primary pt-[6rem] 1sm:pt-[11.25rem] pb-[2rem] 1sm:pb-[3.75rem] w-full overflow-hidden'>
+        <section className='relative bg-primary pt-[4.599375rem] 3sm:pt-[6rem] 1sm:pt-[11.25rem] pb-[2rem] 1sm:pb-[3.75rem] w-full overflow-hidden'>
             {/* Blue Blur - Top Left */}
             <div className="absolute top-[-15%] left-[-10%] w-[min(40vw,400px)] h-[min(100vh,1000px)] bg-glow opacity-30 rounded-full blur-[150px] rotate-[-27.4933deg]" />
             {/* Blue Blur - Bottom Right */}
@@ -50,12 +50,12 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
                                 <div className='breadcrumbs flex flex-row w-full items-center'>
                                     <Link 
                                         href="/services" 
-                                        className="uppercase text-white text-[1rem]/[1.25rem] font-medium tracking-[2px]"
+                                        className="uppercase text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-medium tracking-[2px]"
                                     >
                                         {title} 
                                     </Link>
-                                    <span className='uppercase text-white text-[1rem]/[1.25rem] font-medium tracking-[2px] mx-[5px]'>&gt;</span>
-                                    <span className='text-brand text-[1rem]/[1.25rem] trackin-[2px] uppercase font-medium'>{subtitle}</span>
+                                    <span className='uppercase text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-medium tracking-[2px] mx-[5px]'>&gt;</span>
+                                    <span className='text-brand text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] trackin-[2px] uppercase font-medium'>{subtitle}</span>
                                 </div>
                                 <h1 className='text-[2rem]/[2.625rem] 2sm:text-[3rem]/[3.75rem] font-semibold text-white tracking-[-1px] capitalize'>{subtitle}</h1>
                                 <p className='text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal opacity-[.6]'>{description}</p>
