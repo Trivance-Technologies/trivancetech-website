@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.trivancetech.com
+
+# Sitemaps
+Sitemap: https://www.trivancetech.com/sitemap.xml
