@@ -50,7 +50,7 @@ const ServicesCard: React.FC<ServicesCardData> = ({ iconUrl, title, description,
                     typesOfService?.map((data, index) => (
                         <li key={index} className='flex flex-row gap-2 items-center'>
                             <span
-                            className="w-[16px] h-[16px] opacity-[.6] bg-primary group-hover:bg-white transition-[background-color] duration-[300ms]"
+                            className="w-[16px] h-[16px] flex-shrink-0 opacity-[.6] bg-primary group-hover:bg-white transition-[background-color] duration-[300ms]"
                             style={{
                                 maskImage: "url('/check.svg')",
                                 WebkitMaskImage: "url('/check.svg')",
