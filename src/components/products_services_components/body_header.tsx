@@ -49,7 +49,7 @@ const BodyHeader: React.FC<bodyHeaderTypes> = ({ imageUrl, imageHeight, imageWid
                             <div className='w-full flex flex-col gap-[1.25rem] text-left items-start'>
                                 <div className='breadcrumbs flex flex-row w-full items-center'>
                                     <Link 
-                                        href="/services" 
+                                        href={`${(title === "Products") ? "/products" : "/services"}`} 
                                         className="uppercase text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-medium tracking-[2px]"
                                     >
                                         {title} 

@@ -8,8 +8,8 @@ const Products = () => {
     <>
       <ServicesSection
       title = "our products"
-      subtitle="Explore our range of innovative products"
-      description="Find reliable and effective products designed to improve your business operations. From essential tools to advanced systems, we've got you covered."
+      subtitle="Explore Our Purpose-Built Solutions"
+      description="Are you managing pensions or enterprise workflows? Find reliable systems to meet industry standards while staying agile and efficient."
       showAllServices={false}
       isProducts={true}
       isHomePage={false}
