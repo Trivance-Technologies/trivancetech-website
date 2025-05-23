@@ -32,11 +32,11 @@ export const bodyHeaderDataMap: Record<string, {
         title: "Services",
         subTitle: "Let us help you rise — where our services can elevate your business potential",
         description: "Gain access to future-ready opportunities through high-impact solutions.",
-        imageAlt: "image of a woman explaining a project on her laptop and phone.",
+        imageAlt: "image of a person holding white paper on brown wooden table.",
         link: "/about",
         imageLink: "/images/bodyheader/image3.webp",
-        width: 1800,
-        height: 1200
+        width: 1280,
+        height: 853
     },
     "/products": {
         title: "Products",

@@ -146,9 +146,9 @@ export const serviceData: Record<string, {
         description: "Document smarter. Operate better.",
         fullDescription: "Process documentation isn't just paperwork — it's how organizations grow with precision. Our service transforms everyday operations into repeatable excellence.",
         imageUrl: "/images/services/image3.webp",
-        imageAlt: "image of a man typing on his laptop.",
-        width: 1800,
-        height: 1200,
+        imageAlt: "image of an engineer testing sound system.",
+        width: 1280,
+        height: 1919,
         whatWeOffer: [
             {
                 title: "Operational Clarity",
@@ -238,9 +238,9 @@ export const serviceData: Record<string, {
         description: "Your team. Our experts. Always within reach.",
         fullDescription: "When issues arise, proximity matters. Our local-first support model ensures that help isn't just fast—it's relevant, contextual, and human.",
         imageUrl: "/images/services/image8.webp",
-        imageAlt: "image of a man and a woman shaking hands in presence of another person.",
-        width: 1800,
-        height: 1508,
+        imageAlt: "image of a black headset with mouthpiece.",
+        width: 1280,
+        height: 853,
         whatWeOffer: [
             {
                 title: "Hyper-Responsive Local Support",

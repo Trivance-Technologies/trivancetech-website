@@ -67,9 +67,9 @@ export const productData: Record<string, {
         description: "Digitize the entire retirement journey for seamless, simplified experiences, while meeting all Pencom standards.",
         fullDescription: "Metafold enables PFAs to run efficient, compliant, and client-focused pension services. It simplifies the complexities of regulation, allowing teams to focus on member satisfaction and transparency.",
         imageUrl: "/images/products/image2.webp",
-        imageAlt: "image of a black elderly man giving a thumbs up with a writing pen in hand and a notebook in front of him.",
-        width: 1280,
-        height: 855,
+        imageAlt: "image showing the metafold pension solution modules.",
+        width: 975,
+        height: 456,
         whatWeOffer: [
             { title: "Pension Management", details: "Pension Management through end-to-end lifecycle tracking: Streamlining onboarding, contributions, and benefits." },
             { title: "Compliance Support", details: "Built-in Pencom reporting and validation tools reduce manual errors and ensure regulatory alignment at every stage." },
@@ -80,9 +80,9 @@ export const productData: Record<string, {
         description: "A robust General Ledger platform built for precise financial tracking, regulatory compliance, and integration across systems",
         fullDescription: "Metafold Accounting delivers financial accuracy through a complete General Ledger system—integrating compliance, receivables, payables, and reconciliations. It brings structure to daily operations while simplifying back-office workflows.",
         imageUrl: "/images/products/image3.webp",
-        imageAlt: "image showing a calculator, a financial report and writing pen.",
-        width: 1280,
-        height: 754,
+        imageAlt: "image showing the metafold accounting module.",
+        width: 975,
+        height: 456,
         whatWeOffer: [
             { title: "General Ledger", details: "Comprehensive financial tracking and reporting." },
             { title: "Streamlines Cash Flow Visibility", details: "Bank Management with multi-bank setup, reconciliations, and payment automation." },
@@ -106,9 +106,9 @@ export const productData: Record<string, {
         description: "A centralized administration hub for managing pension fund flows, contribution histories, disbursements, and client communications.",
         fullDescription: "A unified system for PFAs to manage funds, contributions, benefits, and client relationships with full transparency.",
         imageUrl: "/images/products/image5.webp",
-        imageAlt: "image of an elderly black man working on his laptop",
-        width: 1279,
-        height: 854,
+        imageAlt: "image showing metadfold pension admin module.",
+        width: 975,
+        height: 420,
         whatWeOffer: [
             { title: "Fund Management", details: "Support for RSA, gratuity, legacy funds, and multi-employer schemes with real-time NAV tracking." },
             { title: "Contribution Tracking", details: "Automatically records employer/employee contributions, handles arrears, and generates batch validations." },
@@ -119,13 +119,13 @@ export const productData: Record<string, {
         description: "A client management solution that streamlines KYC, statements, and portal access for seamless user experiences.",
         fullDescription: "The module facilitates secure delivery, transparent, and accessible client services. From KYC to real-time statements, it streamlines engagement and reduces admin load.",
         imageUrl: "/images/products/image6.webp",
-        imageAlt: "image of a black man on a phone call whilst working on his tablet.",
-        width: 1280,
-        height: 853,
+        imageAlt: "image showing metafold customer module.",
+        width: 975,
+        height: 430,
         whatWeOffer: [
             { title: "Client Management", details: "Centralize KYC, client records, and communication for better oversight." },
             { title: "Statement Generation", details: "Create and issue at scale, ready for download or distribution." },
-            { title: "Customer Portal", details: "Empower clients with secure access to balances, histories, and updates—improving transparency and reducing service load." }
+            { title: "Customer Portal", details: "Empower clients with secure access to balances, histories, and updates — improving transparency and reducing service load." }
         ]
     }
 };
