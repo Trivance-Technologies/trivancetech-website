@@ -1,4 +1,5 @@
 'use client'
+import BlogDisplay from "@/components/blog_display";
 import ClientsLogoDisplay from "@/components/clients_logo_display";
 import InfoSection from "@/components/info_section";
 import PartnersLogosDisplay from "@/components/partners_logos_display";
@@ -30,6 +31,7 @@ export default function Home() {
       />
       <ClientsLogoDisplay />
       <PartnersLogosDisplay />
+      <BlogDisplay />
     </>
   );
 }

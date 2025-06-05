@@ -92,6 +92,12 @@ const Footer = () => {
                                 Products
                             </Link>
                             <Link 
+                                href="/blog" 
+                                className={`transition-all duration-[400ms] ${(basePath === '/blog') ? 'text-brand' : 'text-secondary'} hover:text-brand`}
+                            >
+                                Blog
+                            </Link>
+                            <Link 
                                 href="/contact" 
                                 className={`transition-all duration-[400ms] ${(basePath === '/contact') ? 'text-brand' : 'text-secondary'} hover:text-brand`}
                             >
