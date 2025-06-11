@@ -405,6 +405,7 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     Slug: Schema.Attribute.UID<'Title'> & Schema.Attribute.Required;
+    Tag: Schema.Attribute.String & Schema.Attribute.Required;
     Title: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;

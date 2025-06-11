@@ -20,7 +20,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
   return (
     <div
       key={id}
-      className="hover:scale-105 transition-all bg-white overflow-hidden shadow-sm hover:shadow-md duration-300 max-w-[330px] flex flex-col"
+      className="hover:scale-105 transition-all bg-white overflow-hidden shadow-sm hover:shadow-md duration-300 flex flex-col h-full w-full"
     >
       <div className="relative w-full h-48 shrink-0">
         <Image src={image} alt={title} fill className="object-cover" />

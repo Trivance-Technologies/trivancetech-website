@@ -48,6 +48,10 @@
       "type": "uid",
       "targetField": "Title",
       "required": true
+    },
+    "Tag": {
+      "type": "string",
+      "required": true
     }
   }
 }

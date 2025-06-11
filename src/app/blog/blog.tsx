@@ -1,6 +1,17 @@
+'use client'
 import BlogCard from "@/components/blog_card";
+import { Search, X } from "lucide-react";
+import { useMemo, useState } from "react"; // 1. Import useMemo
 
-const newsCards = [
+interface NewsCard {
+  id: number;
+  category: string;
+  title: string;
+  description: string;
+  image: string;
+}
+
+const newsCards: NewsCard[] = [
   {
     id: 1,
     category: "Career",
@@ -29,15 +40,6 @@ const newsCards = [
       "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 4,
-    category: "Technology",
-    title: "Top 5 AI trends that will reshape your industry.",
-    description:
-      "Stay ahead of the curve with insights on how artificial intelligence is transforming businesses worldwide.",
-    image:
-      "https://images.unsplash.com/photo-1581090700227-0a6c40b5c9c0?auto=format&fit=crop&w=800&q=60",
-  },
-  {
     id: 5,
     category: "Health",
     title: "The secret to a healthier lifestyle starts here.",
@@ -45,15 +47,6 @@ const newsCards = [
       "Unlock the power of balanced nutrition, regular exercise, and mindfulness for a happier, healthier you.",
     image:
       "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 6,
-    category: "Finance",
-    title: "How to budget effectively in today’s economy.",
-    description:
-      "Master the art of budgeting, saving, and investing to secure your financial future.",
-    image:
-      "https://images.unsplash.com/photo-1581093588401-b54ee30844a5?auto=format&fit=crop&w=800&q=60",
   },
   {
     id: 7,
@@ -65,15 +58,6 @@ const newsCards = [
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 8,
-    category: "Career",
-    title: "Remote work: How to stay productive and balanced.",
-    description:
-      "Find out how to stay focused, avoid burnout, and thrive while working from home.",
-    image:
-      "https://images.unsplash.com/photo-1581091228709-8aa2b6e3bd6d?auto=format&fit=crop&w=800&q=60",
-  },
-  {
     id: 9,
     category: "Lifestyle",
     title: "Minimalism: Simplify your life and live with purpose.",
@@ -81,33 +65,6 @@ const newsCards = [
       "Learn how to declutter your space, your mind, and your life for a more meaningful existence.",
     image:
       "https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 10,
-    category: "Technology",
-    title: "The future of electric vehicles: What you need to know.",
-    description:
-      "Discover how EVs are revolutionizing transportation and what it means for consumers and the planet.",
-    image:
-      "https://images.unsplash.com/photo-1579487787933-4bc2a1b94e0d?auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 11,
-    category: "Health",
-    title: "Mindfulness: A path to mental well-being.",
-    description:
-      "Explore techniques to stay present and reduce stress in your daily life.",
-    image:
-      "https://images.unsplash.com/photo-1504198453319-5ce911bafcde?auto=format&fit=crop&w=800&q=60",
-  },
-  {
-    id: 12,
-    category: "Finance",
-    title: "Investing 101: Building your financial portfolio.",
-    description:
-      "Learn the basics of investing and how to grow your wealth over time.",
-    image:
-      "https://images.unsplash.com/photo-1605902711622-cfb43c4437d2?auto=format&fit=crop&w=800&q=60",
   },
   {
     id: 13,
@@ -155,15 +112,6 @@ const newsCards = [
       "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 18,
-    category: "Finance",
-    title: "Retirement planning: Securing your future.",
-    description:
-      "Steps to ensure a comfortable and financially stable retirement.",
-    image:
-      "https://images.unsplash.com/photo-1588776814546-ec7e3a8b8c6b?auto=format&fit=crop&w=800&q=60",
-  },
-  {
     id: 19,
     category: "Travel",
     title: "Cultural immersion: Traveling beyond tourism.",
@@ -183,20 +131,81 @@ const newsCards = [
   },
 ];
 
+const tags = ["All Posts", "Career", "Lifestyle", "Health", "Technology", "Finance", "Travel"];
+
+
 const Blog = () => {
+  const [searchValue, setSearchValue] = useState<string>("");
+  const [searchTag, setSearchTag] = useState<string>("All Posts");
+
+  const filteredCards = useMemo(() => {
+    return newsCards.filter((card) => {
+      const tagMatch = searchTag === "All Posts" || card.category === searchTag;
+      const searchMatch =
+        searchValue.trim() === "" ||
+        card.title.toLowerCase().includes(searchValue.trim().toLowerCase());
+      return tagMatch && searchMatch;
+    });
+  }, [searchValue, searchTag]);
+
   return (
     <section className="w-full py-[6.25rem] px-[1.5rem] flex flex-col items-center bg-secondary">
-      <div className="w-fit grid grid-cols-3 gap-[2.5rem] items-center">
-        {
-          newsCards.map((card) => {
-            return (
-              <BlogCard key={card.id} id={card.id} image={card.image} title={card.title} category={card.category} description={card.description}/>
-            )
-          })
-        }
+      <div className="flex flex-col mx-auto w-full max-w-[67.25rem] items-center">
+        <h2 className="self-start uppercase tracking-[2px] font-medium text-[.875rem]/[1.25rem] 3sm:text-[1rem]/[1.25rem] opacity-[.6] text-primary mb-[4rem]">Search Our Blog Library</h2>
+        <div className="flex flex-wrap gap-2 self-start">
+          {tags.map((tag) => (
+            <button
+              key={tag}
+              className={`px-4 py-2 hover:cursor-pointer text-sm font-medium text-gray-700 uppercase tracking-wide hover:bg-gray-100 ${(searchTag === tag) ? 'border border-gray-400' : ''}`}
+              onClick={() => { setSearchTag(tag); }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+        <div className="w-full flex items-center border border-gray-300 px-4 py-2 bg-white self-start my-[1.5rem]">
+          <span 
+            className="mr-2 text-gray-500"
+          >
+            <Search className="w-5 h-5" />
+          </span>
+          <input 
+            type="text" 
+            placeholder="Search for posts..."
+            aria-label="Search posts"
+            onChange={(e) => { setSearchValue(e.target.value) }}
+            value={searchValue}
+            className="flex-grow bg-transparent focus:outline-none text-gray-700 placeholder-gray-400"
+          />
+          <button 
+            className={`mr-2 text-red-500 hover:cursor-pointer ${(searchValue.trim() === "") ? "hidden" : "block"}`}
+            aria-label = "clear search"
+            onClick={() => setSearchValue("")}
+          >
+            <X className="w-5 h-5" />
+          </button>
+        </div>
+        <div className="w-fit grid grid-cols-1 3sm:grid-cols-2 1sm:grid-cols-3 gap-[2.5rem] justify-around">
+          {filteredCards.length > 0 ? (
+            filteredCards.map((card) => (
+              <BlogCard
+                key={card.id}
+                id={card.id}
+                image={card.image}
+                title={card.title}
+                category={card.category}
+                description={card.description}
+              />
+            ))
+          ) : (
+            <p className="col-span-3 text-center text-gray-500 py-10">
+              No posts found matching your search.
+            </p>
+          )}
+        </div>
       </div>
     </section>
   )
 }
 
-export default Blog
+export default Blog;
