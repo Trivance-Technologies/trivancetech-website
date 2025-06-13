@@ -19,16 +19,6 @@
       "required": true,
       "unique": true
     },
-    "Image": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "CoverImage": {
       "type": "media",
       "multiple": false,
@@ -39,10 +29,6 @@
         "videos",
         "audios"
       ]
-    },
-    "DatePublished": {
-      "type": "date",
-      "required": true
     },
     "Slug": {
       "type": "uid",

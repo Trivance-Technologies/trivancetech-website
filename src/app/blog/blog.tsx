@@ -4,7 +4,7 @@ import { Search, X } from "lucide-react";
 import { useMemo, useState } from "react"; // 1. Import useMemo
 
 interface NewsCard {
-  id: number;
+  slug: number;
   category: string;
   title: string;
   description: string;
@@ -13,7 +13,7 @@ interface NewsCard {
 
 const newsCards: NewsCard[] = [
   {
-    id: 1,
+    slug: 1,
     category: "Career",
     title: "How to win any job you want. Get started with 5 steps.",
     description:
@@ -22,7 +22,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1529400971008-f566de0e6dfc?auto=format&fit=crop&w=1470&q=80",
   },
   {
-    id: 2,
+    slug: 2,
     category: "Lifestyle",
     title: "10+ Best ways to reduce your office work depression.",
     description:
@@ -31,7 +31,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1500099817043-86d46000d58f?auto=format&fit=crop&w=1374&q=80",
   },
   {
-    id: 3,
+    slug: 3,
     category: "Career",
     title: "Why should you work as a team even on small projects.",
     description:
@@ -40,7 +40,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 5,
+    slug: 5,
     category: "Health",
     title: "The secret to a healthier lifestyle starts here.",
     description:
@@ -49,7 +49,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 7,
+    slug: 7,
     category: "Travel",
     title: "Explore the world: Top 10 destinations for 2025.",
     description:
@@ -58,7 +58,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 9,
+    slug: 9,
     category: "Lifestyle",
     title: "Minimalism: Simplify your life and live with purpose.",
     description:
@@ -67,7 +67,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1508780709619-79562169bc64?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 13,
+    slug: 13,
     category: "Travel",
     title: "Sustainable tourism: Travel responsibly.",
     description:
@@ -76,7 +76,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 14,
+    slug: 14,
     category: "Career",
     title: "Networking: Building professional relationships.",
     description:
@@ -85,7 +85,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 15,
+    slug: 15,
     category: "Lifestyle",
     title: "Work-life balance: Achieving harmony.",
     description:
@@ -94,7 +94,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 16,
+    slug: 16,
     category: "Technology",
     title: "Cybersecurity: Protecting your digital life.",
     description:
@@ -103,7 +103,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1591696205602-2f950c417cb9?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 17,
+    slug: 17,
     category: "Health",
     title: "Nutrition: Eating for optimal health.",
     description:
@@ -112,7 +112,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 19,
+    slug: 19,
     category: "Travel",
     title: "Cultural immersion: Traveling beyond tourism.",
     description:
@@ -121,7 +121,7 @@ const newsCards: NewsCard[] = [
       "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=60",
   },
   {
-    id: 20,
+    slug: 20,
     category: "Career",
     title: "Leadership skills: Leading with confidence.",
     description:
@@ -149,7 +149,7 @@ const Blog = () => {
   }, [searchValue, searchTag]);
 
   return (
-    <section className="w-full py-[6.25rem] px-[1.5rem] flex flex-col items-center bg-secondary">
+    <section className="w-full py-[6.25rem] px-[1rem] 1sm:px-[1.5rem] flex flex-col items-center bg-secondary">
       <div className="flex flex-col mx-auto w-full max-w-[67.25rem] items-center">
         <h2 className="self-start uppercase tracking-[2px] font-medium text-[.875rem]/[1.25rem] 3sm:text-[1rem]/[1.25rem] opacity-[.6] text-primary mb-[4rem]">Search Our Blog Library</h2>
         <div className="flex flex-wrap gap-2 self-start">
@@ -185,12 +185,12 @@ const Blog = () => {
             <X className="w-5 h-5" />
           </button>
         </div>
-        <div className="w-fit grid grid-cols-1 3sm:grid-cols-2 1sm:grid-cols-3 gap-[2.5rem] justify-around">
+        <div className="w-fit grid grid-cols-1 3sm:grid-cols-2 1sm:grid-cols-3 gap-[1.25rem] 1sm:gap-[2.5rem] justify-around">
           {filteredCards.length > 0 ? (
             filteredCards.map((card) => (
               <BlogCard
-                key={card.id}
-                id={card.id}
+                key={card.slug}
+                slug={card.slug}
                 image={card.image}
                 title={card.title}
                 category={card.category}

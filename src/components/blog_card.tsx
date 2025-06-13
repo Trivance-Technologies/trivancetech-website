@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 type BlogCardProps = {
-  id: string | number;
+  slug: string | number;
   image: string;
   title: string;
   category: string;
@@ -11,19 +11,20 @@ type BlogCardProps = {
 };
 
 const BlogCard: React.FC<BlogCardProps> = ({
-  id,
+  slug,
   image,
   title,
   category,
   description,
 }) => {
   return (
-    <div
-      key={id}
-      className="hover:scale-105 transition-all bg-white overflow-hidden shadow-sm hover:shadow-md duration-300 flex flex-col h-full w-full"
+    <Link
+      href={`/blog/${slug}`}
+      key={slug}
+      className="group hover:scale-105 hover:cursor-pointer transition-all bg-white overflow-hidden shadow-sm hover:shadow-md duration-300 flex flex-col h-full w-full"
     >
       <div className="relative w-full h-48 shrink-0">
-        <Image src={image} alt={title} fill className="object-cover" />
+        <Image src={image} alt={`cover image for ${title}`} fill className="object-cover" />
       </div>
       <div className="p-6 text-left flex flex-col h-full">
         <p className="text-xs text-[rgb(23,29,47)] mb-2">{category}</p>
@@ -33,20 +34,19 @@ const BlogCard: React.FC<BlogCardProps> = ({
         <p className="text-sm text-primary opacity-[.6] mb-4 flex-grow">
           {description}
         </p>
-        <Link
-          href="/blog/"
-          className="flex flex-row gap-[.375rem] items-center justify-start text-sm transition-[background-color,color] duration-[400ms] border-[2px] hover:bg-transparent py-[.625rem] 2sm:py-[.875rem] px-[1.25rem] 2sm:px-[1.875rem] text-primary hover:text-[#5880B5] bg-transparent border-[rgba(23,29,47,0.2)] font-semibold w-fit"
+        <div
+          className="flex flex-row gap-[.375rem] items-center justify-start text-sm transition-[color] duration-[400ms] border-[2px] py-[.625rem] 2sm:py-[.875rem] px-[1.25rem] 2sm:px-[1.875rem] text-primary group-hover:text-[#5880B5] bg-transparent border-[rgba(23,29,47,0.2)] font-semibold w-fit"
         >
-          READ MORE
+          Read More
           <Image
             src="/right_arrow.svg"
             alt="right arrow icon"
             width={20}
             height={21}
           />
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
