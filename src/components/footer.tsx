@@ -91,7 +91,7 @@ const Footer = () => {
                         </section>
                         <section className="w-full 2sm:max-w-[20rem] flex flex-col text-left items-start">
                             <h2 className="w-[100px] text-secondary text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem]  mb-[.875rem] 2ms:mb-[1.5rem] font-semibold text-left">
-                                Services
+                                What We Do
                             </h2>
                             <div className="w-[100px] flex flex-col justify-start items-start gap-[1.25rem] 2ms:gap-[1.5rem] text-left">
                                 <Link 

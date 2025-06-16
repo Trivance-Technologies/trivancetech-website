@@ -38,6 +38,10 @@
     "Tag": {
       "type": "string",
       "required": true
+    },
+    "ShortDescription": {
+      "type": "text",
+      "required": true
     }
   }
 }

@@ -1,76 +1,29 @@
+import BlogCard from "@/components/blog_card";
+import MarkdownContent from "@/components/markdown_content";
+import { Article, ArticleCard, getArticleBySlug, getArticlesByTag } from "@/libs/articles";
 import { CalendarDays, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-// import { useEffect, useState } from "react";
 import { FaFacebook, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
-interface StrapiImageData {
-  attributes: {
-    url: string;
-  };
-}
-
-interface StrapiArticleAttributes {
-  slug: string;
-  title: string;
-  category: string;
-  description: string;
-  image: {
-    data: StrapiImageData | null;
-  };
-}
-
-interface StrapiArticle {
-  id: number;
-  attributes: StrapiArticleAttributes;
-}
-
-interface NewsCard {
-    id: number;
+interface PageProps {
+  params: {
     slug: string;
-    category: string;
-    title: string;
-    description: string;
-    image: string;
+  };
 }
 
-async function getArticles(): Promise<NewsCard[]> {
-  const res = await fetch("http://localhost:1337/api/articles", {
-    cache: "no-store", // ensures SSR-like behavior
-  });
+export default async function Page ({ params }: PageProps) {
+    const { slug } = params;
 
-  const json = await res.json();
-
-  console.log("📦 Strapi Response:\n", JSON.stringify(json, null, 2));
-
-//   const newsCards = json.data.map((item: StrapiArticle) => ({
-//     id: item.id,
-//     slug: item.attributes.slug,
-//     category: item.attributes.category,
-//     title: item.attributes.title,
-//     description: item.attributes.description,
-//     image: item.attributes.image?.data
-//       ? "http://localhost:1337" + item.attributes.image.data.attributes.url
-//       : "",
-//   }));
-
-  return [];
-}
-
-export default async function Page () {
-    await getArticles();
-    // const [currentUrl, setCurrentUrl] = useState("");
-
-    // useEffect(() => {
-    //     if (typeof window !== "undefined") {
-    //         setCurrentUrl(window.location.href);
-    //         console.log(currentUrl);
-    //     }
-    // }, [currentUrl]);
-
+    const article: Article | null = await getArticleBySlug(slug);
     const currentUrl = "http://localhost:3000/blog";
-
     const encodedUrl = encodeURIComponent(currentUrl);
+
+    if (!article) {
+        return <div className="text-red-500">Article not found.</div>;
+    }
+
+    const newsCards: ArticleCard[] = await getArticlesByTag(article.category);
 
   return (
     <>
@@ -83,27 +36,27 @@ export default async function Page () {
             <div className="absolute bottom-[-10%] left-[50%] translate-x-[-50%] w-[min(70vw,800px)] h-[min(70vw,800px)] bg-glow opacity-30 rounded-full blur-[200px] rotate-[10deg]"/>
             <div className="flex 1sm:flex-col flex-col-reverse mx-auto max-w-[67.25rem] items-center w-full gap-[2.25rem] 2sm:gap-[3.75rem] 1sm:gap-[4rem] mb-[2rem] 2sm:mb-[4rem]">
                 <div className="flex flex-col max-w-[51.625rem] mx-auto gap-[.5rem] text-center 1sm:px-0 px-[1rem]">
-                    <div className="text-brand uppercase text-[1rem]/[1.25rem] font-medium tracking-[2px]">Career</div>
-                    <h1 className="text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold text-white tracking-[-1px] capitalize">The secret to a healthier lifestyle starts here</h1>
-                    <p className="text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal opacity-[.8]">Unlock the power of balanced nutrition, regular exercise, and mindfulness for a happier, healthier you.</p>
+                    <div className="text-brand uppercase text-[1rem]/[1.25rem] font-medium tracking-[2px]">{article.category}</div>
+                    <h1 className="text-[1.5rem]/[2rem] 2sm:text-[2.5rem]/[3rem] font-semibold text-white tracking-[-1px] capitalize">{article.title}</h1>
+                    <p className="text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal opacity-[.8]">{article.description}</p>
                     <div className="flex items-center justify-center gap-[1.5rem] text-white text-[.875rem]/[1.25rem] opacity-70 mt-[1.25rem]">
                         <div className="flex items-center gap-[0.5rem]">
                             <CalendarDays size={16} className="stroke-white opacity-70" />
-                            <span>June 13, 2025</span>
+                            <span>{article.publishedAt}</span>
                         </div>
                         <div className="flex items-center gap-[0.5rem]">
                             <Clock size={16} className="stroke-white opacity-70" />
-                            <span>4 min read</span>
+                            <span>{article.readTime}</span>
                         </div>
                     </div>
                 </div>
                 <div className="w-full relative" style={{ paddingTop: "51.28%" }}>
-                    <Image alt={`cover image for`} priority className="object-cover w-full" fill src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=800&q=60" />
+                    <Image alt={`cover image for ${article.title}`} priority className="object-cover w-full" fill src={article.image} />
                 </div>
             </div>
         </section> 
         <section className="bg-white px-[1rem] 1sm:px-[1.5rem] py-[3.75rem] flex justify-center">
-            <div className="flex flex-col 2sm:flex-row max-auto max-w-[48rem] gap-[2rem]">
+            <div className="flex flex-col 2sm:flex-row max-auto max-w-[60rem] gap-[2rem] w-full">
                 <div
                     aria-label="Share buttons"
                     className="
@@ -164,8 +117,8 @@ export default async function Page () {
                         <FaWhatsapp size={24} color="#002147" />
                     </a>
                 </div>
-                <div className="flex flex-col text-left text-[#171D2F] gap-[2rem]">
-                    {/* <MarkdownContent content={markdownString} /> */}
+                <div className="flex flex-col text-left text-[#171D2F] gap-[2rem] w-full">
+                    <MarkdownContent content={article.content} />
                 </div>
             </div>
         </section>   
@@ -181,47 +134,16 @@ export default async function Page () {
                     </Link>
                 </div>
                 <div className="grid grid-cols-1 3sm:grid-cols-2 2sm:grid-cols-3 gap-[1.25rem] 1sm:gap-[2.5rem]">
-                    {/* {
+                    {
                         newsCards.map((card) => {
                             return (
-                                <BlogCard key={card.slug} slug={card.slug} image={card.image} title={card.title} category={card.category} description={card.description}/>
+                                <BlogCard key={card.slug} slug={card.slug} image={card.image} title={card.title} category={card.category} description={card.description} publishedAt={card.publishedAt} readTime={card.readTime}/>
                             )})
-                    } */}
+                    }
                 </div>
             </div>
         </section>
     </>
   )
 }
-
-
-// export async function getServerSideProps(context) {
-//   // Fetch articles from your local Strapi instance
-//   const res = await fetch("http://localhost:1337/api/articles?populate=image");
-//   const json = await res.json();
-
-//   // Format the articles to match your NewsCard type
-//   const newsCards = json.data.map((item: any) => ({
-//     id: item.id,
-//     slug: item.attributes.slug,
-//     category: item.attributes.category,
-//     title: item.attributes.title,
-//     description: item.attributes.description,
-//     image: item.attributes.image?.data
-//       ? "http://localhost:1337" + item.attributes.image.data.attributes.url
-//       : "",
-//   }));
-
-//   // Build current URL from request headers (optional)
-//   const protocol = context.req.headers["x-forwarded-proto"] || "http";
-//   const host = context.req.headers.host;
-//   const currentUrl = `${protocol}://${host}${context.req.url}`;
-
-//   return {
-//     props: {
-//       newsCards,
-//       currentUrl,
-//     },
-//   };
-// }
 

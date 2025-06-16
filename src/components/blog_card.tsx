@@ -1,3 +1,4 @@
+import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -8,6 +9,8 @@ type BlogCardProps = {
   title: string;
   category: string;
   description: string;
+  publishedAt: string;
+  readTime: string;
 };
 
 const BlogCard: React.FC<BlogCardProps> = ({
@@ -16,6 +19,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
   title,
   category,
   description,
+  publishedAt,
+  readTime
 }) => {
   return (
     <Link
@@ -28,6 +33,16 @@ const BlogCard: React.FC<BlogCardProps> = ({
       </div>
       <div className="p-6 text-left flex flex-col h-full">
         <p className="text-xs text-[rgb(23,29,47)] mb-2">{category}</p>
+        <div className="flex items-center text-xs text-[rgba(23,29,47,0.6)] mb-2 space-x-4">
+          <div className="flex items-center space-x-1">
+            <Calendar size={14} />
+            <span>{publishedAt}</span>
+          </div>
+          <div className="flex items-center space-x-1">
+            <Clock size={14} />
+            <span>{readTime}</span>
+          </div>
+        </div>
         <h3 className="text-[1.25rem]/[1.5rem] font-semibold mb-2 text-[#171d2f]">
           {title}
         </h3>
