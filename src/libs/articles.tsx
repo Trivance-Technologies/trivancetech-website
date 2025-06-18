@@ -30,13 +30,6 @@ export interface Article extends ArticleCard {
   content: string;
 }
 
-interface StrapiTag {
-  id: number;
-  attributes: {
-    name: string;
-  };
-}
-
 const domain = "http://localhost:1337";
 
 function calculateReadTime(content: string): string {
@@ -93,7 +86,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   };
 }
 
-export async function getArticlesByTag(tag: string, limit = 3): Promise<ArticleCard[]> {
+export async function getArticlesByTag(tag: string, start: number, limit: number): Promise<{articleCards: ArticleCard[]; totalArticlesCount: number}> {
   const query = new URLSearchParams({
     "fields[0]": "Slug",
     "fields[1]": "Tag",
@@ -102,8 +95,9 @@ export async function getArticlesByTag(tag: string, limit = 3): Promise<ArticleC
     "fields[4]": "publishedAt",
     "fields[5]": "Content",
     populate: "CoverImage",
-    "filters[Tag][$eq]": tag,
+    "filters[Tag][$containsi]": tag,
     "sort[0]": "publishedAt:desc",
+    "pagination[start]": start.toString(),
     "pagination[limit]": limit.toString(),
   }).toString();
 
@@ -112,8 +106,9 @@ export async function getArticlesByTag(tag: string, limit = 3): Promise<ArticleC
   });
 
   const json = await res.json();
+  const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
-  return (json.data as StrapiArticle[]).map((item) => {
+  const articleCards = (json.data as StrapiArticle[]).map((item) => {
     const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
     const date = formatPublishedDate(item.publishedAt);
     const readTime = calculateReadTime(item.Content);
@@ -129,12 +124,15 @@ export async function getArticlesByTag(tag: string, limit = 3): Promise<ArticleC
       readTime,
     };
   });
+
+  return { articleCards, totalArticlesCount };
 }
 
-export async function getAllTags () {
-    const res = await fetch(`${domain}/api/tags?fields[0]=name`);
-    const json = await res.json();
-    return (json.data as StrapiTag[]).map((tag) => tag.attributes.name);
+export async function getAllTags(): Promise<string[]> {
+  const res = await fetch(`${domain}/api/tag?fields[0]=name`);
+  const json = await res.json();
+  const tags = (json.data as { name: string }[]).map((tag) => tag.name);
+  return ["All Posts", ...tags];
 }
 
 export async function getLatestArticles(): Promise<ArticleCard[]> {
@@ -174,7 +172,7 @@ export async function getLatestArticles(): Promise<ArticleCard[]> {
   });
 }
 
-export async function getAllArticles(start: number, limit: number): Promise<ArticleCard[]> {
+export async function getAllArticles(start: number, limit: number): Promise<{ articleCards: ArticleCard[]; totalArticlesCount: number}> {
   const query = new URLSearchParams({
     "fields[0]": "Slug",
     "fields[1]": "Tag",
@@ -193,8 +191,10 @@ export async function getAllArticles(start: number, limit: number): Promise<Arti
   });
 
   const json = await res.json();
+  const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
-  return (json.data as StrapiArticle[]).map((item) => {
+
+  const articleCards = (json.data as StrapiArticle[]).map((item) => {
     const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
     const date = formatPublishedDate(item.publishedAt);
     const readTime = calculateReadTime(item.Content);
@@ -210,6 +210,63 @@ export async function getAllArticles(start: number, limit: number): Promise<Arti
       readTime,
     };
   });
+
+  return { articleCards, totalArticlesCount };
 }
+
+export async function getArticlesBySearch(
+  query: string,
+  tag: string,
+  start: number,
+  limit: number
+): Promise<{ articleCards: ArticleCard[]; totalArticlesCount: number }> {
+  const params = new URLSearchParams({
+    "fields[0]": "Slug",
+    "fields[1]": "Tag",
+    "fields[2]": "Title",
+    "fields[3]": "ShortDescription",
+    "fields[4]": "publishedAt",
+    "fields[5]": "Content",
+    populate: "CoverImage",
+    "sort[0]": "publishedAt:desc",
+    "pagination[start]": start.toString(),
+    "pagination[limit]": limit.toString(),
+  });
+
+  // Search by title or description
+  params.append("filters[$or][0][Title][$containsi]", query);
+  params.append("filters[$or][1][ShortDescription][$containsi]", query);
+
+  // Optional tag filter
+  if (tag && tag !== "All Posts") {
+    params.append("filters[Tag][$containsi]", tag);
+  }
+
+  const fullUrl = `${domain}/api/articles?${params.toString()}`;
+
+  const res = await fetch(fullUrl, { cache: "no-store" });
+  const json = await res.json();
+  const totalArticlesCount = json.meta?.pagination?.total ?? 0;
+
+  const articleCards = (json.data as StrapiArticle[]).map((item) => {
+    const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
+    const date = formatPublishedDate(item.publishedAt);
+    const readTime = calculateReadTime(item.Content);
+
+    return {
+      id: item.id,
+      slug: item.Slug,
+      category: item.Tag.trim(),
+      title: item.Title,
+      description: item.ShortDescription,
+      image: largeUrl ? `${domain}${largeUrl}` : "",
+      publishedAt: date,
+      readTime,
+    };
+  });
+
+  return { articleCards, totalArticlesCount };
+}
+
 
 

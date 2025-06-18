@@ -1,6 +1,7 @@
+import NotFoundPage from "@/app/not-found";
 import BlogCard from "@/components/blog_card";
 import MarkdownContent from "@/components/markdown_content";
-import { Article, ArticleCard, getArticleBySlug, getArticlesByTag } from "@/libs/articles";
+import { Article, getArticleBySlug, getArticlesByTag, getLatestArticles } from "@/libs/articles";
 import { CalendarDays, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,10 +21,17 @@ export default async function Page ({ params }: PageProps) {
     const encodedUrl = encodeURIComponent(currentUrl);
 
     if (!article) {
-        return <div className="text-red-500">Article not found.</div>;
+        return <NotFoundPage />;
     }
 
-    const newsCards: ArticleCard[] = await getArticlesByTag(article.category);
+    const { articleCards: rawRelatedCards } = await getArticlesByTag(article.category, 0, 5);
+    let articleCards = rawRelatedCards.filter(card => card.slug !== slug);
+
+    if (articleCards.length === 0) {
+        articleCards = (await getLatestArticles()).filter(card => card.slug !== slug);
+    }
+
+    articleCards = articleCards.slice(0, 3);
 
   return (
     <>
@@ -135,7 +143,7 @@ export default async function Page ({ params }: PageProps) {
                 </div>
                 <div className="grid grid-cols-1 3sm:grid-cols-2 2sm:grid-cols-3 gap-[1.25rem] 1sm:gap-[2.5rem]">
                     {
-                        newsCards.map((card) => {
+                        articleCards.map((card) => {
                             return (
                                 <BlogCard key={card.slug} slug={card.slug} image={card.image} title={card.title} category={card.category} description={card.description} publishedAt={card.publishedAt} readTime={card.readTime}/>
                             )})

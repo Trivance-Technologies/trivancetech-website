@@ -23,21 +23,8 @@ const NotFound = () => {
           justifyContent: "center",
         }}
       >
-        <div>
-          <style>
-            {`
-              body { color: #000; background: #fff; margin: 0; }
-              .next-error-h1 { border-right: 1px solid rgba(0, 0, 0, 0.3); }
-
-              @media (prefers-color-scheme: dark) {
-                body { color: #fff; background: #000; }
-                .next-error-h1 { border-right: 1px solid rgba(255, 255, 255, 0.3); }
-              }
-            `}
-          </style>
-
+        <div className="text-primary">
           <h1
-            className="next-error-h1"
             style={{
               display: "inline-block",
               margin: "0 20px 0 0",

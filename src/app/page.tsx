@@ -1,5 +1,7 @@
+import { ArticleCard, getLatestArticles } from "@/libs/articles";
 import Home from "./homepage";
 
-export default function Page() {
-    return <Home />;
+export default async function Page() {
+    const articleCards: ArticleCard[] = await getLatestArticles();    
+    return <Home articleCards={articleCards} />;
 }

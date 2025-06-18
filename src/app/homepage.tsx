@@ -4,8 +4,13 @@ import ClientsLogoDisplay from "@/components/clients_logo_display";
 import InfoSection from "@/components/info_section";
 import PartnersLogosDisplay from "@/components/partners_logos_display";
 import ServicesSection from "@/components/services_section";
+import { ArticleCard } from "@/libs/articles";
 
-export default function Home() {
+interface HomeProps {
+  articleCards: ArticleCard[];
+}
+
+export default function Home({ articleCards }: HomeProps ) {
 
   return (
     <>
@@ -31,7 +36,9 @@ export default function Home() {
       />
       <ClientsLogoDisplay />
       <PartnersLogosDisplay />
-      <BlogDisplay />
+      {
+        articleCards.length > 0 && <BlogDisplay articleCards={articleCards} />
+      }
     </>
   );
 }

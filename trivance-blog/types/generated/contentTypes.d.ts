@@ -411,6 +411,37 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMetadataForWebsitePagesMetadataForWebsitePages
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'metadata_for_website_page';
+  info: {
+    displayName: 'Metadata for Website Pages';
+    pluralName: 'metadata-for-website-page';
+    singularName: 'metadata-for-website-pages';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    Description: Schema.Attribute.Text & Schema.Attribute.Required;
+    Keywords: Schema.Attribute.Blocks & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::metadata-for-website-pages.metadata-for-website-pages'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTagsTags extends Struct.CollectionTypeSchema {
   collectionName: 'tag';
   info: {
@@ -947,6 +978,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
+      'api::metadata-for-website-pages.metadata-for-website-pages': ApiMetadataForWebsitePagesMetadataForWebsitePages;
       'api::tags.tags': ApiTagsTags;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
