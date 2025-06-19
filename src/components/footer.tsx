@@ -136,11 +136,11 @@ const Footer = () => {
                                 <div className='flex flex-col gap-[1rem]'>
                                     <div className='flex flex-col gap-[8px]'>
                                         <h3 className='text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] '>Email</h3>
-                                        <p className='opacity-[.6] text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem]  font-normal'>contact@trivancetech.com</p>
+                                        <a href='mailto:contact@trivancetech.com' className='underline hover:text-brand transition-color duration-[400ms] opacity-[.6] text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem]  font-normal'>contact@trivancetech.com</a>
                                     </div>
                                     <div className='flex flex-col gap-[8px]'>
                                         <h3 className='text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] '>Phone</h3>
-                                        <p className='opacity-[.6] text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem]  font-normal'>+234 802 346 9186</p>
+                                        <a href='tel:+2348023469186' className='underline hover:text-brand transition-color duration-[400ms] opacity-[.6] text-white text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem] font-normal'>+234 802 346 9186</a>
                                     </div>
                                 </div>
                             </div>

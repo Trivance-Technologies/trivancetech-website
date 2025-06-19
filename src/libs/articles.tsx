@@ -13,6 +13,10 @@ export interface StrapiArticle {
       };
     };
   };
+  Metadata: {
+    metaTitle: string;
+    metaDescription: string;
+  }
 }
 
 export interface ArticleCard {
@@ -28,6 +32,8 @@ export interface ArticleCard {
 
 export interface Article extends ArticleCard {
   content: string;
+  metaTitle: string;
+  metaDescription: string;
 }
 
 const domain = "http://localhost:1337";
@@ -56,8 +62,8 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     "fields[3]": "ShortDescription",
     "fields[4]": "publishedAt",
     "fields[5]": "Content",
-    populate: "CoverImage",
     "filters[Slug][$eq]": slug,
+    "populate": "*"
   }).toString();
 
   const res = await fetch(`${domain}/api/articles?${query}`, {
@@ -66,6 +72,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
   const json = await res.json();
   const item = (json.data as StrapiArticle[])[0];
+  const meta = item.Metadata;
 
   if (!item) return null;
 
@@ -83,6 +90,8 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     content: item.Content,
     readTime,
     publishedAt: date,
+    metaTitle: meta?.metaTitle ?? item.Title,
+    metaDescription: meta?.metaDescription ?? item.ShortDescription,
   };
 }
 
@@ -135,7 +144,7 @@ export async function getAllTags(): Promise<string[]> {
   return ["All Posts", ...tags];
 }
 
-export async function getLatestArticles(): Promise<ArticleCard[]> {
+export async function getLatestArticles(): Promise<{articleCards: ArticleCard[]; totalArticlesCount: number}> {
   const query = new URLSearchParams({
     "fields[0]": "Slug",
     "fields[1]": "Tag",
@@ -153,8 +162,9 @@ export async function getLatestArticles(): Promise<ArticleCard[]> {
   });
 
   const json = await res.json();
+  const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
-  return (json.data as StrapiArticle[]).map((item) => {
+  const articleCards = (json.data as StrapiArticle[]).map((item) => {
     const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
     const date = formatPublishedDate(item.publishedAt);
     const readTime = calculateReadTime(item.Content);
@@ -170,6 +180,8 @@ export async function getLatestArticles(): Promise<ArticleCard[]> {
       readTime,
     };
   });
+
+  return { articleCards, totalArticlesCount };
 }
 
 export async function getAllArticles(start: number, limit: number): Promise<{ articleCards: ArticleCard[]; totalArticlesCount: number}> {

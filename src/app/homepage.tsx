@@ -8,9 +8,10 @@ import { ArticleCard } from "@/libs/articles";
 
 interface HomeProps {
   articleCards: ArticleCard[];
+  totalArticlesCount: number;
 }
 
-export default function Home({ articleCards }: HomeProps ) {
+export default function Home({ articleCards, totalArticlesCount }: HomeProps ) {
 
   return (
     <>
@@ -37,7 +38,7 @@ export default function Home({ articleCards }: HomeProps ) {
       <ClientsLogoDisplay />
       <PartnersLogosDisplay />
       {
-        articleCards.length > 0 && <BlogDisplay articleCards={articleCards} />
+        totalArticlesCount > 0 && <BlogDisplay articleCards={articleCards} />
       }
     </>
   );

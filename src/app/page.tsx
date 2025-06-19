@@ -1,7 +1,25 @@
-import { ArticleCard, getLatestArticles } from "@/libs/articles";
+import { getLatestArticles } from "@/libs/articles";
 import Home from "./homepage";
 
+export async function generateMetadata() {
+
+  return {
+    title: "Trivance Technologies | Digital Transformation Experts for Regulated Industries",
+    description: "Trivance delivers data-driven digital transformation with ERP, accounting, and pension systems built for compliance-heavy sectors. Your business, reimagined",
+    openGraph: {
+      title: "Trivance Technologies | Digital Transformation Experts for Regulated Industries",
+      description: "Trivance delivers data-driven digital transformation with ERP, accounting, and pension systems built for compliance-heavy sectors. Your business, reimagined",
+      url: `https://trivancetech.com/`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Trivance Technologies | Digital Transformation Experts for Regulated Industries",
+      description: "Trivance delivers data-driven digital transformation with ERP, accounting, and pension systems built for compliance-heavy sectors. Your business, reimagined",
+    },
+  };
+}
+
 export default async function Page() {
-    const articleCards: ArticleCard[] = await getLatestArticles();    
-    return <Home articleCards={articleCards} />;
+    const {articleCards, totalArticlesCount} = await getLatestArticles();    
+    return <Home articleCards={articleCards} totalArticlesCount={totalArticlesCount} />;
 }

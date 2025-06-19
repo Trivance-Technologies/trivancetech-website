@@ -13,8 +13,37 @@ interface PageProps {
   };
 }
 
+export async function generateMetadata({ params }: PageProps) {
+  const temp = await Promise.resolve(params);
+  const slug = temp.slug;
+
+  const article = await getArticleBySlug(slug);
+
+  if (!article) return { title: "Not Found", description: "Article not found" };
+
+  return {
+    title: article.metaTitle,
+    description: article.metaDescription,
+    openGraph: {
+      title: article.metaTitle,
+      description: article.metaDescription,
+      images: [article.image],
+      url: `https://yourdomain.com/blog/${article.slug}`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.metaTitle,
+      description: article.metaDescription,
+      images: [article.image],
+    },
+  };
+}
+
+
+
 export default async function Page ({ params }: PageProps) {
-    const { slug } = params;
+    const temp = await Promise.resolve(params);
+    const slug = temp.slug;
 
     const article: Article | null = await getArticleBySlug(slug);
     const currentUrl = "http://localhost:3000/blog";
@@ -28,7 +57,7 @@ export default async function Page ({ params }: PageProps) {
     let articleCards = rawRelatedCards.filter(card => card.slug !== slug);
 
     if (articleCards.length === 0) {
-        articleCards = (await getLatestArticles()).filter(card => card.slug !== slug);
+        articleCards = (await getLatestArticles()).articleCards.filter(card => card.slug !== slug);
     }
 
     articleCards = articleCards.slice(0, 3);

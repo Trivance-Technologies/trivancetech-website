@@ -4,7 +4,6 @@ import Header from "@/components/header";
 import SmallScreenNavigation from "@/components/small_screen_navigation";
 import { NavigationProvider } from "@/context/navigationContext";
 import { NotFoundPageContextProvider } from "@/context/notFoundPageContext";
-import type { Metadata } from "next";
 import { Inter } from 'next/font/google';
 import { Suspense } from "react";
 import { Toaster } from 'sonner';
@@ -14,11 +13,6 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "Trivance Technologies - Industry Solutions Provider",
-  description: "Providing tailored solutions for various industries through innovative technologies.",
-};
 
 export default function RootLayout({
   children,

@@ -42,6 +42,12 @@
     "ShortDescription": {
       "type": "text",
       "required": true
+    },
+    "Metadata": {
+      "type": "component",
+      "component": "metadata.metadata",
+      "repeatable": false,
+      "required": true
     }
   }
 }

@@ -398,6 +398,8 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'api::article.article'
     > &
       Schema.Attribute.Private;
+    Metadata: Schema.Attribute.Component<'metadata.metadata', false> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     ShortDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     Slug: Schema.Attribute.UID<'Title'> & Schema.Attribute.Required;
@@ -411,13 +413,13 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiMetadataForWebsitePagesMetadataForWebsitePages
+export interface ApiPastClientsLogosPastClientsLogos
   extends Struct.CollectionTypeSchema {
-  collectionName: 'metadata_for_website_page';
+  collectionName: 'past_clients_logo';
   info: {
-    displayName: 'Metadata for Website Pages';
-    pluralName: 'metadata-for-website-page';
-    singularName: 'metadata-for-website-pages';
+    displayName: 'Past Clients Logos';
+    pluralName: 'past-clients-logo';
+    singularName: 'past-clients-logos';
   };
   options: {
     draftAndPublish: true;
@@ -426,16 +428,15 @@ export interface ApiMetadataForWebsitePagesMetadataForWebsitePages
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    Description: Schema.Attribute.Text & Schema.Attribute.Required;
-    Keywords: Schema.Attribute.Blocks & Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
-      'api::metadata-for-website-pages.metadata-for-website-pages'
+      'api::past-clients-logos.past-clients-logos'
     > &
       Schema.Attribute.Private;
+    logo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'> &
+      Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
-    Title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -978,7 +979,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::article.article': ApiArticleArticle;
-      'api::metadata-for-website-pages.metadata-for-website-pages': ApiMetadataForWebsitePagesMetadataForWebsitePages;
+      'api::past-clients-logos.past-clients-logos': ApiPastClientsLogosPastClientsLogos;
       'api::tags.tags': ApiTagsTags;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

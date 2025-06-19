@@ -1,11 +1,23 @@
 import { getAllArticles, getAllTags } from "@/libs/articles";
-import { Metadata } from "next";
 import Blog from "./blog";
 
-export const metadata: Metadata = {
-    title: 'Blog - Trivance Technologies',
-    description: "Stay updated with Trivance Technologies' insights on Odoo solutions, industry trends, and expert tips to transform your business with our tailored technology solutions.",
-};
+export async function generateMetadata() {
+
+  return {
+    title: "Insights & Updates | Trivance Technologies Blog on ERP, Fintech & Compliance",
+    description: "Stay informed with Trivance’s expert insights on ERP implementation, pension tech, digital transformation, and regulatory trends shaping compliance-driven industries.",
+    openGraph: {
+      title: "Insights & Updates | Trivance Technologies Blog on ERP, Fintech & Compliance",
+      description: "Stay informed with Trivance’s expert insights on ERP implementation, pension tech, digital transformation, and regulatory trends shaping compliance-driven industries.",
+      url: `https://trivancetech.com/`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Insights & Updates | Trivance Technologies Blog on ERP, Fintech & Compliance",
+      description: "Stay informed with Trivance’s expert insights on ERP implementation, pension tech, digital transformation, and regulatory trends shaping compliance-driven industries.",
+    },
+  };
+}
 
 export default async function Page() {
     const {articleCards, totalArticlesCount} = await getAllArticles(0, 10);

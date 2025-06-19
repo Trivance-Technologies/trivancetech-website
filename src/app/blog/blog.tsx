@@ -153,7 +153,7 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
                   }));
                 }}
 
-                className="mt-6 px-6 py-2 border-[2px] border-primary text-primary hover:text-brand hover:border-primary hover:bg-primary bg-transparent transition-[border-color,color,background-color] duration-[400ms] hover:cursor-pointer"
+                className="mt-14 px-6 py-2 border-[2px] border-primary text-primary hover:text-brand hover:border-primary hover:bg-primary bg-transparent transition-[border-color,color,background-color] duration-[400ms] hover:cursor-pointer"
               >
                 Load More
               </button>
