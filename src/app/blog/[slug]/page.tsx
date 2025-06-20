@@ -28,13 +28,17 @@ export async function generateMetadata({ params }: PageProps) {
       title: article.metaTitle,
       description: article.metaDescription,
       images: [article.image],
-      url: `https://yourdomain.com/blog/${article.slug}`,
+      url: `https://trivancetech.com/blog/${article.slug}`,
+      type: 'website',
+      siteName: 'Trivance Technologies',
     },
     twitter: {
       card: "summary_large_image",
       title: article.metaTitle,
       description: article.metaDescription,
       images: [article.image],
+      type: 'website',
+      siteName: 'Trivance Technologies',
     },
   };
 }

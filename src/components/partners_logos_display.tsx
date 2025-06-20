@@ -15,6 +15,7 @@ const PartnersLogosDisplay = () => {
                   ease: "easeInOut",
               }}
               viewport={{ once: true }}  
+              style={{ willChange: "transform, opacity" }}   
             >Our Partners</motion.h2>
             <motion.div className="w-full flex flex-col 3sm:flex-row gap-[4rem] justify-center items-center"
               initial={{ y: 100, opacity: 0 }}

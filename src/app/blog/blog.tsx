@@ -1,6 +1,7 @@
 'use client'
 import BlogCard from "@/components/blog_card";
 import { ArticleCard, getAllArticles, getArticlesBySearch, getArticlesByTag } from "@/libs/articles";
+import { motion } from "framer-motion";
 import { Search, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -43,8 +44,27 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
          ? 
          (
           <div className="flex flex-col mx-auto w-full max-w-[67.25rem] items-center">
-            <h2 className="self-start uppercase tracking-[2px] font-medium text-[.875rem]/[1.25rem] 3sm:text-[1rem]/[1.25rem] opacity-[.6] text-primary mb-[4rem]">Search Our Blog Library</h2>
-            <div className="flex flex-wrap gap-2 self-start">
+            <motion.h2
+              initial={{ y: 100, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{
+                  duration: 1,
+                  ease: "easeInOut",
+              }}
+              viewport={{ once: true }}  
+              style={{ willChange: "transform, opacity" }}   
+              className="self-start uppercase tracking-[2px] font-medium text-[.875rem]/[1.25rem] 3sm:text-[1rem]/[1.25rem] opacity-[.6] text-primary mb-[4rem]">Search Our Blog Library</motion.h2>
+            <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{
+                duration: 1,
+                ease: "easeInOut",
+                delay: .5
+            }}
+            viewport={{ once: true }}  
+            style={{ willChange: "transform, opacity" }}  
+            className="flex flex-wrap gap-2 self-start">
               {tagList.map((tag, index) => (
                 <button
                   key={index}
@@ -54,8 +74,18 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
                   {tag}
                 </button>
               ))}
-            </div>
-            <div className="w-full flex flex-row gap-[.5rem] items-center">
+            </motion.div>
+            <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{
+                duration: 1,
+                ease: "easeInOut",
+                delay: 1
+            }}
+            viewport={{ once: true }}  
+            style={{ willChange: "transform, opacity" }}  
+            className="w-full flex flex-row gap-[.5rem] items-center">
               <div className="w-full flex items-center border border-gray-300 px-4 py-2 bg-white self-start my-[1.5rem]">
                 <span 
                   className="mr-2 text-gray-500"
@@ -96,8 +126,18 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
               >
                 Search
               </button>
-            </div>
-            <div className="w-fit grid grid-cols-1 3sm:grid-cols-2 1sm:grid-cols-3 gap-[1.25rem] 1sm:gap-[2.5rem] justify-around">
+            </motion.div>
+            <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{
+                duration: 1,
+                ease: "easeInOut",
+                delay: 1.5
+            }}
+            viewport={{ once: true }}  
+            style={{ willChange: "transform, opacity" }}  
+            className="w-fit grid grid-cols-1 3sm:grid-cols-2 1sm:grid-cols-3 gap-[1.25rem] 1sm:gap-[2.5rem] justify-around">
               {articleCardData.length > 0 ? (
                 articleCardData.map((card) => (
                   <BlogCard
@@ -116,7 +156,7 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
                   No posts found matching your search.
                 </p>
               )}
-            </div>
+            </motion.div>
             {hasMore[searchTag] && (
               <button
               onClick={async () => {

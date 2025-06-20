@@ -4,7 +4,9 @@
   --breakpoint-0sm: 1100px;
   --breakpoint-1sm: 991px;
   --breakpoint-2sm: 767px;
+  --breakpoint-2.5sm: 550px;
   --breakpoint-3sm: 479px;
+  --breakpoint-4sm: 360px;
 
   --color-primary: #002147;
   --color-brand: #FFE4B5;

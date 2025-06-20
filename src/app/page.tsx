@@ -1,4 +1,5 @@
 import { getLatestArticles } from "@/libs/articles";
+import { logoDetails, retrieveClientLogos } from "@/libs/strapi_calls";
 import Home from "./homepage";
 
 export async function generateMetadata() {
@@ -21,5 +22,6 @@ export async function generateMetadata() {
 
 export default async function Page() {
     const {articleCards, totalArticlesCount} = await getLatestArticles();    
-    return <Home articleCards={articleCards} totalArticlesCount={totalArticlesCount} />;
+    const logoData: logoDetails[] = await retrieveClientLogos();
+    return <Home articleCards={articleCards} totalArticlesCount={totalArticlesCount} logoData={logoData} />;
 }
