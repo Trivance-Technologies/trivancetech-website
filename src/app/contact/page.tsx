@@ -1,10 +1,22 @@
-import { Metadata } from "next";
 import Contact from "./contact";
 
-export const metadata: Metadata = {
-    title: 'Contact Us - Trivance Technologies',
-    description: "Get in touch with Trivance Technologies for expert industry solutions and consultation.",
-};
+export async function generateMetadata() {
+
+  return {
+    title: "Contact Trivance | Speak with Our ERP & Fintech Specialists",
+    description: "Reach out to Trivance Technologies for consultations on ERP, pension systems, and business automation tailored to your industry’s needs.",
+    openGraph: {
+      title: "Contact Trivance | Speak with Our ERP & Fintech Specialists",
+      description: "Reach out to Trivance Technologies for consultations on ERP, pension systems, and business automation tailored to your industry’s needs.",
+      url: `https://trivancetech.com/`,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Contact Trivance | Speak with Our ERP & Fintech Specialists",
+      description: "Reach out to Trivance Technologies for consultations on ERP, pension systems, and business automation tailored to your industry’s needs.",
+    },
+  };
+}
 
 export default function Page() {
     return <Contact />;

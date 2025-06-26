@@ -48,6 +48,16 @@ export const bodyHeaderDataMap: Record<string, {
         width: 1280,
         height: 853
     },
+    "/blog": {
+        title: "Blog",
+        subTitle: "Insights on Digital Transformation and Industry-Specific Solutions",
+        description: "Explore expert articles and updates from Trivance Technologies, a leading Odoo partner, offering tailored IT solutions to drive efficiency, compliance, and growth across various industries.",
+        link: "/about",
+        imageLink: "/images/bodyheader/image6.webp",
+        imageAlt: "image of a person working on their laptop.",
+        width: 1280,
+        height: 1920
+    },
     "/contact": {
         title: "Contact",
         subTitle: "Our search for smarter never stops",

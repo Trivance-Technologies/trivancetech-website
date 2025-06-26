@@ -113,6 +113,14 @@ const Header: React.FC = () => {
               Products
           </Link>
           <Link 
+              href="/blog" 
+              className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] 
+              ${basePath === "/blog" ? "border-brand" : "border-transparent"} 
+              hover:text-brand px-[1rem] py-[.5rem]`}
+          >
+              Blog
+          </Link>
+          <Link 
               href="/contact" 
               className={`transition-[border] duration-[400ms] hover:border-brand border-b-[2px] 
               ${basePath === "/contact" ? "border-brand" : "border-transparent"} 

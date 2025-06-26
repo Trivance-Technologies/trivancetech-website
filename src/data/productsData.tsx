@@ -132,28 +132,28 @@ export const productData: Record<string, {
 
 export const productMetadata: Record<string, Metadata> = {
     "odoo": {
-        title: "Odoo ERP Solution - Trivance Technologies",
-        description: "Streamline business processes with Odoo's powerful, open-source ERP solution designed for seamless integration and customization."
+        title: "Odoo ERP Solution | Unified Business Management - Trivance",
+        description: "Streamline HR, finance, procurement, and compliance with Trivance’s customized Odoo ERP deployment. Ideal for SMEs and regulatory-driven sectors."
     },
     "metafold-pension-solution": {
-        title: "Metafold Pension Solution - Trivance Technologies",
-        description: "Simplify pension administration with Metafold Pension Solution, managing registration, exit processes, and Pencom requirements."
+        title: "Metafold Pension Solution | PenCom-Compliant Retirement Management",
+        description: "Digitize pension management with Metafold—automate onboarding, track contributions, and meet all PenCom regulatory requirements effortlessly."
     },
     "metafold-accounting": {
-        title: "Metafold Accounting - Trivance Technologies",
-        description: "A complete General Ledger system for efficient financial operations, reporting, and bank management."
+        title: "Metafold Accounting Software | General Ledger & Cash Flow Platform",
+        description: "Gain real-time financial visibility with Metafold’s compliant General Ledger system—automating reporting, bank reconciliations, and payables."
     },
     "metafold-investment": {
-        title: "Metafold Investment - Trivance Technologies",
-        description: "Manage multi-investments across various asset classes with Metafold Investment’s powerful asset management features."
+        title: "Metafold Investment Platform | Portfolio Tracking for Asset Managers",
+        description: "Track bonds, equities, and real estate portfolios across multi-asset classes with Metafold’s investment dashboard, analytics, and audit-ready reporting."
     },
     "metafold-pension-admin": {
-        title: "Metafold Pension Admin - Trivance Technologies",
-        description: "Manage funds, contributions, payments, and customer relationships efficiently with Metafold Pension Admin."
+        title: "Pension Administration System | Metafold Pension Admin",
+        description: "Centralize pension fund flows, contributions, and communications. Manage RSA, legacy, and multi-employer schemes with full NAV tracking."
     },
     "metafold-customer": {
-        title: "Metafold Customer - Trivance Technologies",
-        description: "Handle KYC, statement generation, and customer portals seamlessly with Metafold Customer."
+        title: "Customer Management for Pensions | Metafold Customer",
+        description: "Simplify KYC, statement generation, and portal access with Metafold Customer—enhancing service delivery for pension clients."
     }
 };
 

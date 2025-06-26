@@ -1,10 +1,19 @@
 'use client'
+import BlogDisplay from "@/components/blog_display";
 import ClientsLogoDisplay from "@/components/clients_logo_display";
 import InfoSection from "@/components/info_section";
 import PartnersLogosDisplay from "@/components/partners_logos_display";
 import ServicesSection from "@/components/services_section";
+import { ArticleCard } from "@/libs/articles";
+import { logoDetails } from "@/libs/strapi_calls";
 
-export default function Home() {
+interface HomeProps {
+  articleCards: ArticleCard[];
+  totalArticlesCount: number;
+  logoData: logoDetails[];
+}
+
+export default function Home({ articleCards, totalArticlesCount, logoData }: HomeProps ) {
 
   return (
     <>
@@ -28,8 +37,11 @@ export default function Home() {
       showAllServices={true}
       isProducts={true}
       />
-      <ClientsLogoDisplay />
+      <ClientsLogoDisplay logos={logoData} />
       <PartnersLogosDisplay />
+      {
+        totalArticlesCount > 0 && <BlogDisplay articleCards={articleCards} />
+      }
     </>
   );
 }

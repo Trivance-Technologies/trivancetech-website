@@ -260,20 +260,32 @@ export const serviceData: Record<string, {
 
 export const serviceMetadata: Record<string, Metadata> = {
     "user-documentation": {
-        title: "User Documentation - Trivance Technologies",
-        description: "Streamline user onboarding and reduce support inquiries with comprehensive training manuals, release notes, user guides, and FAQs."
+        title: "User Documentation Services | Training Manuals, FAQs & Support Content",
+        description: "Minimize support requests with visual-first manuals, FAQs, and release notes—designed to drive adoption and long-term system use."
     },
     "technical-manual": {
-        title: "Technical Manual - Trivance Technologies",
-        description: "Empower technical users with detailed manuals that explain system logic, functionality, and troubleshooting steps."
+        title: "Technical Manuals | System Architecture & Troubleshooting Guides",
+        description: "Equip your developers with deep system documentation, backend logic blueprints, and scenario-based troubleshooting frameworks."
     },
     "process-documentation": {
-        title: "Process Documentation - Trivance Technologies",
-        description: "Improve operational clarity and efficiency with well-structured process documentation tailored for your organization."
+        title: "Business Process Documentation | Workflow Mapping & Optimization",
+        description: "Standardize processes with visual documentation. Increase productivity and uncover operational gaps across your business."
     },
     "knowledge-base-platform": {
-        title: "Knowledge Base Platform - Trivance Technologies",
-        description: "Centralize your organization's knowledge with a secure, AI-powered platform for collaboration and information sharing."
+        title: "AI Knowledge Base Platform | Centralized Docs & Secure Collaboration",
+        description: "Build a searchable, role-based knowledge platform for your teams. Secure, AI-powered access to documentation and team learning."
+    },
+    "software-development-and-implementation": {
+        title: "Custom Software Development & Implementation | Scalable Solutions, Seamless Rollouts",
+        description: "From tailored apps and enterprise tools to secure data migrations and post-go-live support, we design, build, and deploy scalable software with agile processes — ensuring smooth, successful implementation every time."
+    },
+    "advisory-services": {
+        title: "Business & Tech Advisory Services | Strategy, Performance, Compliance",
+        description: "Get expert insights to align tech with business goals. We optimize systems for growth, efficiency, and compliance."
+    },
+    "support-services": {
+        title: "Support Services | Trivance Technical Help & Local Expertise",
+        description: "Local-first technical support for fast issue resolution, change management, and mission-critical escalations."
     }
 };
 
