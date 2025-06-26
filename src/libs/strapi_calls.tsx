@@ -1,4 +1,4 @@
-const domain = "http://localhost:1337";
+const domain = "https://wealthy-power-26376c166d.strapiapp.com";
 
 interface PastClientLogoDetails {
     logo: logoDetails;
@@ -21,7 +21,6 @@ export async function retrieveClientLogos () {
     });
 
     const json = await res.json();
-    console.log(json);
     const clientLogos = (json.data as PastClientLogoDetails[]).map((item) => {
         return {
             width: item.logo.width,

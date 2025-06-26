@@ -36,7 +36,7 @@ export interface Article extends ArticleCard {
   metaDescription: string;
 }
 
-const domain = "http://localhost:1337";
+const domain = "https://wealthy-power-26376c166d.strapiapp.com";
 
 function calculateReadTime(content: string): string {
   const wordsPerMinute = 200;
@@ -145,7 +145,7 @@ export async function getAllTags(): Promise<string[]> {
 }
 
 export async function getLatestArticles(): Promise<{articleCards: ArticleCard[]; totalArticlesCount: number}> {
-  const query = new URLSearchParams({
+  const params = new URLSearchParams({
     "fields[0]": "Slug",
     "fields[1]": "Tag",
     "fields[2]": "Title",
@@ -154,9 +154,11 @@ export async function getLatestArticles(): Promise<{articleCards: ArticleCard[];
     "fields[5]": "Content",
     populate: "CoverImage",
     "sort[0]": "publishedAt:desc",
-    "pagination[limit]": "3",
-  }).toString();
+    "pagination[limit]": "3"
+  });
 
+  const query = params.toString();
+  
   const res = await fetch(`${domain}/api/articles?${query}`, {
     cache: "no-store",
   });

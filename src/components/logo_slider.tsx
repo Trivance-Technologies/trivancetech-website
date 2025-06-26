@@ -44,7 +44,7 @@ export default function LogoSlider({ logos, perPage = 6, autoPlayInterval = 4000
         {pages[currentPage].map((logo, idx) => (
           <Image
             key={idx}
-            src={`http://localhost:1337${logo.url}`}
+            src={logo.url}
             width={logo.width}
             height={logo.height}
             alt={logo.alternativeText}
