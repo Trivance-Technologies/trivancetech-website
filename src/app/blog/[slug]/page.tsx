@@ -8,14 +8,12 @@ import Link from "next/link";
 import { FaFacebook, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
 }
 
+
 export async function generateMetadata({ params }: PageProps) {
-  const temp = await Promise.resolve(params);
-  const slug = temp.slug;
+  const { slug } = await params;
 
   const article = await getArticleBySlug(slug);
 
@@ -46,8 +44,9 @@ export async function generateMetadata({ params }: PageProps) {
 
 
 export default async function Page ({ params }: PageProps) {
-    const temp = await Promise.resolve(params);
-    const slug = temp.slug;
+    // const temp = await Promise.resolve(params);
+    // const slug = temp.slug;
+      const { slug } = await params;
 
     const article: Article | null = await getArticleBySlug(slug);
     const currentUrl = "http://localhost:3000/blog";
