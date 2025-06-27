@@ -1,5 +1,3 @@
-const domain = "https://wealthy-power-26376c166d.strapiapp.com";
-
 interface PastClientLogoDetails {
     logo: logoDetails;
 }
@@ -16,7 +14,7 @@ export async function retrieveClientLogos () {
         populate: "logo"
     }).toString();
 
-    const res = await fetch(`${domain}/api/past-clients-logo?${query}`, {
+    const res = await fetch(`${process.env.STRAPI_URL}/api/past-clients-logo?${query}`, {
         cache: "no-store",
     });
 

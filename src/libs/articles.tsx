@@ -34,8 +34,6 @@ export interface Article extends ArticleCard {
   metaDescription: string;
 }
 
-const domain = "https://wealthy-power-26376c166d.strapiapp.com";
-
 function calculateReadTime(content: string): string {
   const wordsPerMinute = 200;
   const words = content.trim().split(/\s+/).length;
@@ -64,7 +62,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     "populate": "*"
   }).toString();
 
-  const res = await fetch(`${domain}/api/articles?${query}`, {
+  const res = await fetch(`${process.env.STRAPI_URL}/api/articles?${query}`, {
     cache: "no-store",
   });
 
@@ -108,7 +106,7 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
     "pagination[limit]": limit.toString(),
   }).toString();
 
-  const res = await fetch(`${domain}/api/articles?${query}`, {
+  const res = await fetch(`${process.env.STRAPI_URL}/api/articles?${query}`, {
     cache: "no-store",
   });
 
@@ -136,7 +134,7 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
 }
 
 export async function getAllTags(): Promise<string[]> {
-  const res = await fetch(`${domain}/api/tag?fields[0]=name`);
+  const res = await fetch(`${process.env.STRAPI_URL}/api/tag?fields[0]=name`);
   const json = await res.json();
   const tags = (json.data as { name: string }[]).map((tag) => tag.name);
   return ["All Posts", ...tags];
@@ -157,7 +155,7 @@ export async function getLatestArticles(): Promise<{articleCards: ArticleCard[];
 
   const query = params.toString();
   
-  const res = await fetch(`${domain}/api/articles?${query}`, {
+  const res = await fetch(`${process.env.STRAPI_URL}/api/articles?${query}`, {
     cache: "no-store",
   });
 
@@ -199,7 +197,7 @@ export async function getAllArticles(start: number, limit: number): Promise<{ ar
     "pagination[limit]": limit.toString(),
   }).toString();
 
-  const res = await fetch(`${domain}/api/articles?${query}`, {
+  const res = await fetch(`${process.env.STRAPI_URL}/api/articles?${query}`, {
     cache: "no-store",
   });
 
@@ -258,7 +256,7 @@ export async function getArticlesBySearch(
     params.append("filters[Tag][$containsi]", tag);
   }
 
-  const fullUrl = `${domain}/api/articles?${params.toString()}`;
+  const fullUrl = `${process.env.STRAPI_URL}/api/articles?${params.toString()}`;
 
   const res = await fetch(fullUrl, { cache: "no-store" });
   const json = await res.json();

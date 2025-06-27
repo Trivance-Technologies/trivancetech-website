@@ -45,7 +45,7 @@ export default async function Page ({ params }: PageProps) {
     const { slug } = await params;
 
     const article: Article | null = await getArticleBySlug(slug);
-    const currentUrl = "https://trivancetech.com/blog";
+    const currentUrl = `https://trivancetech.com/blog/${slug}`;
     const encodedUrl = encodeURIComponent(currentUrl);
 
     if (!article) {
