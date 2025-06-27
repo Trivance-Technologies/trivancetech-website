@@ -129,8 +129,7 @@ Strapi powers the blog and stores client logos.
 - **Access issues**: Contact CEO for `.env.local` or login credentials  
 - **Frontend bugs**: Troubleshoot in `pages/` or `components/` folders
 - **Website Data Update**: Update the data in the `data/` folders. The file names and the field names of these data are self-explanatory.
-- **Blog/Strapi issues**: Use the Strapi admin to adjust content or check API connectivity, especially if the usage limit for the month hasn't been reached.
-
+- **Blog/Strapi issues**: Use the Strapi Admin Panel to update content or troubleshoot issues. If the blog content fails to load, check API connectivity — this might occur due to monthly usage limits being reached, which can prevent successful data fetching.
 ---
 
 ## ✅ Summary
