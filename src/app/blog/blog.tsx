@@ -149,6 +149,7 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
                     description={card.description}
                     publishedAt={card.publishedAt}
                     readTime={card.readTime}
+                    alternativeText={card.alternativeText}
                   />
                 ))
               ) : (

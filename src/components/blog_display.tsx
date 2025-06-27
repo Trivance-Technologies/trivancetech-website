@@ -45,7 +45,7 @@ const BlogDisplay = ({ articleCards }: BlogDisplayProps) => {
                 {
                     articleCards.map((card) => {
                         return (
-                            <BlogCard key={card.slug} slug={card.slug} image={card.image} title={card.title} category={card.category} description={card.description} publishedAt={card.publishedAt} readTime={card.readTime}/>
+                            <BlogCard alternativeText={card.alternativeText} key={card.slug} slug={card.slug} image={card.image} title={card.title} category={card.category} description={card.description} publishedAt={card.publishedAt} readTime={card.readTime}/>
                         )})
                 }
             </motion.div> 

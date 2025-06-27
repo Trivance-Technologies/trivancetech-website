@@ -41,15 +41,11 @@ export async function generateMetadata({ params }: PageProps) {
   };
 }
 
-
-
 export default async function Page ({ params }: PageProps) {
-    // const temp = await Promise.resolve(params);
-    // const slug = temp.slug;
-      const { slug } = await params;
+    const { slug } = await params;
 
     const article: Article | null = await getArticleBySlug(slug);
-    const currentUrl = "http://localhost:3000/blog";
+    const currentUrl = "https://trivancetech.com/blog";
     const encodedUrl = encodeURIComponent(currentUrl);
 
     if (!article) {
@@ -91,7 +87,7 @@ export default async function Page ({ params }: PageProps) {
                     </div>
                 </div>
                 <div className="w-full relative" style={{ paddingTop: "51.28%" }}>
-                    <Image alt={`cover image for ${article.title}`} priority className="object-cover w-full" fill src={article.image} />
+                    <Image alt={article.alternativeText} priority className="object-cover w-full" fill src={article.image} />
                 </div>
             </div>
         </section> 
@@ -177,7 +173,7 @@ export default async function Page ({ params }: PageProps) {
                     {
                         articleCards.map((card) => {
                             return (
-                                <BlogCard key={card.slug} slug={card.slug} image={card.image} title={card.title} category={card.category} description={card.description} publishedAt={card.publishedAt} readTime={card.readTime}/>
+                                <BlogCard alternativeText={article.alternativeText} key={card.slug} slug={card.slug} image={card.image} title={card.title} category={card.category} description={card.description} publishedAt={card.publishedAt} readTime={card.readTime}/>
                             )})
                     }
                 </div>

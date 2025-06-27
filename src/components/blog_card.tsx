@@ -11,6 +11,7 @@ type BlogCardProps = {
   description: string;
   publishedAt: string;
   readTime: string;
+  alternativeText: string;
 };
 
 const BlogCard: React.FC<BlogCardProps> = ({
@@ -20,7 +21,8 @@ const BlogCard: React.FC<BlogCardProps> = ({
   category,
   description,
   publishedAt,
-  readTime
+  readTime,
+  alternativeText
 }) => {
   return (
     <Link
@@ -29,7 +31,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
       className="group hover:scale-105 hover:cursor-pointer transition-all bg-white overflow-hidden shadow-sm hover:shadow-md duration-300 flex flex-col h-full w-full"
     >
       <div className="relative w-full h-48 shrink-0">
-        <Image src={image} alt={`cover image for ${title}`} fill className="object-cover" />
+        <Image src={image} alt={alternativeText} fill className="object-cover" />
       </div>
       <div className="p-6 text-left flex flex-col h-full">
         <p className="text-xs text-[rgb(23,29,47)] mb-2">{category}</p>

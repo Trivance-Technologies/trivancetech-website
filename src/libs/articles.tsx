@@ -7,11 +7,8 @@ export interface StrapiArticle {
   publishedAt: string;
   Content: string;
   CoverImage?: {
-    formats?: {
-      large?: {
-        url: string;
-      };
-    };
+    alternativeText: string;
+    url: string;
   };
   Metadata: {
     metaTitle: string;
@@ -28,6 +25,7 @@ export interface ArticleCard {
   image: string;
   publishedAt: string;
   readTime: string;
+  alternativeText: string;
 }
 
 export interface Article extends ArticleCard {
@@ -76,7 +74,6 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
   if (!item) return null;
 
-  const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
   const readTime = calculateReadTime(item.Content);
   const date = formatPublishedDate(item.publishedAt);
 
@@ -86,12 +83,13 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     category: item.Tag.trim(),
     title: item.Title,
     description: item.ShortDescription,
-    image: largeUrl ? `${domain}${largeUrl}` : "",
+    image: item.CoverImage?.url ?? "",
     content: item.Content,
     readTime,
     publishedAt: date,
     metaTitle: meta?.metaTitle ?? item.Title,
     metaDescription: meta?.metaDescription ?? item.ShortDescription,
+    alternativeText: item.CoverImage?.alternativeText ?? ""
   };
 }
 
@@ -118,7 +116,6 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
   const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
   const articleCards = (json.data as StrapiArticle[]).map((item) => {
-    const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
     const date = formatPublishedDate(item.publishedAt);
     const readTime = calculateReadTime(item.Content);
 
@@ -128,9 +125,10 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
       category: item.Tag.trim(),
       title: item.Title,
       description: item.ShortDescription,
-      image: largeUrl ? `${domain}${largeUrl}` : "",
+      image: item.CoverImage?.url ?? "",
       publishedAt: date,
       readTime,
+      alternativeText: item.CoverImage?.alternativeText ?? ""
     };
   });
 
@@ -164,10 +162,10 @@ export async function getLatestArticles(): Promise<{articleCards: ArticleCard[];
   });
 
   const json = await res.json();
+  console.log(json);
   const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
   const articleCards = (json.data as StrapiArticle[]).map((item) => {
-    const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
     const date = formatPublishedDate(item.publishedAt);
     const readTime = calculateReadTime(item.Content);
 
@@ -177,9 +175,10 @@ export async function getLatestArticles(): Promise<{articleCards: ArticleCard[];
       category: item.Tag.trim(),
       title: item.Title,
       description: item.ShortDescription,
-      image: largeUrl ? `${domain}${largeUrl}` : "",
+      image: item.CoverImage?.url ?? "",
       publishedAt: date,
       readTime,
+      alternativeText: item.CoverImage?.alternativeText ?? ""
     };
   });
 
@@ -209,9 +208,11 @@ export async function getAllArticles(start: number, limit: number): Promise<{ ar
 
 
   const articleCards = (json.data as StrapiArticle[]).map((item) => {
-    const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
     const date = formatPublishedDate(item.publishedAt);
     const readTime = calculateReadTime(item.Content);
+
+    console.log(item.CoverImage?.url);
+
 
     return {
       id: item.id,
@@ -219,9 +220,10 @@ export async function getAllArticles(start: number, limit: number): Promise<{ ar
       category: item.Tag.trim(),
       title: item.Title,
       description: item.ShortDescription,
-      image: largeUrl ? `${domain}${largeUrl}` : "",
+      image: item.CoverImage?.url ?? "",
       publishedAt: date,
       readTime,
+      alternativeText: item.CoverImage?.alternativeText ?? ""
     };
   });
 
@@ -263,7 +265,6 @@ export async function getArticlesBySearch(
   const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
   const articleCards = (json.data as StrapiArticle[]).map((item) => {
-    const largeUrl = item.CoverImage?.formats?.large?.url ?? "";
     const date = formatPublishedDate(item.publishedAt);
     const readTime = calculateReadTime(item.Content);
 
@@ -273,9 +274,10 @@ export async function getArticlesBySearch(
       category: item.Tag.trim(),
       title: item.Title,
       description: item.ShortDescription,
-      image: largeUrl ? `${domain}${largeUrl}` : "",
+      image: item.CoverImage?.url ?? "",
       publishedAt: date,
       readTime,
+      alternativeText: item.CoverImage?.alternativeText ?? ""
     };
   });
 
