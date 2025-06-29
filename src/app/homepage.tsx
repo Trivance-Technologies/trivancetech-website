@@ -37,7 +37,7 @@ export default function Home({ articleCards, totalArticlesCount, logoData }: Hom
       showAllServices={true}
       isProducts={true}
       />
-      <ClientsLogoDisplay logos={logoData} />
+      {logoData.length > 0 && <ClientsLogoDisplay logos={logoData} />}
       <PartnersLogosDisplay />
       {
         totalArticlesCount > 0 && <BlogDisplay articleCards={articleCards} />

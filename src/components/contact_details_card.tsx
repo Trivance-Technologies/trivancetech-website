@@ -24,7 +24,7 @@ const ContactDetailsCard: React.FC<ContactDetailsCardProps> = ({ iconUrl, title,
     style={{ willChange: "transform, opacity" }}
     >
       <div className='relative w-[24px] h-[24px]'>
-        <Image src={iconUrl} fill alt='icon'/>
+        <Image src={iconUrl} fill alt='icon' sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
       </div>
       <h2 className='text-[1.125rem]/[1.5rem] 2sm:text-[1.25rem]/[1.5rem] font-semibold text-primary'>{title}</h2>
       <p className='opacity-[.6] text-[1rem]/[1.25rem] text-primary'>{detail}</p>
