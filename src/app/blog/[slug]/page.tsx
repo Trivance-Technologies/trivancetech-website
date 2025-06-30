@@ -11,8 +11,6 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-export const revalidate = 7200; // 2 hours in seconds 
-
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
 

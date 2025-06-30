@@ -1,8 +1,8 @@
-import { getLatestArticles } from "@/libs/articles";
-import { logoDetails, retrieveClientLogos } from "@/libs/strapi_calls";
-import Home from "./homepage";
-
-export const revalidate = 7200; // 2 hours in seconds 
+import BlogDisplay from "@/components/blog_display";
+import ClientsLogoDisplay from "@/components/clients_logo_display";
+import InfoSection from "@/components/info_section";
+import PartnersLogosDisplay from "@/components/partners_logos_display";
+import ServicesSection from "@/components/services_section";
 
 export async function generateMetadata() {
   return {
@@ -21,15 +21,33 @@ export async function generateMetadata() {
   };
 }
 
-export default async function Page() {
-  const { articleCards, totalArticlesCount } = await getLatestArticles();
-  const logoData: logoDetails[] = await retrieveClientLogos();
+export default function Page() {
 
   return (
-    <Home
-      articleCards={articleCards}
-      totalArticlesCount={totalArticlesCount}
-      logoData={logoData}
-    />
+    <>
+      <ServicesSection
+      isHomePage={true}
+      title = "our services"
+      subtitle = "Our Services Deliver, Our Solutions Work"
+      description = "Let's boost your business. Our tailored services provide expert support—from planning to growth and beyond."
+      showAllServices={true}
+      isProducts={false}
+       />
+      <InfoSection
+      swapRow={false}
+      showButton={true}
+       />
+      <ServicesSection
+      isHomePage={true}
+      title = "our products"
+      subtitle="Explore the innovation in our products"
+      description="We're locked in with you. From reliable, effective and tailored products to improve your operations to essential tools and advanced systems — we support your goals."
+      showAllServices={true}
+      isProducts={true}
+      />
+      <ClientsLogoDisplay/>
+      <PartnersLogosDisplay />
+      <BlogDisplay />
+    </>
   );
 }

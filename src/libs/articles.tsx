@@ -82,7 +82,8 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       "populate": "*"
     }).toString();
 
-    const res = await fetchWithRetry(`${process.env.STRAPI_URL}/api/articles?${query}`);
+    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
     const json = await res.json();
     const item = (json.data as StrapiArticle[])[0];
     if (!item) return null;
@@ -127,7 +128,8 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
       "pagination[limit]": limit.toString(),
     }).toString();
 
-    const res = await fetchWithRetry(`${process.env.STRAPI_URL}/api/articles?${query}`);
+    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
@@ -152,7 +154,9 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
 
 export async function getAllTags(): Promise<string[]> {
   try {
-    const res = await fetchWithRetry(`${process.env.STRAPI_URL}/api/tag?fields[0]=name`);
+
+    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const res = await fetchWithRetry(`${baseUrl}/api/tag?fields[0]=name`);
     const json = await res.json();
     const tags = (json.data as { name: string }[]).map(tag => tag.name);
     return ["All Posts", ...tags];
@@ -176,7 +180,8 @@ export async function getLatestArticles(): Promise<{ articleCards: ArticleCard[]
       "pagination[limit]": "3"
     });
 
-    const res = await fetchWithRetry(`${process.env.STRAPI_URL}/api/articles?${params.toString()}`);
+    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const res = await fetchWithRetry(`${baseUrl}/api/articles?${params.toString()}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
@@ -214,7 +219,8 @@ export async function getAllArticles(start: number, limit: number) {
       "pagination[limit]": limit.toString(),
     }).toString();
 
-    const res = await fetchWithRetry(`${process.env.STRAPI_URL}/api/articles?${query}`);
+    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
@@ -263,7 +269,8 @@ export async function getArticlesBySearch(
       params.append("filters[Tag][$containsi]", tag);
     }
 
-    const res = await fetchWithRetry(`${process.env.STRAPI_URL}/api/articles?${params.toString()}`);
+    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const res = await fetchWithRetry(`${baseUrl}/api/articles?${params.toString()}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 

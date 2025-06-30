@@ -16,8 +16,8 @@ export async function retrieveClientLogos(): Promise<logoDetails[]> {
       const query = new URLSearchParams({
         populate: "logo"
       }).toString();
-  
-      const res = await fetchWithRetry(`${process.env.STRAPI_URL}/api/past-clients-logo?${query}`);
+      const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+      const res = await fetchWithRetry(`${baseUrl}/api/past-clients-logo?${query}`);
       const json = await res.json();
   
       const clientLogos = (json.data as PastClientLogoDetails[]).map((item) => ({

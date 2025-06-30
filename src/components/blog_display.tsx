@@ -1,14 +1,28 @@
-import { ArticleCard } from "@/libs/articles";
+'use client'
+import { ArticleCard, getLatestArticles } from "@/libs/articles";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import BlogCard from "./blog_card";
 
-interface BlogDisplayProps {
-  articleCards: ArticleCard[];
-}
 
-const BlogDisplay = ({ articleCards }: BlogDisplayProps) => {
+const BlogDisplay = () => {
+  const [articleCards, setArticleCards] = useState<ArticleCard[]>([]);
+  const [totalArticlesCount, setTotalArticlesCount] = useState<number>(0);
+  
+  useEffect(() => {
+    const fetchArticles = async () => {
+        const { articleCards: fetchedArticleCards, totalArticlesCount: fetchedTotalArticlesCount } = await getLatestArticles();
+        setArticleCards(fetchedArticleCards);
+        setTotalArticlesCount(fetchedTotalArticlesCount);
+    };
+
+    fetchArticles();
+  }, []);
+
+
   return (
-    <section className="w-full py-[3.75rem] overflow-hidden bg-secondary flex flex-col px-[1rem] 1sm:px-[1.5rem]">
+    totalArticlesCount > 0 && (
+      <section className="w-full py-[3.75rem] overflow-hidden bg-secondary flex flex-col px-[1rem] 1sm:px-[1.5rem]">
         <div className="flex flex-col w-full max-w-[67.25rem] mx-auto items-center">
             <motion.h2
               initial={{ y: 100, opacity: 0 }}
@@ -50,7 +64,8 @@ const BlogDisplay = ({ articleCards }: BlogDisplayProps) => {
                 }
             </motion.div> 
         </div>
-    </section>
+      </section>
+    )
   )
 }
 
