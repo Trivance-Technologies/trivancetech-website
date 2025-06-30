@@ -2,6 +2,8 @@ import { getLatestArticles } from "@/libs/articles";
 import { logoDetails, retrieveClientLogos } from "@/libs/strapi_calls";
 import Home from "./homepage";
 
+export const revalidate = 7200; // 2 hours in seconds 
+
 export async function generateMetadata() {
   return {
     title: "Trivance Technologies | Digital Transformation Experts for Regulated Industries",

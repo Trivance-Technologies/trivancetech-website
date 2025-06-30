@@ -1,6 +1,8 @@
 import { getAllArticles, getAllTags } from "@/libs/articles";
 import Blog from "./blog";
 
+export const revalidate = 7200; // 2 hours in seconds 
+
 export async function generateMetadata() {
 
   return {
