@@ -1,3 +1,4 @@
+'use client'
 import { logoDetails } from '@/libs/strapi_calls';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -10,7 +11,7 @@ interface LogoSliderProps {
 }
 
 export default function LogoSlider({ logos, perPage = 6, autoPlayInterval = 4000 }: LogoSliderProps) {
-  // Chunk logos into pages
+
   const pages: logoDetails[][] = [];
   for (let i = 0; i < logos.length; i += perPage) {
     pages.push(logos.slice(i, i + perPage));

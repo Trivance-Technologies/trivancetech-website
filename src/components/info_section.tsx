@@ -35,7 +35,15 @@ const InfoSection : React.FC<InfoSectionDetails> = ({ swapRow, showButton }) => 
                             Get In Touch
                         </Link>
                     </div>
-                    <Image src='/images/image2.webp' width={1800} height={1200} alt="image of lines of code on a laptop screen." className="object-cover max-h-[26rem] 2sm:max-w-[26rem]"/>
+                    <Image
+                    src="/images/image2.webp"
+                    alt="lines of code on a laptop screen."
+                    width={416}
+                    height={277}          // maintain aspect ratio
+                    className="object-cover w-full 2sm:max-w-[26rem] h-auto"
+                    sizes="(max-width: 640px) 100vw, 416px"
+                    />
+                    {/* <Image src='/images/image2.webp' width={1800} height={1200} alt="image of lines of code on a laptop screen." className="object-cover max-h-[26rem] 2sm:max-w-[26rem]"/> */}
                 </div>
             </motion.div >
         </div>

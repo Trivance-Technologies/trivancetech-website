@@ -8,6 +8,7 @@ import { Inter } from 'next/font/google';
 import { Suspense } from "react";
 import { Toaster } from 'sonner';
 import "./globals.css";
+import { AppDataProvider } from "@/context/appDataContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,6 +27,7 @@ export default function RootLayout({
         className={`${inter.variable} antialiased relative`}
       >
         <Suspense>
+          <AppDataProvider>
           <NavigationProvider>
           <NotFoundPageContextProvider>
             <Header />
@@ -38,6 +40,7 @@ export default function RootLayout({
             <SmallScreenNavigation />
           </NotFoundPageContextProvider>
           </NavigationProvider>
+          </AppDataProvider>
         </Suspense>
       </body>
     </html>

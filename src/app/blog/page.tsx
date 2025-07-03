@@ -1,4 +1,3 @@
-import { getAllArticles, getAllTags } from "@/libs/articles";
 import Blog from "./blog";
 
 export async function generateMetadata() {
@@ -24,8 +23,5 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-    const {articleCards, totalArticlesCount} = await getAllArticles(0, 10);
-    const allTags: string[] = await getAllTags();
-
-    return <Blog articleCards={articleCards} tagList={allTags} totalAllArticlesCount={totalArticlesCount} />;
+    return <Blog />;
 }

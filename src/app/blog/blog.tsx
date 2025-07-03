@@ -1,30 +1,47 @@
 'use client'
 import BlogCard from "@/components/blog_card";
-import { ArticleCard, getAllArticles, getArticlesBySearch, getArticlesByTag } from "@/libs/articles";
+import { ArticleCard, getAllArticles, getAllTags, getArticlesBySearch, getArticlesByTag } from "@/libs/articles";
 import { motion } from "framer-motion";
+import Lottie from "lottie-react";
 import { Search, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import loading from '@/lottie/loading.json'
 
-interface BlogProps {
-  articleCards: ArticleCard[];
-  tagList: string[];
-  totalAllArticlesCount: number;
-}
-
-const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
+const Blog = () => {
+  const [tagList, setTagList] = useState<string[]>([]);
+  const [totalAllArticlesCount, setTotalAllArticlesCount] = useState<number>(0);
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchTag, setSearchTag] = useState<string>("All Posts");
-  const [pagination, setPagination] = useState<Record<string, number>>({"All Posts": articleCards.length});
-  const [hasMore, setHasMore] = useState<Record<string, boolean>>({"All Posts": articleCards.length < totalAllArticlesCount,}); //if a tag has enough articles in the backend to load more.
+  const [pagination, setPagination] = useState<Record<string, number>>({"All Posts": 0});
+  const [hasMore, setHasMore] = useState<Record<string, boolean>>({"All Posts": false}); //if a tag has enough articles in the backend to load more.
 
   const [activeQuery, setActiveQuery] = useState<string>("");
 
-  const [articleCardData, setArticleCardData] = useState<ArticleCard[]>(articleCards);
+  const [articleCardData, setArticleCardData] = useState<ArticleCard[]>([]);
+  const [isInititalDataLoading, setIsInitialDataLoading] = useState<boolean>(true);
+  const [isArticlesDataFetching, setIsArticlesDataFetching] = useState<boolean>(false);
+
+  useEffect(() => {
+    async function loadInitial() {
+      const { articleCards, totalArticlesCount } = await getAllArticles(0, 10);
+      const allTags = await getAllTags();
+
+      setTotalAllArticlesCount(totalArticlesCount);
+      setTagList(allTags);
+      setPagination({ "All Posts": articleCards.length });
+      setHasMore({ "All Posts": articleCards.length < totalArticlesCount });
+      setArticleCardData(articleCards);
+      setIsInitialDataLoading(false);
+    }
+
+    loadInitial();
+  }, []);
 
   useEffect(() => {
       if (searchTag === "All Posts") return;
 
       async function fetchByTag() {
+        setIsArticlesDataFetching(true);
         const { articleCards, totalArticlesCount } = await getArticlesByTag(searchTag, 0, 10);
         setArticleCardData(articleCards);
         setPagination((prev) => ({ ...prev, [searchTag]: articleCards.length }));
@@ -32,6 +49,7 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
           ...prev,
           [searchTag]: articleCards.length < totalArticlesCount,
         }));
+        setIsArticlesDataFetching(false);
       }
 
       fetchByTag();
@@ -40,7 +58,18 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
   return (
     <section className="w-full py-[6.25rem] px-[1rem] 1sm:px-[1.5rem] flex flex-col items-center bg-secondary">
       {
-        (totalAllArticlesCount > 0)
+       isInititalDataLoading ?
+       (
+        <div className="flex justify-center items-center w-full">
+          <Lottie
+            animationData={loading}
+            loop
+            className="w-[200px] h-[200px] 2sm:w-[300px] 2sm:h-[300px]"
+          />
+        </div>
+       )
+       :
+       ( (totalAllArticlesCount > 0)
          ? 
          (
           <div className="flex flex-col mx-auto w-full max-w-[67.25rem] items-center">
@@ -85,8 +114,8 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
             }}
             viewport={{ once: true }}  
             style={{ willChange: "transform, opacity" }}  
-            className="w-full flex flex-row gap-[.5rem] items-center">
-              <div className="w-full flex items-center border border-gray-300 px-4 py-2 bg-white self-start my-[1.5rem]">
+            className="w-full flex flex-col 3sm:flex-row gap-[1rem] 3sm:gap-[.5rem] items-center my-[1.5rem]">
+              <div className="w-full flex items-center border border-gray-300 px-4 py-2 bg-white self-start">
                 <span 
                   className="mr-2 text-gray-500"
                 >
@@ -108,9 +137,10 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <button className="h-fit hover:cursor-pointer px-[1.5rem] py-[.5rem] border-[2px] hover:border-primary hover:text-primary text-brand border-primary bg-primary hover:bg-transparent transition-[border-color,color,background-color] duration-[400ms]"
+              <button className="self-start flex h-fit hover:cursor-pointer px-[1.5rem] py-[.5rem] border-[2px] hover:border-primary hover:text-primary text-brand border-primary bg-primary hover:bg-transparent transition-[border-color,color,background-color] duration-[400ms]"
                 onClick={
                 async () => {
+                  setIsArticlesDataFetching(true);
                   const trimmedQuery = searchValue.trim();
                   if (trimmedQuery === "") return;
 
@@ -122,12 +152,24 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
                     ...prev,
                     [trimmedQuery]: articleCards.length < totalArticlesCount,
                   }));
+                  setIsArticlesDataFetching(false);
                 }}
               >
                 Search
               </button>
             </motion.div>
-            <motion.div 
+            {isArticlesDataFetching ?
+            (
+              <div className="flex justify-center items-center w-full">
+                <Lottie
+                  animationData={loading}
+                  loop
+                  className="w-[200px] h-[200px] 2sm:w-[300px] 2sm:h-[300px]"
+                />
+              </div>
+            )
+            :
+            ( <motion.div 
             initial={{ y: 100, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{
@@ -157,7 +199,8 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
                   No posts found matching your search.
                 </p>
               )}
-            </motion.div>
+            </motion.div> )
+            }
             {hasMore[searchTag] && (
               <button
               onClick={async () => {
@@ -200,13 +243,13 @@ const Blog = ({ articleCards, tagList, totalAllArticlesCount }: BlogProps) => {
               </button>
             )}
           </div>
-         ) : (
-          <div className="flex mx-auto w-full max-w-[67.25rem] items-center justify-center">
-            <p className="col-span-3 text-center text-gray-500 py-10">
-              There is currently no article to read now
-            </p>
-          </div>  
-         )
+        ) : (
+        <div className="flex mx-auto w-full max-w-[67.25rem] items-center justify-center">
+          <p className="col-span-3 text-center text-gray-500 py-10">
+            There are currently no articles to display now
+          </p>
+        </div>  
+        ) )
       }
     </section>
   )

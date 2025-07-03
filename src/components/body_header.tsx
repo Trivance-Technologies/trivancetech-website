@@ -76,6 +76,7 @@ const BodyHeader: React.FC = () => {
           width={content.width}
           height={content.height}
           className="object-cover 1sm:max-h-[22.23rem] max-h-[33.92rem] w-full"
+          sizes="(max-width: 640px) 100vw, (min-width: 641px) calc(22.23rem * (content.width / content.height))"
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{
