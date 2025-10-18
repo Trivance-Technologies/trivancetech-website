@@ -1,3 +1,4 @@
+import { capitalizeWords } from "@/libs/utils";
 import { Calendar, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -34,7 +35,7 @@ const BlogCard: React.FC<BlogCardProps> = ({
         <Image src={image} alt={alternativeText} fill className="object-cover" sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
       </div>
       <div className="p-6 text-left flex flex-col h-full">
-        <p className="text-xs text-[rgb(23,29,47)] mb-2">{category}</p>
+        <p className="text-xs text-[rgb(23,29,47)] mb-2">{capitalizeWords(category)}</p>
         <div className="flex items-center text-xs text-[rgba(23,29,47,0.6)] mb-2 space-x-4">
           <div className="flex items-center space-x-1">
             <Calendar size={14} />

@@ -6,23 +6,21 @@ interface NotFoundPageContextType {
     toggleIs404: (value: boolean) => void;
 }
 
+const NotFoundPageContext = createContext<NotFoundPageContextType | undefined>(undefined);
+
 export const NotFoundPageContextProvider = ({ children }: { children: React.ReactNode }) => {
     const [is404, setIs404] = useState(false);
 
     const toggleIs404 = (value: boolean) => {
         setIs404(value);
-    };    
+    };
 
     return (
         <NotFoundPageContext.Provider value={{ is404, toggleIs404 }}>
-            {children} 
+            {children}
         </NotFoundPageContext.Provider>
     );
 };
-
-
-const NotFoundPageContext = createContext<NotFoundPageContextType | undefined>(undefined);
-
 
 export const useNotFoundPageContext = () => {
     const context = useContext(NotFoundPageContext);

@@ -1,59 +1,28 @@
 'use client'
 import BlogCard from "@/components/blog_card";
-import { ArticleCard, getAllArticles, getAllTags, getArticlesBySearch, getArticlesByTag } from "@/libs/articles";
+import { useBlog } from "@/components/hooks/useBlog";
+import { getSearchButtonStyles, getClearButtonVisibility, isSearchEmpty } from "@/libs/utils";
 import { motion } from "framer-motion";
 import Lottie from "lottie-react";
 import { Search, X } from "lucide-react";
-import { useEffect, useState } from "react";
 import loading from '@/lottie/loading.json'
 
 const Blog = () => {
-  const [tagList, setTagList] = useState<string[]>([]);
-  const [totalAllArticlesCount, setTotalAllArticlesCount] = useState<number>(0);
-  const [searchValue, setSearchValue] = useState<string>("");
-  const [searchTag, setSearchTag] = useState<string>("All Posts");
-  const [pagination, setPagination] = useState<Record<string, number>>({"All Posts": 0});
-  const [hasMore, setHasMore] = useState<Record<string, boolean>>({"All Posts": false}); //if a tag has enough articles in the backend to load more.
-
-  const [activeQuery, setActiveQuery] = useState<string>("");
-
-  const [articleCardData, setArticleCardData] = useState<ArticleCard[]>([]);
-  const [isInititalDataLoading, setIsInitialDataLoading] = useState<boolean>(true);
-  const [isArticlesDataFetching, setIsArticlesDataFetching] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function loadInitial() {
-      const { articleCards, totalArticlesCount } = await getAllArticles(0, 10);
-      const allTags = await getAllTags();
-
-      setTotalAllArticlesCount(totalArticlesCount);
-      setTagList(allTags);
-      setPagination({ "All Posts": articleCards.length });
-      setHasMore({ "All Posts": articleCards.length < totalArticlesCount });
-      setArticleCardData(articleCards);
-      setIsInitialDataLoading(false);
-    }
-
-    loadInitial();
-  }, []);
-
-  useEffect(() => {
-      if (searchTag === "All Posts") return;
-
-      async function fetchByTag() {
-        setIsArticlesDataFetching(true);
-        const { articleCards, totalArticlesCount } = await getArticlesByTag(searchTag, 0, 10);
-        setArticleCardData(articleCards);
-        setPagination((prev) => ({ ...prev, [searchTag]: articleCards.length }));
-        setHasMore((prev) => ({
-          ...prev,
-          [searchTag]: articleCards.length < totalArticlesCount,
-        }));
-        setIsArticlesDataFetching(false);
-      }
-
-      fetchByTag();
-  }, [searchTag]);
+  const {
+    tagList,
+    totalAllArticlesCount,
+    searchValue,
+    searchTag,
+    hasMore,
+    articleCardData,
+    isInititalDataLoading,
+    isArticlesDataFetching,
+    setSearchValue,
+    handleSearch,
+    handleClearSearch,
+    handleLoadMore,
+    handleTagSelect,
+  } = useBlog();
 
   return (
     <section className="w-full py-[6.25rem] px-[1rem] 1sm:px-[1.5rem] flex flex-col items-center bg-secondary">
@@ -98,7 +67,7 @@ const Blog = () => {
                 <button
                   key={index}
                   className={`px-4 py-2 hover:cursor-pointer text-sm font-medium text-gray-700 uppercase tracking-wide hover:bg-gray-100 ${(searchTag === tag) ? 'border border-gray-400' : ''}`}
-                  onClick={() => { setSearchTag(tag); setActiveQuery(""); }}
+                  onClick={() => handleTagSelect(tag)}
                 >
                   {tag}
                 </button>
@@ -127,33 +96,25 @@ const Blog = () => {
                   aria-label="Search posts"
                   onChange={(e) => { setSearchValue(e.target.value) }}
                   value={searchValue}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !isSearchEmpty(searchValue)) {
+                      handleSearch();
+                    }
+                  }}
                   className="flex-grow bg-transparent focus:outline-none text-gray-700 placeholder-gray-400"
                 />
                 <button 
-                  className={`mr-2 text-red-500 hover:cursor-pointer ${(searchValue.trim() === "") ? "hidden" : "block"}`}
+                  className={`mr-2 text-red-500 hover:cursor-pointer ${getClearButtonVisibility(searchValue)}`}
                   aria-label = "clear search"
-                  onClick={() => setSearchValue("")}
+                  onClick={handleClearSearch}
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
-              <button className="self-start flex h-fit hover:cursor-pointer px-[1.5rem] py-[.5rem] border-[2px] hover:border-primary hover:text-primary text-brand border-primary bg-primary hover:bg-transparent transition-[border-color,color,background-color] duration-[400ms]"
-                onClick={
-                async () => {
-                  setIsArticlesDataFetching(true);
-                  const trimmedQuery = searchValue.trim();
-                  if (trimmedQuery === "") return;
-
-                  const { articleCards, totalArticlesCount } = await getArticlesBySearch(trimmedQuery, searchTag, 0, 10);
-                  setArticleCardData(articleCards);
-                  setActiveQuery(trimmedQuery);
-                  setPagination((prev) => ({ ...prev, [trimmedQuery]: articleCards.length }));
-                  setHasMore((prev) => ({
-                    ...prev,
-                    [trimmedQuery]: articleCards.length < totalArticlesCount,
-                  }));
-                  setIsArticlesDataFetching(false);
-                }}
+              <button 
+                className={`self-start flex h-fit px-[1.5rem] py-[.5rem] border-[2px] transition-[border-color,color,background-color] duration-[400ms] ${getSearchButtonStyles(searchValue)}`}
+                disabled={isSearchEmpty(searchValue)}
+                onClick={handleSearch}
               >
                 Search
               </button>
@@ -203,40 +164,7 @@ const Blog = () => {
             }
             {hasMore[searchTag] && (
               <button
-              onClick={async () => {
-                  const currentStart = pagination[searchTag] ?? 0;
-                  const limit = 10;
-
-                  let moreArticles: ArticleCard[] = [];
-                  let totalArticlesCount: number = 0;
-
-                  if (activeQuery) {
-                    const result = await getArticlesBySearch(activeQuery, searchTag, currentStart, limit);
-                    moreArticles = result.articleCards;
-                    totalArticlesCount = result.totalArticlesCount;
-                  } else if (searchTag === "All Posts") {
-                    const result = await getAllArticles(currentStart, limit);
-                    moreArticles = result.articleCards;
-                    totalArticlesCount = result.totalArticlesCount;
-                  } else {
-                    const result = await getArticlesByTag(searchTag, currentStart, limit);
-                    moreArticles = result.articleCards;
-                    totalArticlesCount = result.totalArticlesCount;
-                  }
-
-                  setArticleCardData((prev) => [...prev, ...moreArticles]);
-
-                  setPagination((prev) => ({
-                    ...prev,
-                    [searchTag]: currentStart + moreArticles.length,
-                  }));
-
-                  setHasMore((prev) => ({
-                    ...prev,
-                    [searchTag]: currentStart + moreArticles.length < totalArticlesCount,
-                  }));
-                }}
-
+                onClick={handleLoadMore}
                 className="mt-14 px-6 py-2 border-[2px] border-primary text-primary hover:text-brand hover:border-primary hover:bg-primary bg-transparent transition-[border-color,color,background-color] duration-[400ms] hover:cursor-pointer"
               >
                 Load More

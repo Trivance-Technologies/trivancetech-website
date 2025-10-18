@@ -50,22 +50,38 @@ function formatPublishedDate(dateString: string): string {
   });
 }
 
-export async function fetchWithRetry(url: string, retries = 2, timeout = 30000): Promise<Response> {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), timeout);
-  try {
-    const res = await fetch(url, { signal: controller.signal });
-    clearTimeout(timer);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    return res;
-  } catch (err) {
-    clearTimeout(timer);
-    if (retries > 0) {
-      console.warn('Fetch failed, retrying...', err);
-      await new Promise(res => setTimeout(res, 2000));
-      return fetchWithRetry(url, retries - 1, timeout);
+export async function fetchWithRetry(
+  url: string,
+  retries = 4,
+  timeout = 60000,
+): Promise<Response> {
+  let attempt = 0;
+  let delay = 1000;
+
+  while (true) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeout);
+    try {
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timer);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return res;
+    } catch (err) {
+      clearTimeout(timer);
+      if (attempt >= retries) {
+        console.error(`fetchWithRetry: all ${retries + 1} attempts failed for ${url}`);
+        throw err;
+      }
+
+      const jitter = Math.floor(Math.random() * 1000);
+      const wait = delay + jitter;
+      console.warn(`fetchWithRetry: attempt ${attempt + 1} failed for ${url}. Retrying in ${wait}ms...`, err);
+      await new Promise((res) => setTimeout(res, wait));
+
+      attempt += 1;
+      delay *= 2;
+      continue;
     }
-    throw err;
   }
 }
 
@@ -166,7 +182,7 @@ export async function getAllTags(): Promise<string[]> {
   }
 }
 
-export async function getLatestArticles(): Promise<{ articleCards: ArticleCard[]; totalArticlesCount: number }> {
+export async function getLatestArticles(limit = 3): Promise<{ articleCards: ArticleCard[]; totalArticlesCount: number }> {
   try {
     const params = new URLSearchParams({
       "fields[0]": "Slug",
@@ -177,7 +193,7 @@ export async function getLatestArticles(): Promise<{ articleCards: ArticleCard[]
       "fields[5]": "Content",
       populate: "CoverImage",
       "sort[0]": "publishedAt:desc",
-      "pagination[limit]": "3"
+      "pagination[limit]": limit.toString()
     });
 
     const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
@@ -290,5 +306,30 @@ export async function getArticlesBySearch(
   } catch (err) {
     console.error("Failed to fetch articles by search:", err);
     return { articleCards: [], totalArticlesCount: 0 };
+  }
+}
+
+export async function getAllArticlesSitemap() {
+  try {
+    const query = new URLSearchParams({
+      "fields[0]": "Slug",
+      "fields[1]": "publishedAt",
+      "sort[0]": "publishedAt:desc",
+      "pagination[limit]": "1000",
+    }).toString();
+
+    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
+    const json = await res.json();
+
+    const articles = (json.data as StrapiArticle[]).map(item => ({
+      slug: item.Slug,
+      publishedAt: item.publishedAt,
+    }));
+
+    return articles;
+  } catch (err) {
+    console.error("Failed to fetch articles for sitemap:", err);
+    return [];
   }
 }

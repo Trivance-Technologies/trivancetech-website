@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -61,18 +60,16 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content }) => {
           img: ({ src, alt }) => {
             if (typeof src !== "string") return null;
             return (
-              <div
-                className="my-6 w-full relative overflow-hidden"
-                style={{ paddingTop: "56.25%" }}
-              >
-                <Image
-                  src={src}
-                  alt={alt ?? ""}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-              </div>
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={src}
+                alt={alt ?? ""}
+                className="my-6 w-full object-cover"
+                style={{ aspectRatio: '16/9' }}
+                loading="lazy"
+                decoding="async"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              />
             );
           },
           code: ({ className, children, ...props }) => {

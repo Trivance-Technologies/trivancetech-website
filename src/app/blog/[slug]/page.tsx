@@ -11,6 +11,9 @@ interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
+// Cache article pages and revalidate once per week (604800 seconds)
+export const revalidate = 604800; // 7 days
+
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
 
@@ -52,10 +55,11 @@ export default async function Page ({ params }: PageProps) {
     }
 
     const { articleCards: rawRelatedCards } = await getArticlesByTag(article.category, 0, 5);
+
     let articleCards = rawRelatedCards.filter(card => card.slug !== slug);
 
     if (articleCards.length === 0) {
-        articleCards = (await getLatestArticles()).articleCards.filter(card => card.slug !== slug);
+        articleCards = (await getLatestArticles(5)).articleCards.filter(card => card.slug !== slug);
     }
 
     articleCards = articleCards.slice(0, 3);
