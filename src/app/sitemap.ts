@@ -1,4 +1,6 @@
 import { getAllArticlesSitemap } from "@/libs/articles";
+import { productData } from "@/data/productsData";
+import { serviceData } from "@/data/servicesData";
 
 const URL = "https://www.trivancetech.com";
 
@@ -11,6 +13,22 @@ export default async function sitemap() {
       lastModified: new Date(article.publishedAt).toISOString(),
       changeFrequency: 'monthly' as const,
       priority: 0.6,
+    }));
+
+    // Generate product pages
+    const products = Object.keys(productData).map((slug) => ({
+      url: `${URL}/products/${slug}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
+    }));
+
+    // Generate service pages
+    const services = Object.keys(serviceData).map((slug) => ({
+      url: `${URL}/services/${slug}`,
+      lastModified: new Date().toISOString(),
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     }));
 
     const routes = [
@@ -52,7 +70,7 @@ export default async function sitemap() {
       },
     ];
 
-    return [...routes, ...posts];
+    return [...routes, ...posts, ...products, ...services];
   } catch (error) {
     console.error('Error generating sitemap:', error);
     

@@ -34,6 +34,31 @@ export interface Article extends ArticleCard {
   metaDescription: string;
 }
 
+// Simple in-memory server-side caches to provide a fallback when Strapi is
+// temporarily unavailable (cold starts). These live for the lifetime of the
+// Node process and are intentionally small and short-lived.
+type CacheEntry<T> = { data: T; fetchedAt: number };
+
+const ARTICLE_TTL_MS = 1000 * 60 * 60; // 1 hour
+
+const articleCache = new Map<string, CacheEntry<Article>>();
+const latestCache = new Map<string, CacheEntry<{ articleCards: ArticleCard[]; totalArticlesCount: number }>>();
+const sitemapCache = new Map<string, CacheEntry<{ slug: string; publishedAt: string }[]>>();
+
+function getCache<T>(map: Map<string, CacheEntry<T>>, key: string): T | null {
+  const entry = map.get(key);
+  if (!entry) return null;
+  if (Date.now() - entry.fetchedAt > ARTICLE_TTL_MS) {
+    map.delete(key);
+    return null;
+  }
+  return entry.data;
+}
+
+function setCache<T>(map: Map<string, CacheEntry<T>>, key: string, data: T) {
+  map.set(key, { data, fetchedAt: Date.now() });
+}
+
 function calculateReadTime(content: string): string {
   const wordsPerMinute = 200;
   const words = content.trim().split(/\s+/).length;
@@ -53,7 +78,7 @@ function formatPublishedDate(dateString: string): string {
 export async function fetchWithRetry(
   url: string,
   retries = 4,
-  timeout = 60000,
+  timeout = 120000,
 ): Promise<Response> {
   let attempt = 0;
   let delay = 1000;
@@ -86,6 +111,11 @@ export async function fetchWithRetry(
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
+  const cached = getCache(articleCache, slug);
+  if (cached) {
+    return cached;
+  }
+
   try {
     const query = new URLSearchParams({
       "fields[0]": "Slug",
@@ -108,7 +138,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     const date = formatPublishedDate(item.publishedAt);
     const meta = item.Metadata;
 
-    return {
+    const article: Article = {
       id: item.id,
       slug: item.Slug,
       category: item.Tag.trim(),
@@ -122,8 +152,15 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       metaDescription: meta?.metaDescription ?? item.ShortDescription,
       alternativeText: item.CoverImage?.alternativeText ?? ""
     };
+    setCache(articleCache, slug, article);
+    return article;
   } catch (err) {
     console.error("Failed to fetch article by slug:", err);
+    const staleCache = articleCache.get(slug);
+    if (staleCache) {
+      console.warn(`Returning stale cached article for slug: ${slug}`);
+      return staleCache.data;
+    }
     return null;
   }
 }
@@ -183,6 +220,13 @@ export async function getAllTags(): Promise<string[]> {
 }
 
 export async function getLatestArticles(limit = 3): Promise<{ articleCards: ArticleCard[]; totalArticlesCount: number }> {
+  const cacheKey = `latest-${limit}`;
+  
+  const cached = getCache(latestCache, cacheKey);
+  if (cached) {
+    return cached;
+  }
+
   try {
     const params = new URLSearchParams({
       "fields[0]": "Slug",
@@ -213,9 +257,16 @@ export async function getLatestArticles(limit = 3): Promise<{ articleCards: Arti
       alternativeText: item.CoverImage?.alternativeText ?? ""
     }));
 
-    return { articleCards, totalArticlesCount };
+    const result = { articleCards, totalArticlesCount };
+    setCache(latestCache, cacheKey, result);
+    return result;
   } catch (err) {
     console.error("Failed to fetch latest articles:", err);
+    const staleCache = latestCache.get(cacheKey);
+    if (staleCache) {
+      console.warn(`Returning stale cached latest articles for limit: ${limit}`);
+      return staleCache.data;
+    }
     return { articleCards: [], totalArticlesCount: 0 };
   }
 }
@@ -310,10 +361,19 @@ export async function getArticlesBySearch(
 }
 
 export async function getAllArticlesSitemap() {
+  const cacheKey = 'sitemap-articles';
+  
+  const cached = getCache(sitemapCache, cacheKey);
+  if (cached) {
+    return cached;
+  }
+
   try {
     const query = new URLSearchParams({
       "fields[0]": "Slug",
       "fields[1]": "publishedAt",
+      "fields[2]": "Title", 
+      "fields[3]": "Tag",
       "sort[0]": "publishedAt:desc",
       "pagination[limit]": "1000",
     }).toString();
@@ -327,9 +387,15 @@ export async function getAllArticlesSitemap() {
       publishedAt: item.publishedAt,
     }));
 
+    setCache(sitemapCache, cacheKey, articles);
     return articles;
   } catch (err) {
     console.error("Failed to fetch articles for sitemap:", err);
+    const staleCache = sitemapCache.get(cacheKey);
+    if (staleCache) {
+      console.warn('Returning stale cached articles for sitemap');
+      return staleCache.data;
+    }
     return [];
   }
 }

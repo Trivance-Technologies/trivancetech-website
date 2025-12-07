@@ -13,7 +13,7 @@ export const bodyHeaderDataMap: Record<string, {
         subTitle: "Innovative Solutions for Sustainable Growth",
         description: "Unlock your organization's potential with expert consulting, tailored solutions, and efficient documentation. Our services drive performance, optimize processes, and ensure long-term success.",
         link: "/about",
-        imageLink: "/images/bodyheader/image1.webp",
+        imageLink: "/images/bodyHeader/image1.webp",
         imageAlt: "image of a building.",
         width: 1125,
         height: 1125
@@ -23,7 +23,7 @@ export const bodyHeaderDataMap: Record<string, {
         subTitle: "We help our clients stay laser-focused on their vision",
         description: "Our services sharpen strategic focus and keep clients aligned with their long-term goals.",
         link: "/contact",
-        imageLink: "/images/bodyheader/image2.webp",
+        imageLink: "/images/bodyHeader/image2.webp",
         imageAlt: "image of a group of people seating around a meeting table.",
         width: 1279,
         height: 854
@@ -34,7 +34,7 @@ export const bodyHeaderDataMap: Record<string, {
         description: "Gain access to future-ready opportunities through high-impact solutions.",
         imageAlt: "image of a person holding white paper on brown wooden table.",
         link: "/about",
-        imageLink: "/images/bodyheader/image3.webp",
+        imageLink: "/images/bodyHeader/image3.webp",
         width: 1280,
         height: 853
     },
@@ -43,7 +43,7 @@ export const bodyHeaderDataMap: Record<string, {
         subTitle: "Our solutions are designed to accelerate operational growth and improve service delivery",
         description: "From enterprise resource planning to pension administration, our products streamline core operations and simplify compliance.",
         link: "/about",
-        imageLink: "/images/bodyheader/image5.webp",
+        imageLink: "/images/bodyHeader/image5.webp",
         imageAlt: "image of a two people shaking hands in front of two other people sitting across a table.",
         width: 1280,
         height: 853
@@ -53,7 +53,7 @@ export const bodyHeaderDataMap: Record<string, {
         subTitle: "Insights on Digital Transformation and Industry-Specific Solutions",
         description: "Explore expert articles and updates from Trivance Technologies, a leading Odoo partner, offering tailored IT solutions to drive efficiency, compliance, and growth across various industries.",
         link: "/about",
-        imageLink: "/images/bodyheader/image6.webp",
+        imageLink: "/images/bodyHeader/image6.webp",
         imageAlt: "image of a person working on their laptop.",
         width: 1280,
         height: 1920
@@ -63,7 +63,7 @@ export const bodyHeaderDataMap: Record<string, {
         subTitle: "Our search for smarter never stops",
         description: "Reach out for inquiries, support, or to schedule a consultation. We're one message away.",
         link: "/about",
-        imageLink: "/images/bodyheader/image4.webp",
+        imageLink: "/images/bodyHeader/image4.webp",
         imageAlt: "image of a young lady talking into her headphones.",
         width: 1280,
         height: 1920
