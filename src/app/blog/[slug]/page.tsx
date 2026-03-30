@@ -6,47 +6,80 @@ import { CalendarDays, Clock } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaFacebook, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { unstable_cache } from "next/cache";
+import { generateArticleMetadata, generateArticleSchemas } from "@/utils/blogMetadata";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// Cache article pages and revalidate once per week (604800 seconds)
-export const revalidate = 604800; // 7 days
+const getCachedArticle = (slug: string) => 
+  unstable_cache(
+    async () => {
+      const article = await getArticleBySlug(slug);
+      // If article is null, throw error to prevent caching null
+      if (!article) {
+        throw new Error(`Article not found: ${slug}`);
+      }
+      return article;
+    },
+    [`blog-article-${slug}`],
+    {
+      tags: [`blog-article-${slug}`, 'blog-articles'],
+    }
+  )();
+
+const getCachedArticlesByTag = (tag: string, start: number, limit: number) =>
+  unstable_cache(
+    async () => {
+      const result = await getArticlesByTag(tag, start, limit);
+      // Only cache if we have articles
+      if (result.articleCards.length === 0) {
+        throw new Error(`No articles found for tag: ${tag}`);
+      }
+      return result;
+    },
+    [`blog-articles-by-tag-${tag}-${start}-${limit}`],
+    {
+      tags: [`blog-tag-${tag}`, 'blog-articles'],
+    }
+  )();
+
+const getCachedLatestArticles = (limit: number) =>
+  unstable_cache(
+    async () => {
+      const result = await getLatestArticles(limit);
+      // Only cache if we have articles
+      if (result.articleCards.length === 0) {
+        throw new Error('No latest articles found');
+      }
+      return result;
+    },
+    [`blog-latest-articles-${limit}`],
+    {
+      tags: ['blog-articles'],
+    }
+  )();
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
 
-  const article = await getArticleBySlug(slug);
+  const article = await getCachedArticle(slug);
 
-  if (!article) return { title: "Not Found", description: "Article not found" };
+  if (!article) {
+    return { 
+      title: "Not Found - Trivance Technologies", 
+      description: "Article not found" 
+    };
+  }
 
-  return {
-    title: article.metaTitle,
-    description: article.metaDescription,
-    openGraph: {
-      title: article.metaTitle,
-      description: article.metaDescription,
-      images: [article.image],
-      url: `https://trivancetech.com/blog/${article.slug}`,
-      type: 'website',
-      siteName: 'Trivance Technologies',
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: article.metaTitle,
-      description: article.metaDescription,
-      images: [article.image],
-      type: 'website',
-      siteName: 'Trivance Technologies',
-    },
-  };
+  return generateArticleMetadata(article);
 }
 
 export default async function Page ({ params }: PageProps) {
     const { slug } = await params;
 
-    const article: Article | null = await getArticleBySlug(slug);
+    const article: Article | null = await getCachedArticle(slug);
     const currentUrl = `https://trivancetech.com/blog/${slug}`;
     const encodedUrl = encodeURIComponent(currentUrl);
 
@@ -54,18 +87,26 @@ export default async function Page ({ params }: PageProps) {
         return <NotFoundPage />;
     }
 
-    const { articleCards: rawRelatedCards } = await getArticlesByTag(article.category, 0, 5);
+    const { articleCards: rawRelatedCards } = await getCachedArticlesByTag(article.category, 0, 5);
 
     let articleCards = rawRelatedCards.filter(card => card.slug !== slug);
 
     if (articleCards.length === 0) {
-        articleCards = (await getLatestArticles(5)).articleCards.filter(card => card.slug !== slug);
+        articleCards = (await getCachedLatestArticles(5)).articleCards.filter(card => card.slug !== slug);
     }
 
     articleCards = articleCards.slice(0, 3);
 
+    const schemas = generateArticleSchemas(article);
+
   return (
     <>
+        <script
+            id="article-structured-data"
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas, null, 2) }}
+        />
+        
         <section className="bg-primary relative overflow-hidden pt-[4.599375rem] 3sm:pt-[6rem] 1sm:pt-[11.25rem] pb-[2rem] 1sm:pb-[3.75rem] px-0 1sm:px-[1.5rem]">
             {/* Blue Blur - Top Left */}
             <div className="absolute top-[-15%] left-[-10%] w-[min(40vw,400px)] h-[min(100vh,1000px)] bg-glow opacity-30 rounded-full blur-[150px] rotate-[-27.4933deg]" />

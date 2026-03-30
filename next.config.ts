@@ -1,6 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  compiler: {
+    removeConsole: true,
+  },
+  experimental: {
+    inlineCss: true,
+    cssChunking: true,
+  },
   /* config options here */
   images: {
     remotePatterns: [

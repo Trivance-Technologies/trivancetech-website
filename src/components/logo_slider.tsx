@@ -48,7 +48,7 @@ export default function LogoSlider({ logos, perPage = 6, autoPlayInterval = 4000
             src={logo.url}
             width={logo.width}
             height={logo.height}
-            alt={logo.alternativeText}
+            alt={logo.alternativeText || `Client Logo ${idx + 1}`}
             className="object-cover max-w-[130px] 1sm:max-w-[154px]"
           />
         ))}
