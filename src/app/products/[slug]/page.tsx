@@ -18,10 +18,17 @@ export async function generateMetadata({ params }: PageProps) {
         return {
             title: "Product Not Found - Trivance Technologies",
             description: "The product you're looking for is unavailable. Discover other powerful solutions from Trivance Technologies.",
+            robots: { index: false, follow: true },
         };
     }
 
-    return productMetadata[slug] || {};
+    return {
+        ...productMetadata[slug],
+        alternates: {
+            canonical: `https://trivancetech.com/products/${slug}`,
+        },
+        robots: { index: true, follow: true },
+    };
 }
 
 

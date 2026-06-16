@@ -15,6 +15,13 @@ export async function generateMetadata() {
       title: "About Trivance Technologies | ERP & Fintech Solutions for the Modern Enterprise",
       description: "We specialize in digital transformation through enterprise-grade solutions like Odoo ERP and Metafold Suite—built for operational efficiency and regulatory compliance.",
     },
+    alternates: {
+      canonical: "https://trivancetech.com/about",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

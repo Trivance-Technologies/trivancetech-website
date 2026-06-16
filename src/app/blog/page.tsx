@@ -12,12 +12,19 @@ export async function generateMetadata() {
       type: 'website',
       siteName: 'Trivance Technologies',
     },
-    twitter: {
+        twitter: {
       card: "summary_large_image",
       title: "Insights & Updates | Trivance Technologies Blog on ERP, Fintech & Compliance",
       description: "Stay informed with Trivance’s expert insights on ERP implementation, pension tech, digital transformation, and regulatory trends shaping compliance-driven industries.",
       type: 'website',
       siteName: 'Trivance Technologies',
+    },
+    alternates: {
+      canonical: "https://trivancetech.com/blog",
+    },
+    robots: {
+      index: true,
+      follow: true,
     },
   };
 }

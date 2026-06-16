@@ -15,6 +15,13 @@ export async function generateMetadata() {
       title: "Enterprise Software Products | Odoo ERP, Metafold Pension, Accounting & More",
       description: "Explore our suite of solutions including Odoo ERP, Metafold Pension, Metafold Accounting, and Investment tools—built for compliance-heavy industries.",
     },
+    alternates: {
+      canonical: "https://trivancetech.com/products",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

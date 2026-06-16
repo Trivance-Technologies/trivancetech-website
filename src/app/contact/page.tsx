@@ -15,6 +15,13 @@ export async function generateMetadata() {
       title: "Contact Trivance | Speak with Our ERP & Fintech Specialists",
       description: "Reach out to Trivance Technologies for consultations on ERP, pension systems, and business automation tailored to your industry’s needs.",
     },
+    alternates: {
+      canonical: "https://trivancetech.com/contact",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

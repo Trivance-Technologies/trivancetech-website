@@ -75,6 +75,11 @@ export function generateArticleMetadata(article: Article): Metadata {
       images: [article.image || siteConfig.defaultImage],
     },
 
+    robots: {
+      index: true,
+      follow: true,
+    },
+
     alternates: {
       canonical: canonicalUrl,
     },

@@ -18,10 +18,17 @@ export async function generateMetadata({ params }: PageProps) {
         return {
             title: "Service Not Found - Trivance Technologies",
             description: "The service you're looking for is unavailable. Check the other services from Trivance Technologies.",
+            robots: { index: false, follow: true },
         };
     }
 
-    return serviceMetadata[slug] || {};
+    return {
+        ...serviceMetadata[slug],
+        alternates: {
+            canonical: `https://trivancetech.com/services/${slug}`,
+        },
+        robots: { index: true, follow: true },
+    };
 }
 
 interface PageProps {

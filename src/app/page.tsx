@@ -18,6 +18,13 @@ export async function generateMetadata() {
       title: "Trivance Technologies | Digital Transformation Experts for Regulated Industries",
       description: "Trivance delivers data-driven digital transformation with ERP, accounting, and pension systems built for compliance-heavy sectors. Your business, reimagined",
     },
+    alternates: {
+      canonical: "https://trivancetech.com",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 

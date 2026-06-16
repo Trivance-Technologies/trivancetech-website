@@ -15,6 +15,13 @@ export async function generateMetadata() {
       title: "Business Services | Digital Transformation, Industry Automation, Documentation, Software Development & Advisory - Trivance",
       description: "From documentation to custom software, Trivance provides implementation, user training, and advisory services to drive digital transformation.",
     },
+    alternates: {
+      canonical: "https://trivancetech.com/services",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   };
 }
 
