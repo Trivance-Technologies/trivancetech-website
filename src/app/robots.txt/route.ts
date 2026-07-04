@@ -1,6 +1,7 @@
+import { serverEnv } from "@/libs/serverEnv";
 import { NextResponse } from "next/server";
 
-const PRODUCTION_URL = "https://www.trivancetech.com";
+const PRODUCTION_URL = serverEnv.SITE_URL || "https://trivancetech.com";
 
 const robotsTxt = `
 User-agent: *

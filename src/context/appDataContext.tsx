@@ -28,21 +28,20 @@ export const AppDataProvider = ({ children }: { children: React.ReactNode }) => 
   const [isArticlesLoading, setIsArticlesLoading] = useState(true);
 
   useEffect(() => {
-    const fetchLogos = async () => {
-      const fetchedLogos = await retrieveClientLogos();
+    const fetchData = async () => {
+      const [fetchedLogos, fetchedArticles] = await Promise.all([
+        retrieveClientLogos(),
+        getLatestArticles()
+      ]);
+      
       setLogos(fetchedLogos);
       setIsLogosLoading(false);
-    };
-
-    const fetchArticles = async () => {
-      const { articleCards: fetchedCards, totalArticlesCount: fetchedCount } = await getLatestArticles();
-      setArticleCards(fetchedCards);
-      setTotalArticlesCount(fetchedCount);
+      setArticleCards(fetchedArticles.articleCards);
+      setTotalArticlesCount(fetchedArticles.totalArticlesCount);
       setIsArticlesLoading(false);
     };
 
-    fetchLogos();
-    fetchArticles();
+    fetchData();
   }, []);
 
   return (

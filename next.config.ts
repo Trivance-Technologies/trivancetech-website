@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV !== "production";
+
 const nextConfig: NextConfig = {
   compiler: {
     removeConsole: true,
@@ -10,6 +12,13 @@ const nextConfig: NextConfig = {
     cssChunking: true,
   },
   async headers() {
+    // Build script-src dynamically
+    const scriptSrc = [
+      "'self'",
+      "'unsafe-inline'",
+      ...(isDev ? ["'unsafe-eval'"] : []),
+    ].join(" ");
+
     return [
       {
         source: '/:path*',
@@ -34,11 +43,11 @@ const nextConfig: NextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline'",
+              `script-src ${scriptSrc}`,
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: blob: https://images.unsplash.com https://wealthy-power-26376c166d.media.strapiapp.com",
               "font-src 'self'",
-              "connect-src 'self'",
+              "connect-src 'self' https://wealthy-power-26376c166d.strapiapp.com",
               "frame-src 'none'",
               "frame-ancestors 'none'",
               "form-action 'self'",

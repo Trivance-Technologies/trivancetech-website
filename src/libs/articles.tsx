@@ -1,5 +1,5 @@
 export interface StrapiArticle {
-  id: number;
+  documentId: string;        // Strapi 5 uses documentId
   Slug: string;
   Tag: string;
   Title: string;
@@ -13,11 +13,11 @@ export interface StrapiArticle {
   Metadata: {
     metaTitle: string;
     metaDescription: string;
-  }
+  };
 }
 
 export interface ArticleCard {
-  id: number;
+  documentId: string;       // replaced id with documentId
   slug: string;
   category: string;
   title: string;
@@ -139,7 +139,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     const meta = item.Metadata;
 
     const article: Article = {
-      id: item.id,
+      documentId: item.documentId,            // use documentId
       slug: item.Slug,
       category: item.Tag.trim(),
       title: item.Title,
@@ -187,7 +187,7 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
     const articleCards = (json.data as StrapiArticle[]).map(item => ({
-      id: item.id,
+      documentId: item.documentId,
       slug: item.Slug,
       category: item.Tag.trim(),
       title: item.Title,
@@ -207,7 +207,6 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
 
 export async function getAllTags(): Promise<string[]> {
   try {
-
     const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/tag?fields[0]=name`);
     const json = await res.json();
@@ -246,7 +245,7 @@ export async function getLatestArticles(limit = 3): Promise<{ articleCards: Arti
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
     const articleCards = (json.data as StrapiArticle[]).map(item => ({
-      id: item.id,
+      documentId: item.documentId,
       slug: item.Slug,
       category: item.Tag.trim(),
       title: item.Title,
@@ -292,7 +291,7 @@ export async function getAllArticles(start: number, limit: number) {
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
     const articleCards = (json.data as StrapiArticle[]).map(item => ({
-      id: item.id,
+      documentId: item.documentId,
       slug: item.Slug,
       category: item.Tag.trim(),
       title: item.Title,
@@ -342,7 +341,7 @@ export async function getArticlesBySearch(
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
 
     const articleCards = (json.data as StrapiArticle[]).map(item => ({
-      id: item.id,
+      documentId: item.documentId,
       slug: item.Slug,
       category: item.Tag.trim(),
       title: item.Title,
