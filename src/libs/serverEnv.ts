@@ -21,7 +21,7 @@ function getServerEnv() {
     return serverEnvSchema.parse({
       STRAPI_URL: process.env.STRAPI_URL,
       REVALIDATE_TOKEN: process.env.REVALIDATE_TOKEN,
-      SITE_URL: process.env.NEXT_PUBLIC_URL
+      SITE_URL: process.env.SITE_URL
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
