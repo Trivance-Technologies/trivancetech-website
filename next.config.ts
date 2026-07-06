@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 const isDev = process.env.NODE_ENV !== "production";
 
 const nextConfig: NextConfig = {
+  cacheComponents: true,
   compiler: {
     removeConsole: true,
   },
@@ -63,6 +64,37 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
+    qualities: [50],
+    deviceSizes: [
+      120,
+      250,
+      320,
+      360,
+      375,
+      390,
+      400,
+      412,
+      430,
+      480,
+      600,
+      665,
+      1024,
+      1366,
+      1920,
+      2560,
+    ],
+    imageSizes: [
+      16,
+      24,
+      36,
+      48,
+      55,
+      96,
+      128,
+      256,
+      384,
+    ],
     remotePatterns: [
       {
         protocol: 'https',

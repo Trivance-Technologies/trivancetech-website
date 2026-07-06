@@ -1,4 +1,5 @@
 import { fetchWithRetry } from "./articles";
+import { serverEnv } from "./serverEnv";
 
 interface PastClientLogoDetails {
     logo: logoDetails;
@@ -16,7 +17,7 @@ export async function retrieveClientLogos(): Promise<logoDetails[]> {
       const query = new URLSearchParams({
         populate: "logo"
       }).toString();
-      const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+      const baseUrl = serverEnv.STRAPI_URL;
       const res = await fetchWithRetry(`${baseUrl}/api/past-clients-logo?${query}`);
       const json = await res.json();
   

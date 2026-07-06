@@ -1,7 +1,7 @@
 'use client'
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { logoDetails, retrieveClientLogos } from '@/libs/strapi_calls';
-import { ArticleCard, getLatestArticles } from '@/libs/articles';
+import React, { createContext, useContext } from 'react';
+import type { logoDetails } from '@/libs/strapi_calls';
+import type { ArticleCard } from '@/libs/articles';
 
 type AppDataContextType = {
   logos: logoDetails[];
@@ -19,41 +19,29 @@ const AppDataContext = createContext<AppDataContextType>({
   isArticlesLoading: true,
 });
 
-export const AppDataProvider = ({ children }: { children: React.ReactNode }) => {
-  const [logos, setLogos] = useState<logoDetails[]>([]);
-  const [isLogosLoading, setIsLogosLoading] = useState(true);
-
-  const [articleCards, setArticleCards] = useState<ArticleCard[]>([]);
-  const [totalArticlesCount, setTotalArticlesCount] = useState<number>(0);
-  const [isArticlesLoading, setIsArticlesLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const [fetchedLogos, fetchedArticles] = await Promise.all([
-        retrieveClientLogos(),
-        getLatestArticles()
-      ]);
-      
-      setLogos(fetchedLogos);
-      setIsLogosLoading(false);
-      setArticleCards(fetchedArticles.articleCards);
-      setTotalArticlesCount(fetchedArticles.totalArticlesCount);
-      setIsArticlesLoading(false);
-    };
-
-    fetchData();
-  }, []);
+export const AppDataProvider = ({
+  children,
+  initialLogos = [],
+  initialArticleCards = [],
+  initialTotalArticlesCount = 0,
+  initiallyLoaded = false,
+}: {
+  children: React.ReactNode;
+  initialLogos?: logoDetails[];
+  initialArticleCards?: ArticleCard[];
+  initialTotalArticlesCount?: number;
+  initiallyLoaded?: boolean;
+}) => {
+  const value: AppDataContextType = {
+    logos: initialLogos,
+    isLogosLoading: !initiallyLoaded,
+    articleCards: initialArticleCards,
+    totalArticlesCount: initialTotalArticlesCount,
+    isArticlesLoading: !initiallyLoaded,
+  };
 
   return (
-    <AppDataContext.Provider
-      value={{
-        logos,
-        isLogosLoading,
-        articleCards,
-        totalArticlesCount,
-        isArticlesLoading,
-      }}
-    >
+    <AppDataContext.Provider value={value}>
       {children}
     </AppDataContext.Provider>
   );

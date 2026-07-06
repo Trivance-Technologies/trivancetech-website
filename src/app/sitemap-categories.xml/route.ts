@@ -4,8 +4,6 @@ import { serverEnv } from "@/libs/serverEnv";
 
 const URL = serverEnv.SITE_URL || "https://trivancetech.com";
 
-export const dynamic = "force-dynamic";
-
 function escapeXml(s: string) {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&apos;");
 }

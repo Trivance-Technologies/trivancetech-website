@@ -1,3 +1,5 @@
+import { serverEnv } from "./serverEnv";
+
 export interface StrapiArticle {
   documentId: string;        // Strapi 5 uses documentId
   Slug: string;
@@ -17,7 +19,7 @@ export interface StrapiArticle {
 }
 
 export interface ArticleCard {
-  documentId: string;       // replaced id with documentId
+  documentId: string;
   slug: string;
   category: string;
   title: string;
@@ -32,31 +34,6 @@ export interface Article extends ArticleCard {
   content: string;
   metaTitle: string;
   metaDescription: string;
-}
-
-// Simple in-memory server-side caches to provide a fallback when Strapi is
-// temporarily unavailable (cold starts). These live for the lifetime of the
-// Node process and are intentionally small and short-lived.
-type CacheEntry<T> = { data: T; fetchedAt: number };
-
-const ARTICLE_TTL_MS = 1000 * 60 * 60; // 1 hour
-
-const articleCache = new Map<string, CacheEntry<Article>>();
-const latestCache = new Map<string, CacheEntry<{ articleCards: ArticleCard[]; totalArticlesCount: number }>>();
-const sitemapCache = new Map<string, CacheEntry<{ slug: string; publishedAt: string }[]>>();
-
-function getCache<T>(map: Map<string, CacheEntry<T>>, key: string): T | null {
-  const entry = map.get(key);
-  if (!entry) return null;
-  if (Date.now() - entry.fetchedAt > ARTICLE_TTL_MS) {
-    map.delete(key);
-    return null;
-  }
-  return entry.data;
-}
-
-function setCache<T>(map: Map<string, CacheEntry<T>>, key: string, data: T) {
-  map.set(key, { data, fetchedAt: Date.now() });
 }
 
 function calculateReadTime(content: string): string {
@@ -111,11 +88,6 @@ export async function fetchWithRetry(
 }
 
 export async function getArticleBySlug(slug: string): Promise<Article | null> {
-  const cached = getCache(articleCache, slug);
-  if (cached) {
-    return cached;
-  }
-
   try {
     const query = new URLSearchParams({
       "fields[0]": "Slug",
@@ -128,7 +100,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       "populate": "*"
     }).toString();
 
-    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const baseUrl = serverEnv.STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
     const json = await res.json();
     const item = (json.data as StrapiArticle[])[0];
@@ -139,7 +111,7 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
     const meta = item.Metadata;
 
     const article: Article = {
-      documentId: item.documentId,            // use documentId
+      documentId: item.documentId,
       slug: item.Slug,
       category: item.Tag.trim(),
       title: item.Title,
@@ -152,15 +124,9 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
       metaDescription: meta?.metaDescription ?? item.ShortDescription,
       alternativeText: item.CoverImage?.alternativeText ?? ""
     };
-    setCache(articleCache, slug, article);
     return article;
   } catch (err) {
-    console.error("Failed to fetch article by slug:", err);
-    const staleCache = articleCache.get(slug);
-    if (staleCache) {
-      console.warn(`Returning stale cached article for slug: ${slug}`);
-      return staleCache.data;
-    }
+    console.error(`Failed to fetch article by slug: ${slug}`, err);
     return null;
   }
 }
@@ -181,7 +147,7 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
       "pagination[limit]": limit.toString(),
     }).toString();
 
-    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const baseUrl = serverEnv.STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
@@ -207,7 +173,7 @@ export async function getArticlesByTag(tag: string, start: number, limit: number
 
 export async function getAllTags(): Promise<string[]> {
   try {
-    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const baseUrl = serverEnv.STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/tag?fields[0]=name`);
     const json = await res.json();
     const tags = (json.data as { name: string }[]).map(tag => tag.name);
@@ -219,13 +185,6 @@ export async function getAllTags(): Promise<string[]> {
 }
 
 export async function getLatestArticles(limit = 3): Promise<{ articleCards: ArticleCard[]; totalArticlesCount: number }> {
-  const cacheKey = `latest-${limit}`;
-  
-  const cached = getCache(latestCache, cacheKey);
-  if (cached) {
-    return cached;
-  }
-
   try {
     const params = new URLSearchParams({
       "fields[0]": "Slug",
@@ -239,7 +198,7 @@ export async function getLatestArticles(limit = 3): Promise<{ articleCards: Arti
       "pagination[limit]": limit.toString()
     });
 
-    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const baseUrl = serverEnv.STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/articles?${params.toString()}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
@@ -256,16 +215,9 @@ export async function getLatestArticles(limit = 3): Promise<{ articleCards: Arti
       alternativeText: item.CoverImage?.alternativeText ?? ""
     }));
 
-    const result = { articleCards, totalArticlesCount };
-    setCache(latestCache, cacheKey, result);
-    return result;
+    return { articleCards, totalArticlesCount };
   } catch (err) {
     console.error("Failed to fetch latest articles:", err);
-    const staleCache = latestCache.get(cacheKey);
-    if (staleCache) {
-      console.warn(`Returning stale cached latest articles for limit: ${limit}`);
-      return staleCache.data;
-    }
     return { articleCards: [], totalArticlesCount: 0 };
   }
 }
@@ -285,7 +237,7 @@ export async function getAllArticles(start: number, limit: number) {
       "pagination[limit]": limit.toString(),
     }).toString();
 
-    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const baseUrl = serverEnv.STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
@@ -335,7 +287,7 @@ export async function getArticlesBySearch(
       params.append("filters[Tag][$containsi]", tag);
     }
 
-    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const baseUrl = serverEnv.STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/articles?${params.toString()}`);
     const json = await res.json();
     const totalArticlesCount = json.meta?.pagination?.total ?? 0;
@@ -360,24 +312,17 @@ export async function getArticlesBySearch(
 }
 
 export async function getAllArticlesSitemap() {
-  const cacheKey = 'sitemap-articles';
-  
-  const cached = getCache(sitemapCache, cacheKey);
-  if (cached) {
-    return cached;
-  }
-
   try {
     const query = new URLSearchParams({
       "fields[0]": "Slug",
       "fields[1]": "publishedAt",
-      "fields[2]": "Title", 
+      "fields[2]": "Title",
       "fields[3]": "Tag",
       "sort[0]": "publishedAt:desc",
       "pagination[limit]": "1000",
     }).toString();
 
-    const baseUrl = process.env.STRAPI_URL ?? process.env.NEXT_PUBLIC_STRAPI_URL;
+    const baseUrl = serverEnv.STRAPI_URL;
     const res = await fetchWithRetry(`${baseUrl}/api/articles?${query}`);
     const json = await res.json();
 
@@ -386,15 +331,9 @@ export async function getAllArticlesSitemap() {
       publishedAt: item.publishedAt,
     }));
 
-    setCache(sitemapCache, cacheKey, articles);
     return articles;
   } catch (err) {
     console.error("Failed to fetch articles for sitemap:", err);
-    const staleCache = sitemapCache.get(cacheKey);
-    if (staleCache) {
-      console.warn('Returning stale cached articles for sitemap');
-      return staleCache.data;
-    }
     return [];
   }
 }

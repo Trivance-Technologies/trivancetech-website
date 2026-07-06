@@ -31,9 +31,8 @@ const Footer = () => {
                                         height: "100%"
                                     }}
                                     className="bg-brand"
-                                    aria-label="logo of trivance tech"
-                                />                      
-                        </Link>
+                                              />                      
+                                      </Link>
                         <p className='text-left text-[.875rem]/[1.25rem] 2sm:text-[1rem]/[1.25rem]  font-normal w-full text-white'>Innovation and progress, powered by tailored expertise designed for you.</p>
                         <div className='flex flex-row justify-start w-full gap-[.75rem]'>
                             <Link aria-label="Trivance Tech's LinkedIn Page" href="https://ng.linkedin.com/company/trivance-technologies-limited" target="_blank" className='transition-all duration-[400ms] rounded-full w-[2rem] h-[2rem] flex justify-center items-center bg-secondary hover:bg-brand'>

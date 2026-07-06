@@ -47,17 +47,20 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header
-      className="fixed top-0 z-[9999] w-full 1sm:pl-[1rem] pl-[1.5rem] 1sm:pr-[1rem] pr-0 transition-[background-color] duration-[300ms]"
-      style={{
-        backgroundColor: isSmallScreen
-        ? `rgba(0, 33, 71, 1)`
-        : (is404 ? `rgba(0, 33, 71, 1)` : `rgba(0, 33, 71, ${scrollProgress})`),
-      }}
+        <header
+      className="fixed top-0 z-[9999] w-full 1sm:pl-[1rem] pl-[1.5rem] 1sm:pr-[1rem] pr-0"
     >
+      {/* Composited opacity layer instead of animating background-color */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[#002147] transition-opacity duration-[300ms]"
+        style={{
+          opacity: isSmallScreen || is404 ? 1 : scrollProgress,
+        }}
+      />
       <nav
         role="navigation"
-        className="w-full flex flex-row mx-auto max-w-[67.25rem] gap-[16px] py-[20px] justify-between"
+        className="relative z-10 w-full flex flex-row mx-auto max-w-[67.25rem] gap-[16px] py-[20px] justify-between"
       >
         <Link
           aria-label="Trivance Tech homepage"
@@ -75,9 +78,8 @@ const Header: React.FC = () => {
               height: "100%"
             }}
             className="bg-brand"
-            aria-label="logo of trivance tech"
-          />
-        </Link>
+                      />
+                    </Link>
 
         <div className="1sm:flex hidden flex-row text-[1rem]/[1.5rem] text-tertiary my-auto">
           <Link 

@@ -5,8 +5,6 @@ import { serverEnv } from "@/libs/serverEnv";
 const URL = serverEnv.SITE_URL || "https://trivancetech.com";
 const ARTICLES_PER_PAGE = 100;
 
-export const dynamic = "force-dynamic";
-
 export async function GET() {
   try {
     const now = new Date().toISOString();
